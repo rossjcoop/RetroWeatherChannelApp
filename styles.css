@@ -12,10 +12,11 @@ html {box-sizing:border-box;}
 }
 
 .subBar {
-	height: 200px;
 	width: 800px;
-	background-color: rgb(196, 89, 1);
-	-webkit-transform: skew(-30deg);
+	height: 0;
+	border-left: 800px solid transparent;
+	border-right: 400px solid transparent;
+	border-bottom: 800px solid rgb(196, 89, 1);
 }
 
 .headline {
