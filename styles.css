@@ -1,0 +1,31 @@
+html {box-sizing:border-box;}
+*, *:before, *:after {box-sizing:inherit;}
+
+.mainBar {
+	width: 1080px;
+	height: 200px;
+	background-color: rgb(28, 16, 81);
+	background-position: center;
+	padding: 15px;
+	display: flex;
+	
+}
+
+.subBar {
+	height: 200px;
+	width: 800px;
+	background-color: rgb(196, 89, 1);
+	-webkit-transform: skew(-30deg);
+}
+
+.headline {
+	color: rgb(223, 180, 39);
+	font-size: 50px;
+	background-position: center;
+}
+
+.timestamp {
+	color: white;
+	font-style: bold;
+	font-size: 15px;
+}
