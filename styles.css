@@ -12,11 +12,11 @@ html {box-sizing:border-box;}
 }
 
 .subBar {
-	width: 800px;
+	border-top: 160px solid rgb(196, 89, 1);
+    border-right: 80px solid transparent;
+	border-left: 0 solid transparent;
 	height: 0;
-	border-left: 800px solid transparent;
-	border-right: 400px solid transparent;
-	border-bottom: 800px solid rgb(196, 89, 1);
+	width: 780px;
 }
 
 .headline {
