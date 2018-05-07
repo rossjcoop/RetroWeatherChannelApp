@@ -3,7 +3,7 @@ html {box-sizing:border-box;}
 
 @font-face {
     font-family: weatherStar;
-    src: url(./Fonts/Star4000.ttf);
+    src: url(./Fonts/Star4000/Star4000.ttf);
 }
 
 body {
@@ -22,9 +22,9 @@ body {
 	background-color: rgb(28, 16, 81);
 	background-position: center;
 	padding: 15px;
-	display: flex;
-	text-shadow: 4px 4px black
-	
+	display: flex; 
+	text-shadow:
+		4px 4px #000;	
 }
 
 .subBar {
