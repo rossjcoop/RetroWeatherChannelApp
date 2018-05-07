@@ -1,28 +1,45 @@
 html {box-sizing:border-box;}
 *, *:before, *:after {box-sizing:inherit;}
 
+@font-face {
+    font-family: weatherStar;
+    src: url(./Fonts/Star4000.ttf);
+}
+
+body {
+	width: 1200px;
+	margin: 0 auto;
+	background-position: center;
+	background-color: black;
+	font-family: 'weatherStar', serif;
+}
+
+
+
 .mainBar {
-	width: 1080px;
+	width: 1200px;
 	height: 200px;
 	background-color: rgb(28, 16, 81);
 	background-position: center;
 	padding: 15px;
 	display: flex;
+	text-shadow: 4px 4px black
 	
 }
 
 .subBar {
 	border-top: 160px solid rgb(196, 89, 1);
-    border-right: 80px solid transparent;
+    border-right: 90px solid transparent;
 	border-left: 0 solid transparent;
 	height: 0;
-	width: 780px;
+	width: 850px;
 }
 
 .headline {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
 	background-position: center;
+	margin-top: -40px;
 }
 
 .timestamp {
