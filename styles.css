@@ -26,14 +26,15 @@ body {
 .mainBar {
 	width: 950px;
 	height: 160px;
-	background: linear-gradient(rgb(49, 22, 73), rgb(180, 98, 20));;
+	background: linear-gradient(rgb(180, 98, 20), rgb(49, 22, 73));
+	margin-top: 50px;
 		
 }
 
 
 
 
-.subBar {
+/*.subBar {
 	margin-top: 50px;
 	border-top: 160px solid rgb(196, 89, 1);
     border-right: 150px solid transparent;
@@ -43,22 +44,22 @@ body {
 	background: linear-gradient(rgb(49, 22, 73), rgb(180, 98, 20));
 	height: 0;
 	width: 950px;
-}
+}*/
 
 .infoBar {
+	margin-left: 80px;
 	display: flex;
 }
 
 
 .logo {
-	margin-top: -125px;
+
 }
 
 .headline {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
 	background-position: center;
-	margin-top: -125px;
 	padding: 20px;
 }
 
@@ -66,7 +67,6 @@ body {
 	float: right;
 	width: 200px;
 	margin-left: 200px;
-	margin-top: -100px;
 	color: white;
 	font-style: bold;
 	font-size: 32px;
@@ -84,7 +84,6 @@ main {
 	width: 1000px;
 	height: 800px;
 	margin: 0 auto;
-	margin-top: -70px;
 	background-color: rgb(36, 43, 90);
 	border-style: 10px solid rgb(58, 82, 132);
 }
