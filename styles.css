@@ -42,15 +42,15 @@ body {
 }
 .inner-mask {
     position: absolute;
-    left: -30px;
+    left: -50px;
     top: 0px;
     width: 880px;
     height: 112px;
     overflow: hidden;
-    -webkit-transform: skew(-20deg, 0deg);
-        -ms-transform: skew(-20deg, 0deg);
-         -o-transform: skew(-20deg, 0deg);
-            transform: skew(-20deg, 0deg);
+    -webkit-transform: skew(-40deg, 0deg);
+        -ms-transform: skew(-40deg, 0deg);
+         -o-transform: skew(-40deg, 0deg);
+            transform: skew(-40deg, 0deg);
 }
 .content {
     position: absolute;
@@ -90,8 +90,9 @@ body {
 }
 
 
-.logo {
-
+#logo {
+	border-radius: 20px;
+	box-shadow: 4px 7px;
 }
 
 .headline {
@@ -117,10 +118,12 @@ main {
 
 .mainBox {
 	width: 900px;
-	height: 800px;
+	height: 600px;
 	margin: 0 auto;
 	margin-top: 12px;
 	background-color: rgb(36, 43, 90);
-	border-image-source: linear-gradient(rgb(49, 22, 73), rgb(180, 98, 20));
+	border: 20px solid rgb(83, 90, 125);
+	border-image-source: radial-gradient(white, rgb(44, 61, 104)); /*not quite right here*/
+	border-image-slice: 20;
 
 }
