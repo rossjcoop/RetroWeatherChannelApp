@@ -93,6 +93,7 @@ body {
 #logo {
 	border-radius: 20px;
 	box-shadow: 4px 7px;
+	margin-top: -25px;
 }
 
 .headline {
@@ -108,16 +109,17 @@ body {
 	font-family: 'weatherStarSmall', monospace;
 	text-align: center;
 	justify-content: center;
+	margin: 0;
 }
 
 main {
 	width: 1200px;
-	height: 1000px;
+	height: 600px;
 	background: linear-gradient(rgb(49, 22, 73), rgb(180, 98, 20)); 
 }
 
 .mainBox {
-	width: 900px;
+	width: 980px;
 	height: 600px;
 	margin: 0 auto;
 	margin-top: 12px;
@@ -127,26 +129,51 @@ main {
 	border-image-source: radial-gradient(rgb(83, 90, 125), rgb(36, 43, 90)); /*not quite right here*/
 	border-image-slice: 20;
 	display: flex;
-	color: white;
+	color: rgb(205,	210, 221);
 }
 
 .mainInfo {
-	width: 450px;
+	width: 490px;
 	text-align: center;
 }
 
 .subInfo {
-	width: 450px;
+	width: 490px;
 }
 
 h1 {
 	font-size: 72px;
+	margin: 0;
+
 }
 
 h2 {
 	font-size: 64px;
+	margin: 5px;
 }
 
 h3 {
-	font-size: 36px;
+	font-size: 44px;
+	margin: 20px;
 }
+
+
+footer {
+	width: 1200px;
+	height: 200px;
+	margin-top: 2px;
+	background-color: rgb(36, 43, 90);
+	border-top: 2px solid gray;
+	color: white;
+	padding-left: 175px;
+
+}
+
+.ccGif {
+	width: 250px;
+}
+
+.city {
+	color: rgb(223, 180, 39);
+	font-size: 50px;
+	margin-left: -25px;
