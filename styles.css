@@ -123,7 +123,30 @@ main {
 	margin-top: 12px;
 	background-color: rgb(36, 43, 90);
 	border: 20px solid rgb(83, 90, 125);
-	border-image-source: radial-gradient(white, rgb(44, 61, 104)); /*not quite right here*/
+	border-radius: 6px;
+	border-image-source: radial-gradient(rgb(83, 90, 125), rgb(36, 43, 90)); /*not quite right here*/
 	border-image-slice: 20;
+	display: flex;
+	color: white;
+}
 
+.mainInfo {
+	width: 450px;
+	text-align: center;
+}
+
+.subInfo {
+	width: 450px;
+}
+
+h1 {
+	font-size: 72px;
+}
+
+h2 {
+	font-size: 64px;
+}
+
+h3 {
+	font-size: 36px;
 }
