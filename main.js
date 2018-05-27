@@ -1,5 +1,6 @@
 
 let temperature = document.getElementById("temp")
+let conditions = document.getElementById("cond")
 
 
 
@@ -18,10 +19,14 @@ function getWeather(city) {
       		response.json()
   				.then(data => {
   				// console.log(data.list.filter(item => item.dt == 1527541200))
-  				console.log(data.main.temp)
+
   				console.log(data)
-  				let temp = data.main.temp
+  				let temp = Math.round(data.main.temp)
+  				let cond = data.weather.reduce(item => item == "main").main
+
   				temperature.innerHTML = `${temp}`
+  				conditions.innerHTML = `${cond}`
+
   				})
 		})
 }
