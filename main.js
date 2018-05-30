@@ -6,6 +6,8 @@ let wind = document.getElementById("wind")
 let city = document.getElementById("cityName")
 let humidity = document.getElementById("humidity")
 let pressure = document.getElementById("pressure")
+let vis = document.getElementById("visibility")
+let timestamp = document.getElementById("timestamp")
 
 
 
@@ -34,6 +36,8 @@ function getWeather(c) {
   				let curCity = data.name
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
+  				let visb = convertMeters(data.visibility)
+  				let time = 
 
 
   				temperature.innerHTML = `${temp}°`
@@ -43,6 +47,7 @@ function getWeather(c) {
   				city.innerHTML = `${curCity}`
   				humidity.innerHTML = `Humidity: ${humid}%`
   				pressure.innerHTML = `Pressure: ${baro}`
+  				vis.innerHTML = `Visibility: ${visb} mi`
 
 
 
@@ -50,7 +55,7 @@ function getWeather(c) {
 		})
 }
 
-console.log(getWeather())
+
 
 
 
@@ -66,7 +71,7 @@ function getWindDirection(deg) { ///This figures out the correct direction based
 	} else if(deg >= 112.6 && deg <= 157.5) {
 		return "SE"
 	} else if(deg >= 157.6 && deg <= 202.5) {
-		return "E"
+		return "S"
 	} else if(deg >= 202.6 && deg <= 247.5) {
 		return "SW"
 	} else if (deg >= 247.6 && deg <= 292.5) {
@@ -84,14 +89,31 @@ function returnCalm(speed) { ///Simple function to return "Calm" if there is no 
 	}
 }
 
-function convertInHg(mb) {
+function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals.
 	return mb * 0.0295300
 }
 
 
+function convertMeters(m) {
+	return Math.round(m * 0.000621)
+}
 
 
+function timeStamp() {
+	const now = new Date()
+	// const month = now.getMonth()
+	// const date = now.getDate()
+	// const day = now.getDay()
+	// const hour = now.getHours()
+	// const minute = now.getMinutes()
+	// const seconds = now.getSeconds()
+	let time = now.toString()
+	timestamp.innerHTML = `${time}`
 
+}
+
+
+setInterval(timeStamp, 1000)
 
 
 
