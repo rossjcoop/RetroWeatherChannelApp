@@ -172,7 +172,7 @@ footer {
 	width: 250px;
 }
 
-.city {
+#cityName {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
 	margin-left: -25px;
