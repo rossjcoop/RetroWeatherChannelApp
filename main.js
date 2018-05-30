@@ -4,6 +4,8 @@ let conditions = document.getElementById("cond")
 let ccGif = document.getElementById("ccGif")
 let wind = document.getElementById("wind")
 let city = document.getElementById("cityName")
+let humidity = document.getElementById("humidity")
+let pressure = document.getElementById("pressure")
 
 
 
@@ -30,6 +32,8 @@ function getWeather(c) {
   				let windSpeed = returnCalm(Math.round(data.wind.speed))
   				let windDir = getWindDirection(data.wind.deg)
   				let curCity = data.name
+  				let humid = data.main.humidity
+  				let baro = convertInHg(data.main.pressure)
 
 
   				temperature.innerHTML = `${temp}°`
@@ -37,6 +41,9 @@ function getWeather(c) {
   				ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
   				wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
   				city.innerHTML = `${curCity}`
+  				humidity.innerHTML = `Humidity: ${humid}%`
+  				pressure.innerHTML = `Pressure: ${baro}`
+
 
 
   				})
@@ -75,6 +82,10 @@ function returnCalm(speed) { ///Simple function to return "Calm" if there is no 
 	} else {
 		return speed
 	}
+}
+
+function convertInHg(mb) {
+	return mb * 0.0295300
 }
 
 
