@@ -100,7 +100,7 @@ function convertMeters(m) {
 }
 
 
-function timeStamp() {
+function getTime() {
 	const now = new Date()
 	// const month = now.getMonth()
 	// const date = now.getDate()
@@ -115,8 +115,8 @@ function timeStamp() {
 
 }
 
-
-setInterval(timeStamp, 1000)
+getTime()
+setInterval(getTime, 1000)
 getWeather()
 setInterval(getWeather, 600000)
 
