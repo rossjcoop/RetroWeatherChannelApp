@@ -7,7 +7,8 @@ let city = document.getElementById("cityName")
 let humidity = document.getElementById("humidity")
 let pressure = document.getElementById("pressure")
 let vis = document.getElementById("visibility")
-let timestamp = document.getElementById("timestamp")
+let timestamp = document.getElementById("time")
+let datestamp = document.getElementById("date")
 
 
 
@@ -107,14 +108,17 @@ function timeStamp() {
 	// const hour = now.getHours()
 	// const minute = now.getMinutes()
 	// const seconds = now.getSeconds()
-	let time = now.toString()
+	const time = now.toTimeString().slice(0, 8)
+	const date = now.toDateString().slice(0, 10)
 	timestamp.innerHTML = `${time}`
+	datestamp.innerHTML = `${date}`
 
 }
 
 
 setInterval(timeStamp, 1000)
-
+getWeather()
+setInterval(getWeather, 600000)
 
 
 ///apixu.com

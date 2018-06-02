@@ -101,7 +101,7 @@ body {
 	margin-left: -100px;
 }
 
-#timestamp {
+#date, #time {
 	color: white;
 	font-style: bold;
 	font-size: 50px;
