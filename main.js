@@ -27,18 +27,16 @@ function getWeather(c) {
       		response.json()
   				.then(data => {
   				// console.log(data.list.filter(item => item.dt == 1527541200))
-
   				console.log(data)
-  				let temp = Math.round(data.main.temp) 
-  				let cond = data.weather.reduce(item => item == "main").main
+  				let temp = Math.round(data.main.temp)
+  				let cond = data.weather.reduce(item => item == "main").description 
   				let icon = data.weather.reduce(item => item == "main").icon
-  				let windSpeed = returnCalm(Math.round(data.wind.speed))
   				let windDir = getWindDirection(data.wind.deg)
+  				let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
   				let curCity = data.name
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
-  				let time = 
 
 
   				temperature.innerHTML = `${temp}°`
@@ -61,7 +59,7 @@ function getWeather(c) {
 
 
 function getWindDirection(deg) { ///This figures out the correct direction based on meterological degrees
-	if(deg >= 361 || NaN) {
+	if(deg >= 361 || deg == undefined) {
 		return ""
 	} else if(deg <= 22.5 || deg >= 337.6) {
 		return "N"
@@ -82,8 +80,8 @@ function getWindDirection(deg) { ///This figures out the correct direction based
 	}
 }
 
-function returnCalm(speed) { ///Simple function to return "Calm" if there is no wind
-	if(speed < 1) {
+function returnCalm(speed, dir) { ///Simple function to return "Calm" if there is no wind
+	if(speed < 1 || dir == "") {
 		return "Calm"
 	} else {
 		return speed
