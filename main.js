@@ -9,6 +9,7 @@ let pressure = document.getElementById("pressure")
 let vis = document.getElementById("visibility")
 let timestamp = document.getElementById("time")
 let datestamp = document.getElementById("date")
+let bottomBar = document.getElementById("bottomBar")
 
 
 
@@ -37,6 +38,7 @@ function getWeather(c) {
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
+  				let footer = slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb)
 
 
   				temperature.innerHTML = `${temp}°`
@@ -47,8 +49,7 @@ function getWeather(c) {
   				humidity.innerHTML = `Humidity: ${humid}%`
   				pressure.innerHTML = `Pressure: ${baro}`
   				vis.innerHTML = `Visibility: ${visb} mi`
-
-
+  				bottomBar.innerHTML = `${footer}`
 
   				})
 		})
@@ -73,9 +74,9 @@ function getWindDirection(deg) { ///This figures out the correct direction based
 		return "S"
 	} else if(deg >= 202.6 && deg <= 247.5) {
 		return "SW"
-	} else if (deg >= 247.6 && deg <= 292.5) {
+	} else if(deg >= 247.6 && deg <= 292.5) {
 		return "W"
-	} else if (deg >= 292.6 && deg <= 337.5) {
+	} else if(deg >= 292.6 && deg <= 337.5) {
 		return "NW"
 	}
 }
@@ -113,6 +114,30 @@ function getTime() {
 
 }
 
+function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb) {
+	let counter = 0
+	if(counter = 0) {
+		return "Conditions at " + curCity
+	} else if(counter = 1) {
+		return cond
+	} else if(counter = 2) {
+		return "Temp: " temp + "°F"
+	} else if(counter = 3) {
+		return "Humidity: " humd + "" + "" + "Dewpoint: " + ""//here would be dewpoint if we had it :(
+	} else if(counter = 4) {
+		return "Barometric Pressure: " + baro + ""//Need a function here to see if pressure is falling, dropping, or sustaning.
+	} else if(counter = 5) {
+		return "Wind: " windDir + "" + windSpeed + "" + "MPH"
+	} else if(counter = 6) {
+		return 
+	}
+	
+	
+}
+//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
+
+//Reminder, lets try coding a switch instead here. We'll see.
+
 getTime()
 setInterval(getTime, 1000)
 getWeather()
@@ -120,5 +145,7 @@ setInterval(getWeather, 600000)
 
 
 ///apixu.com
+
+
 
 
