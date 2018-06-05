@@ -38,7 +38,8 @@ function getWeather(c) {
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
-  				let footer = slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb)
+  				let dt = data.dt
+  				let footer = slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
 
 
   				temperature.innerHTML = `${temp}°`
@@ -114,25 +115,26 @@ function getTime() {
 
 }
 
-function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb) {
+function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
 	let counter = 0
-	if(counter = 0) {
+	if(counter == 0) {
 		return "Conditions at " + curCity
-	} else if(counter = 1) {
+	} else if(counter == 1) {
 		return cond
-	} else if(counter = 2) {
-		return "Temp: " temp + "°F"
-	} else if(counter = 3) {
-		return "Humidity: " humd + "" + "" + "Dewpoint: " + ""//here would be dewpoint if we had it :(
-	} else if(counter = 4) {
+	} else if(counter == 2) {
+		return "Temp: " + temp + "°F"
+	} else if(counter == 3) {
+		return "Humidity: " + humd + "" + "" + "Dewpoint: " + ""//here would be dewpoint if we had it :(
+	} else if(counter == 4) {
 		return "Barometric Pressure: " + baro + ""//Need a function here to see if pressure is falling, dropping, or sustaning.
-	} else if(counter = 5) {
-		return "Wind: " windDir + "" + windSpeed + "" + "MPH"
-	} else if(counter = 6) {
-		return 
+	} else if(counter == 5) {
+		return "Wind: " + windDir + "" + windSpeed + "" + "MPH"
+	} else if(counter == 6) {
+		return "Visib: " + visb + "" + "mi." + "  " + "Ceiling: " + ""//Need a data point for ceiling, eventually.
+	} else if(counter == 7) {
+		return dt + "Precipitation: " + "" //Need a data point for precip, eventually.
 	}
-	
-	
+		
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
