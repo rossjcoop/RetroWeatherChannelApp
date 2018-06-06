@@ -37,7 +37,7 @@ function getWeather(c) {
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
-  				let dt = data.dt
+  				let dt = new Date(data.dt * 1000).toDateString()
   				
   				slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)//This calls and sends the data to the data in the footer that slides every 5-7 seconds or so...
 
@@ -114,11 +114,10 @@ function getTime() {
 }
 
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
-	slideshow()
+
 	setInterval(slideshow, 45000)
 
 	function slideshow() {
-		order1()
 		setTimeout(order1, 5000)
 		setTimeout(order2, 10000)
 		setTimeout(order3, 15000)
@@ -157,7 +156,7 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 			}
 
 			function order8() {
-				bottomBar.innerHTML = `${dt} Precipitation:` //Need a data point for precip, eventually.
+				bottomBar.innerHTML = `${dt.slice(3, 7)} Precipitation:` //Need a data point for precip, eventually.
 			}
 	}		
 }
