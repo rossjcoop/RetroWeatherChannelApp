@@ -27,7 +27,6 @@ function getWeather(c) {
       		}
       		response.json()
   				.then(data => {
-  				// console.log(data.list.filter(item => item.dt == 1527541200))
   				console.log(data)
   				let temp = Math.round(data.main.temp)
   				let cond = data.weather.reduce(item => item == "main").description 
@@ -39,7 +38,8 @@ function getWeather(c) {
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
   				let dt = data.dt
-  				let footer = slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
+  				
+  				slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)//This calls and sends the data to the data in the footer that slides every 5-7 seconds or so...
 
 
   				temperature.innerHTML = `${temp}°`
@@ -50,8 +50,6 @@ function getWeather(c) {
   				humidity.innerHTML = `Humidity: ${humid}%`
   				pressure.innerHTML = `Pressure: ${baro}`
   				vis.innerHTML = `Visibility: ${visb} mi`
-  				bottomBar.innerHTML = `${footer}`
-
   				})
 		})
 }
@@ -116,35 +114,61 @@ function getTime() {
 }
 
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
-	let counter = 0
-	if(counter == 0) {
-		return "Conditions at " + curCity
-	} else if(counter == 1) {
-		return cond
-	} else if(counter == 2) {
-		return "Temp: " + temp + "°F"
-	} else if(counter == 3) {
-		return "Humidity: " + humd + "" + "" + "Dewpoint: " + ""//here would be dewpoint if we had it :(
-	} else if(counter == 4) {
-		return "Barometric Pressure: " + baro + ""//Need a function here to see if pressure is falling, dropping, or sustaning.
-	} else if(counter == 5) {
-		return "Wind: " + windDir + "" + windSpeed + "" + "MPH"
-	} else if(counter == 6) {
-		return "Visib: " + visb + "" + "mi." + "  " + "Ceiling: " + ""//Need a data point for ceiling, eventually.
-	} else if(counter == 7) {
-		return dt + "Precipitation: " + "" //Need a data point for precip, eventually.
-	}
-		
+	slideshow()
+	setInterval(slideshow, 45000)
+
+	function slideshow() {
+		order1()
+		setTimeout(order1, 5000)
+		setTimeout(order2, 10000)
+		setTimeout(order3, 15000)
+		setTimeout(order4, 20000)
+		setTimeout(order5, 25000)
+		setTimeout(order6, 30000)
+		setTimeout(order7, 35000)
+		setTimeout(order8, 40000)
+	
+			function order1() {
+				bottomBar.innerHTML = `Conditions at ${curCity}`
+			}
+			
+		 	function order2() {
+				bottomBar.innerHTML = `${cond}`
+			}
+
+			function order3() {
+				bottomBar.innerHTML = `Temp: ${temp}°F`
+			}
+
+			function order4() {
+				bottomBar.innerHTML = `Humidity: ${humid}%  Dewpoint:`//here would be dewpoint if we had it :(
+			}
+
+			function order5() {
+				bottomBar.innerHTML = `Barometric Pressure: ${baro}`//Need a function here to see if pressure is falling, dropping, or sustaning.
+			}
+
+			function order6() {
+				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} MPH`
+			}
+
+			function order7() {
+				bottomBar.innerHTML = `Visib: ${visb}mi.  Ceiling:`//Need a data point for ceiling, eventually.
+			}
+
+			function order8() {
+				bottomBar.innerHTML = `${dt} Precipitation:` //Need a data point for precip, eventually.
+			}
+	}		
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
 //Reminder, lets try coding a switch instead here. We'll see.
 
 getTime()
-setInterval(getTime, 1000)
 getWeather()
+setInterval(getTime, 1000)
 setInterval(getWeather, 600000)
-
 
 ///apixu.com
 
