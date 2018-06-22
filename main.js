@@ -42,7 +42,7 @@ function getWeather(c) {
   				slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)//This calls and sends the data to the data in the footer that slides every 5-7 seconds or so...
 
 
-  				temperature.innerHTML = `${temp}°`
+  				temperature.innerHTML = `${temp}`
   				conditions.innerHTML = `${cond}`
   				ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
   				wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
@@ -112,12 +112,14 @@ function getTime() {
 	datestamp.innerHTML = `${date}`
 
 }
-
+//Still need to figure out the timing of this function when it coincides with the call of the main function refreshing the data for everything. Need to end the function I think everytime I start it up again. Lol
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
-
-	setInterval(slideshow, 45000)
+	clearInterval(doSlides)
+	slideshow()
+	var doSlides = setInterval(slideshow, 45000)
 
 	function slideshow() {
+		order1()
 		setTimeout(order1, 5000)
 		setTimeout(order2, 10000)
 		setTimeout(order3, 15000)
@@ -162,12 +164,11 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
-//Reminder, lets try coding a switch instead here. We'll see.
 
 getTime()
 getWeather()
 setInterval(getTime, 1000)
-setInterval(getWeather, 600000)
+setInterval(getWeather, 450000)
 
 ///apixu.com
 

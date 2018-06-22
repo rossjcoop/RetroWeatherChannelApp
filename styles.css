@@ -136,6 +136,11 @@ main {
 	text-align: center;
 }
 
+.tempBox {
+	width: 200px;
+	display: inline-flex;
+}
+
 .subInfo {
 	width: 490px;
 }
@@ -176,3 +181,5 @@ footer {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
 	margin-left: -25px;
+}
+
