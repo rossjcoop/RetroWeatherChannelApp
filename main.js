@@ -1,15 +1,17 @@
 
-let temperature = document.getElementById("temp")
-let conditions = document.getElementById("cond")
-let ccGif = document.getElementById("ccGif")
-let wind = document.getElementById("wind")
-let city = document.getElementById("cityName")
-let humidity = document.getElementById("humidity")
-let pressure = document.getElementById("pressure")
-let vis = document.getElementById("visibility")
-let timestamp = document.getElementById("time")
-let datestamp = document.getElementById("date")
-let bottomBar = document.getElementById("bottomBar")
+const temperature = document.getElementById("temp")
+const conditions = document.getElementById("cond")
+const ccGif = document.getElementById("ccGif")
+const wind = document.getElementById("wind")
+const gust = document.getElementById("gust")
+const city = document.getElementById("cityName")
+const humidity = document.getElementById("humidity")
+const pressure = document.getElementById("pressure")
+const vis = document.getElementById("visibility")
+const timestamp = document.getElementById("time")
+const datestamp = document.getElementById("date")
+const bottomBar = document.getElementById("bottomBar")
+
 
 
 
@@ -33,6 +35,7 @@ function getWeather(c) {
   				let icon = data.weather.reduce(item => item == "main").icon
   				let windDir = getWindDirection(data.wind.deg)
   				let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
+  				let windGust = returnGust(data.wind.gust)
   				let curCity = data.name
   				let humid = data.main.humidity
   				let baro = convertInHg(data.main.pressure)
@@ -46,6 +49,7 @@ function getWeather(c) {
   				conditions.innerHTML = `${cond}`
   				ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
   				wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
+  				gust.innerHTML = `${windGust}`
   				city.innerHTML = `${curCity}`
   				humidity.innerHTML = `Humidity: ${humid}%`
   				pressure.innerHTML = `Pressure: ${baro}`
@@ -88,6 +92,15 @@ function returnCalm(speed, dir) { ///Simple function to return "Calm" if there i
 	}
 }
 
+
+function returnGust(gust) {
+	if(gust != undefined) {
+		return "Gusts to " + Math.round(gust)
+	} else {
+		return ""
+	}
+}
+
 function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals.
 	return mb * 0.0295300
 }
@@ -110,6 +123,14 @@ function getTime() {
 		amPm = "PM"
 	}
 
+	if(minute < 10) {
+		minute = "0" + minute
+	}
+
+	if(seconds < 10) {
+		seconds = "0" + seconds
+	}
+
 	const time = hour + ":" + minute + ":" + seconds + " " + amPm
 	const date = now.toDateString().slice(0, 10)
 	timestamp.innerHTML = `${time}`
@@ -118,10 +139,8 @@ function getTime() {
 }
 
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
-	clearInterval(doSlides)
 	slideshow()
-	var doSlides = setInterval(slideshow, 45000)
-
+	
 	function slideshow() {
 		order1()
 		setTimeout(order1, 5000)
@@ -164,7 +183,9 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 			function order8() {
 				bottomBar.innerHTML = `${dt.slice(3, 7)} Precipitation:` //Need a data point for precip, eventually.
 			}
-	}		
+	}
+
+	setInterval(slideshow, 45000)		
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
