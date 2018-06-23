@@ -99,20 +99,24 @@ function convertMeters(m) {
 
 
 function getTime() {
-	const now = new Date()
-	// const month = now.getMonth()
-	// const date = now.getDate()
-	// const day = now.getDay()
-	// const hour = now.getHours()
-	// const minute = now.getMinutes()
-	// const seconds = now.getSeconds()
-	const time = now.toTimeString().slice(0, 8)
+	var now = new Date()
+	var hour = now.getHours()
+	var minute = now.getMinutes()
+	var seconds = now.getSeconds()
+	var amPm = "AM"
+
+	if(hour > 12) {
+		hour -= 12
+		amPm = "PM"
+	}
+
+	const time = hour + ":" + minute + ":" + seconds + " " + amPm
 	const date = now.toDateString().slice(0, 10)
 	timestamp.innerHTML = `${time}`
 	datestamp.innerHTML = `${date}`
 
 }
-//Still need to figure out the timing of this function when it coincides with the call of the main function refreshing the data for everything. Need to end the function I think everytime I start it up again. Lol
+
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
 	clearInterval(doSlides)
 	slideshow()
@@ -168,10 +172,17 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 getTime()
 getWeather()
 setInterval(getTime, 1000)
-setInterval(getWeather, 450000)
+setInterval(getWeather, 450000) //a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
 
 ///apixu.com
 
+
+
+//trying to write a function a take temp and humidity to figure out dewpoint.
+function dp(T, RH) {
+    var tA = Math.pow(RH/100,1/8);
+    return ((112 + (0.9 * T))) * tA + (0.1 * T) - 112;
+};
 
 
 
