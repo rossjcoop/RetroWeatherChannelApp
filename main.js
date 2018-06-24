@@ -139,8 +139,14 @@ function getTime() {
 }
 
 function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
+
+	var mph = "MPH"
+
+	if(windSpeed === "Calm") {
+		mph = ""
+	}
+
 	slideshow()
-	
 	function slideshow() {
 		order1()
 		setTimeout(order1, 5000)
@@ -173,7 +179,7 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 			}
 
 			function order6() {
-				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} MPH`
+				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed}${mph}`
 			}
 
 			function order7() {
