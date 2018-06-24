@@ -101,8 +101,8 @@ function returnGust(gust) {
 	}
 }
 
-function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals.
-	return mb * 0.0295300
+function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals. mb * 0.0295300
+	return Number(Math.round((mb * 0.0295300)+'e2')+'e-2');
 }
 
 
