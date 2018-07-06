@@ -70,6 +70,7 @@ function getListofCities(lat, lon) {
       		response.json()
   				.then(data => {
   					console.log(data)
+  					localObs(data)
   				})
   		})
 }
@@ -236,13 +237,27 @@ function cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro
 
 }
 
+function localObs(data){
+	var city0 = data.list[0]
+	var city1 = data.list[1]
+	var city2 = data.list[2]
+	var city3 = data.list[3]
+	var city4 = data.list[4]
+	var city5 = data.list[5]
+	var city6 = data.list[6]
+	var city7 = data.list[7]
+	var city8 = data.list[8]
+	var city9 = data.list[9]
+
+}
+
 
 
 
 function noData() { ///Will display if no data reports, or if error.
 	mainBox.innerHTML = `
 			<div class = "noData>
-				<h1>No data</h1>
+				<h1>No Report Availiable</h1>
 			</div>`
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
