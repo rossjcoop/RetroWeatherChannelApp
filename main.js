@@ -1,27 +1,24 @@
 
-const temperature = document.getElementById("temp")
-const conditions = document.getElementById("cond")
-const ccGif = document.getElementById("ccGif")
-const wind = document.getElementById("wind")
-const gust = document.getElementById("gust")
-const city = document.getElementById("cityName")
-const humidity = document.getElementById("humidity")
-const pressure = document.getElementById("pressure")
-const vis = document.getElementById("visibility")
+// const temperature = document.getElementById("temp")
+// const conditions = document.getElementById("cond")
+// const ccGif = document.getElementById("ccGif")
+// const wind = document.getElementById("wind")
+// const gust = document.getElementById("gust")
+// const city = document.getElementById("cityName")
+// const humidity = document.getElementById("humidity")
+// const pressure = document.getElementById("pressure")
+// const vis = document.getElementById("visibility")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
+const mainBox = document.getElementById("mainBox")
 
-
-
-
-
-
-const api = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
+const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
+const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
 
 
 function getWeather(c) {
-	fetch(api)
+	fetch(ccApi)
   		.then(response => {
   			if(response.status !== 200) {
         		console.log(response.status);
@@ -41,24 +38,41 @@ function getWeather(c) {
   				let baro = convertInHg(data.main.pressure)
   				let visb = convertMeters(data.visibility)
   				let dt = new Date(data.dt * 1000).toDateString()
-  				
+  				let lat = data.coord.lat
+  				let lon = data.coord.lon
+
+  				getListofCities(lat, lon)
+  				cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
   				slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)//This calls and sends the data to the data in the footer that slides every 5-7 seconds or so...
 
 
-  				temperature.innerHTML = `${temp}`
-  				conditions.innerHTML = `${cond}`
-  				ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
-  				wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
-  				gust.innerHTML = `${windGust}`
-  				city.innerHTML = `${curCity}`
-  				humidity.innerHTML = `Humidity: ${humid}%`
-  				pressure.innerHTML = `Pressure: ${baro}`
-  				vis.innerHTML = `Visibility: ${visb} mi`
+
+  				// temperature.innerHTML = `${temp}`
+  				// conditions.innerHTML = `${cond}`
+  				// ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
+  				// wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
+  				// gust.innerHTML = `${windGust}`
+  				// city.innerHTML = `${curCity}`
+  				// humidity.innerHTML = `Humidity: ${humid}%`
+  				// pressure.innerHTML = `Pressure: ${baro}`
+  				// vis.innerHTML = `Visibility: ${visb} mi`
   				})
 		})
 }
 
-
+function getListofCities(lat, lon) {
+	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1")
+		.then(response => {
+  			if(response.status !== 200) {
+        		console.log(response.status);
+        		return;
+      		}
+      		response.json()
+  				.then(data => {
+  					console.log(data)
+  				})
+  		})
+}
 
 
 
@@ -92,8 +106,16 @@ function returnCalm(speed, dir) { ///Simple function to return "Calm" if there i
 	}
 }
 
+function returnMPH(ws) {  //Function to not display MPH is windspeed is calm
+	if(ws === "Calm") {
+		return ""
+	} else {
+		return "MPH"
+	}
+}
 
-function returnGust(gust) {
+
+function returnGust(gust) { //Function to display gusts if there are any
 	if(gust != undefined) {
 		return "Gusts to " + Math.round(gust)
 	} else {
@@ -106,12 +128,12 @@ function convertInHg(mb) {///Simple function to convert millibars to inches of M
 }
 
 
-function convertMeters(m) {
+function convertMeters(m) { //Function to convert kilometers into miles
 	return Math.round(m * 0.000621)
 }
 
 
-function getTime() {
+function getTime() {  //Timestamp clock function as the top
 	var now = new Date()
 	var hour = now.getHours()
 	var minute = now.getMinutes()
@@ -138,16 +160,10 @@ function getTime() {
 
 }
 
-function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {
-
-	var mph = "MPH"
-
-	if(windSpeed === "Calm") {
-		mph = ""
-	}
-
+function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
 	slideshow()
 	function slideshow() {
+		let mph = returnMPH(windSpeed)
 		order1()
 		setTimeout(order1, 5000)
 		setTimeout(order2, 10000)
@@ -179,11 +195,11 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 			}
 
 			function order6() {
-				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed}${mph}`
+				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} ${mph}`
 			}
 
 			function order7() {
-				bottomBar.innerHTML = `Visib: ${visb}mi.  Ceiling:`//Need a data point for ceiling, eventually.
+				bottomBar.innerHTML = `Visib: ${visb} mi.  Ceiling:`//Need a data point for ceiling, eventually.
 			}
 
 			function order8() {
@@ -192,6 +208,42 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 	}
 
 	setInterval(slideshow, 45000)		
+}
+
+
+
+
+function cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { ///Page 1
+	mainBox.innerHTML = `
+			<div class = "mainInfo">
+				<div class = "tempBox">
+					<h1 id = "temp">${temp}</h1><h1>°</h1>
+				</div>
+				<h2 id = "cond">${cond}</h2>
+				<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
+				<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
+				<h3 id = "gust">${windGust}</h3>
+			</div>
+			<div class = "subInfo">
+				<h3 id = "cityName">${curCity}</h3>
+				<h3 id = "humidity">Humidity: ${humid}%</h3>
+				<h3>Dewpoint: </h3>
+				<h3>Ceiling: </h3>
+				<h3 id = "visibility">Visibility: ${visb} mi</h3>
+				<h3 id = "pressure">Pressure: ${baro}</h3>
+				<h3>Head Index: </h3>
+			</div>`
+
+}
+
+
+
+
+function noData() { ///Will display if no data reports, or if error.
+	mainBox.innerHTML = `
+			<div class = "noData>
+				<h1>No data</h1>
+			</div>`
 }
 //Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
@@ -210,6 +262,9 @@ function dp(T, RH) {
     var tA = Math.pow(RH/100,1/8);
     return ((112 + (0.9 * T))) * tA + (0.1 * T) - 112;
 };
+
+
+
 
 
 
