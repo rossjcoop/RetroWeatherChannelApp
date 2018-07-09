@@ -248,7 +248,7 @@ function localObs(data){
 		<div class = "cityRow">
 			<div class = "city">${item.name}</div>
 			<div class = "citytemp">${item.main.temp}</div>
-			<div class = "cityWeather">${item.weather.description}</div>
+			<div class = "cityWeather">${item.weather[0].description}</div>
 			<div class = "cityWind">${item.wind.deg}</div>
 		</div>
 		
