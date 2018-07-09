@@ -232,24 +232,114 @@ function cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro
 				<h3>Ceiling: </h3>
 				<h3 id = "visibility">Visibility: ${visb} mi</h3>
 				<h3 id = "pressure">Pressure: ${baro}</h3>
-				<h3>Head Index: </h3>
+				<h3>Heat Index: </h3>
 			</div>`
 
 }
 
 function localObs(data){
-	var city0 = data.list[0]
-	var city1 = data.list[1]
-	var city2 = data.list[2]
-	var city3 = data.list[3]
-	var city4 = data.list[4]
-	var city5 = data.list[5]
-	var city6 = data.list[6]
-	var city7 = data.list[7]
-	var city8 = data.list[8]
-	var city9 = data.list[9]
+	mainBox.innerHTML = ''
+	
+	
+	data.list.forEach(function(item) { 		
+		let resultBlock = ''
+		resultBlock = `
+		
+		<div class = "cityRow">
+			<div class = "city">${item.name}</div>
+			<div class = "citytemp">${item.main.temp}</div>
+			<div class = "cityWeather">${item.weather.description}</div>
+			<div class = "cityWind">${item.wind.deg}</div>
+		</div>
+		
+		`
+
+		mainBox.innerHTML += resultBlock
+
+		})
 
 }
+
+
+
+
+
+
+	// var city0 = data.list[0]
+	// var city1 = data.list[1]
+	// var city2 = data.list[2]
+	// var city3 = data.list[3]
+	// var city4 = data.list[4]
+	// var city5 = data.list[5]
+	// var city6 = data.list[6]
+	// var city7 = data.list[7]
+	// var city8 = data.list[8]
+	// var city9 = data.list[9]
+
+	// mainBox.innerHTML = `
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city0.name}</div>
+	// 		<div class = "citytemp">${city0.main.temp}</div>
+	// 		<div class = "cityWeather">${city0.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city0.wind.deg) wd + "" + returnCalm(Math.round(city0.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city1.name}</div>
+	// 		<div class = "citytemp">${city1.main.temp}</div>
+	// 		<div class = "cityWeather">${city1.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city1.wind.deg) wd + "" + returnCalm(Math.round(city1.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city2.name}</div>
+	// 		<div class = "citytemp">${city2.main.temp}</div>
+	// 		<div class = "cityWeather">${city2.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city2.wind.deg) wd + "" + returnCalm(Math.round(city2.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city3.name}</div>
+	// 		<div class = "citytemp">${city3.main.temp}</div>
+	// 		<div class = "cityWeather">${city3.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city3.wind.deg) wd + "" + returnCalm(Math.round(city3.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city4.name}</div>
+	// 		<div class = "citytemp">${city4.main.temp}</div>
+	// 		<div class = "cityWeather">${city4.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city4.wind.deg) wd + "" + returnCalm(Math.round(city4.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city5.name}</div>
+	// 		<div class = "citytemp">${city5.main.temp}</div>
+	// 		<div class = "cityWeather">${city5.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city5.wind.deg) wd + "" + returnCalm(Math.round(city5.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city6.name}</div>
+	// 		<div class = "citytemp">${city6.main.temp}</div>
+	// 		<div class = "cityWeather">${city6.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city6.wind.deg) wd + "" + returnCalm(Math.round(city6.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city7.name}</div>
+	// 		<div class = "citytemp">${city7.main.temp}</div>
+	// 		<div class = "cityWeather">${city7.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city7.wind.deg) wd + "" + returnCalm(Math.round(city7.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city8.name}</div>
+	// 		<div class = "citytemp">${city8.main.temp}</div>
+	// 		<div class = "cityWeather">${city8.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city8.wind.deg) wd + "" + returnCalm(Math.round(city8.wind.speed), wd)}</div>
+	// 	</div>
+	// 	<div class = "cityRow">
+	// 		<div class = "city">${city9.name}</div>
+	// 		<div class = "citytemp">${city9.main.temp}</div>
+	// 		<div class = "cityWeather">${city9.weather.description}</div>
+	// 		<div class = "cityWind">${let wd = getWindDirection(city9.wind.deg) wd + "" + returnCalm(Math.round(city9.wind.speed), wd)}</div>
+	// 	</div>
+	// `
+
+
 
 
 
