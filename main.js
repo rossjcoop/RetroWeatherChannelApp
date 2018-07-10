@@ -21,15 +21,16 @@ function getWeather(c) {
 	fetch(ccApi)
   		.then(response => {
   			if(response.status !== 200) {
-        		console.log(response.status);
+        		console.log(response.status)
+        		noData()
         		return;
       		}
       		response.json()
   				.then(data => {
   				console.log(data)
   				let temp = Math.round(data.main.temp)
-  				let cond = data.weather.reduce(item => item == "main").description 
-  				let icon = data.weather.reduce(item => item == "main").icon
+  				let cond = data.weather[0].description 
+  				let icon = data.weather[0].icon
   				let windDir = getWindDirection(data.wind.deg)
   				let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
   				let windGust = returnGust(data.wind.gust)
@@ -70,7 +71,7 @@ function getListofCities(lat, lon) {
       		response.json()
   				.then(data => {
   					console.log(data)
-  					localObs(data)
+  					// localObs(data)
   				})
   		})
 }
@@ -140,6 +141,10 @@ function getTime() {  //Timestamp clock function as the top
 	var minute = now.getMinutes()
 	var seconds = now.getSeconds()
 	var amPm = "AM"
+
+	if(hour == 0) {
+		hour += 12
+	}
 
 	if(hour > 12) {
 		hour -= 12
