@@ -1,13 +1,3 @@
-
-// const temperature = document.getElementById("temp")
-// const conditions = document.getElementById("cond")
-// const ccGif = document.getElementById("ccGif")
-// const wind = document.getElementById("wind")
-// const gust = document.getElementById("gust")
-// const city = document.getElementById("cityName")
-// const humidity = document.getElementById("humidity")
-// const pressure = document.getElementById("pressure")
-// const vis = document.getElementById("visibility")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
@@ -17,7 +7,7 @@ const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=i
 const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
 
 
-function getWeather(c) {
+function getWeather(c) {  ///Eventually, I will feed this function a given city either via dialogue box, or more clever, using current location.
 	fetch(ccApi)
   		.then(response => {
   			if(response.status !== 200) {
@@ -42,26 +32,16 @@ function getWeather(c) {
   				let lat = data.coord.lat
   				let lon = data.coord.lon
 
-  				getListofCities(lat, lon)
-  				cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
-  				slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)//This calls and sends the data to the data in the footer that slides every 5-7 seconds or so...
 
+  				page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
+  				footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
+  				setTimeout(function() {getRegionalObs(lat, lon); }, 10000)
 
-
-  				// temperature.innerHTML = `${temp}`
-  				// conditions.innerHTML = `${cond}`
-  				// ccGif.innerHTML = `<img class="gif" src="./Images/CurrentConditions/${icon}.gif">`
-  				// wind.innerHTML = `Wind: ${windDir} ${windSpeed}`
-  				// gust.innerHTML = `${windGust}`
-  				// city.innerHTML = `${curCity}`
-  				// humidity.innerHTML = `Humidity: ${humid}%`
-  				// pressure.innerHTML = `Pressure: ${baro}`
-  				// vis.innerHTML = `Visibility: ${visb} mi`
   				})
 		})
 }
 
-function getListofCities(lat, lon) {
+function getRegionalObs(lat, lon) {
 	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1")
 		.then(response => {
   			if(response.status !== 200) {
@@ -71,7 +51,7 @@ function getListofCities(lat, lon) {
       		response.json()
   				.then(data => {
   					console.log(data)
-  					// localObs(data)
+  					localObs(data)
   				})
   		})
 }
@@ -166,7 +146,8 @@ function getTime() {  //Timestamp clock function as the top
 
 }
 
-function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
+function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
+	bottomBar.innerHTML = ""
 	slideshow()
 	function slideshow() {
 		let mph = returnMPH(windSpeed)
@@ -219,7 +200,7 @@ function slides(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 
 
 
-function cC(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { ///Page 1
+function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { ///Page 1
 	mainBox.innerHTML = `
 			<div class = "mainInfo">
 				<div class = "tempBox">
@@ -270,85 +251,6 @@ function localObs(data){
 
 
 
-	// var city0 = data.list[0]
-	// var city1 = data.list[1]
-	// var city2 = data.list[2]
-	// var city3 = data.list[3]
-	// var city4 = data.list[4]
-	// var city5 = data.list[5]
-	// var city6 = data.list[6]
-	// var city7 = data.list[7]
-	// var city8 = data.list[8]
-	// var city9 = data.list[9]
-
-	// mainBox.innerHTML = `
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city0.name}</div>
-	// 		<div class = "citytemp">${city0.main.temp}</div>
-	// 		<div class = "cityWeather">${city0.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city0.wind.deg) wd + "" + returnCalm(Math.round(city0.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city1.name}</div>
-	// 		<div class = "citytemp">${city1.main.temp}</div>
-	// 		<div class = "cityWeather">${city1.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city1.wind.deg) wd + "" + returnCalm(Math.round(city1.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city2.name}</div>
-	// 		<div class = "citytemp">${city2.main.temp}</div>
-	// 		<div class = "cityWeather">${city2.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city2.wind.deg) wd + "" + returnCalm(Math.round(city2.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city3.name}</div>
-	// 		<div class = "citytemp">${city3.main.temp}</div>
-	// 		<div class = "cityWeather">${city3.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city3.wind.deg) wd + "" + returnCalm(Math.round(city3.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city4.name}</div>
-	// 		<div class = "citytemp">${city4.main.temp}</div>
-	// 		<div class = "cityWeather">${city4.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city4.wind.deg) wd + "" + returnCalm(Math.round(city4.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city5.name}</div>
-	// 		<div class = "citytemp">${city5.main.temp}</div>
-	// 		<div class = "cityWeather">${city5.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city5.wind.deg) wd + "" + returnCalm(Math.round(city5.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city6.name}</div>
-	// 		<div class = "citytemp">${city6.main.temp}</div>
-	// 		<div class = "cityWeather">${city6.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city6.wind.deg) wd + "" + returnCalm(Math.round(city6.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city7.name}</div>
-	// 		<div class = "citytemp">${city7.main.temp}</div>
-	// 		<div class = "cityWeather">${city7.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city7.wind.deg) wd + "" + returnCalm(Math.round(city7.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city8.name}</div>
-	// 		<div class = "citytemp">${city8.main.temp}</div>
-	// 		<div class = "cityWeather">${city8.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city8.wind.deg) wd + "" + returnCalm(Math.round(city8.wind.speed), wd)}</div>
-	// 	</div>
-	// 	<div class = "cityRow">
-	// 		<div class = "city">${city9.name}</div>
-	// 		<div class = "citytemp">${city9.main.temp}</div>
-	// 		<div class = "cityWeather">${city9.weather.description}</div>
-	// 		<div class = "cityWind">${let wd = getWindDirection(city9.wind.deg) wd + "" + returnCalm(Math.round(city9.wind.speed), wd)}</div>
-	// 	</div>
-	// `
-
-
-
-
-
-
 function noData() { ///Will display if no data reports, or if error.
 	mainBox.innerHTML = `
 			<div class = "noData>
@@ -360,6 +262,7 @@ function noData() { ///Will display if no data reports, or if error.
 
 getTime()
 getWeather()
+
 setInterval(getTime, 1000)
 setInterval(getWeather, 450000) //a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
 
