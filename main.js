@@ -202,6 +202,7 @@ function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 
 function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { ///Page 1
 	mainBox.innerHTML = `
+		<div class = "page1Box">
 			<div class = "mainInfo">
 				<div class = "tempBox">
 					<h1 id = "temp">${temp}</h1><h1>°</h1>
@@ -219,8 +220,8 @@ function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, b
 				<h3 id = "visibility">Visibility: ${visb} mi</h3>
 				<h3 id = "pressure">Pressure: ${baro}</h3>
 				<h3>Heat Index: </h3>
-			</div>`
-
+			</div>
+		</div>`
 }
 
 function localObs(data){
@@ -233,7 +234,7 @@ function localObs(data){
 		
 		<div class = "cityRow">
 			<div class = "city">${item.name}</div>
-			<div class = "citytemp">${item.main.temp}</div>
+			<div class = "cityTemp">${item.main.temp}</div>
 			<div class = "cityWeather">${item.weather[0].description}</div>
 			<div class = "cityWind">${item.wind.deg}</div>
 		</div>

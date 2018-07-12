@@ -127,8 +127,14 @@ main {
 	border-radius: 6px;
 	border-image-source: radial-gradient(rgb(83, 90, 125), rgb(36, 43, 90)); /*not quite right here*/
 	border-image-slice: 20;
-	display: flex;
+/*	display: flex;*/
 	color: rgb(205,	210, 221);
+}
+
+.page1Box {
+	width: 980px;
+	height: 600px;
+	display: flex;
 }
 
 .mainInfo {
@@ -180,5 +186,28 @@ footer {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
 	margin-left: -25px;
+}
+
+.cityRow {
+	width: 980px;
+	height: 80px;
+	display: flex;
+	font-size: 50px;
+}
+
+.city {
+	width: 400px;
+}
+
+.cityTemp {
+	width: 90px;
+}
+
+.cityWeather {
+	width: 380px;
+}
+
+.cityWind {
+	width: 110px;
 }
 
