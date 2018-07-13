@@ -240,9 +240,9 @@ function page2(data){
 		
 		resultBlock = `		
 		<div class = "cityRow">
-			<div class = "city">${item.name}</div>
+			<div class = "city">${abbreviator(item.name)}</div>
 			<div class = "cityTemp">${Math.round(item.main.temp)}</div>
-			<div class = "cityWeather">${item.weather[0].description}</div>
+			<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
 			<div class = "cityWind">${wd}${ws}</div>
 		</div>
 		
@@ -284,6 +284,18 @@ function dp(T, RH) {
 
 
 
+
+function abbreviator(word) {
+	let wordLength = word.length
+	if(word.endsWith("Air Force Base")) {
+		return word.substr(0, (wordLength - 14)) + " " + "AFB"
+	} else if(word.startsWith("Scattered")) {
+		return "Sct'd" + "" + word.substr(8, wordLength)
+	} else {
+		return word
+	}
+
+}
 
 
 
