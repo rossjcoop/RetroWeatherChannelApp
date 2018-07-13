@@ -1,3 +1,4 @@
+const headline = document.getElementById("headline")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
@@ -204,7 +205,8 @@ function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 
 
 
-function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { ///Page 1
+function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { 
+	headline.innerHTML = `<div>Current<br />Conditions</div>`
 	mainBox.innerHTML = `
 		<div class = "page1Box">
 			<div class = "mainInfo">
@@ -229,9 +231,8 @@ function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, b
 }
 
 function page2(data){
-	mainBox.innerHTML = ''
-	
-	
+	headline.innerHTML = `<div>Latest Observations</div`
+	mainBox.innerHTML = ''	
 	data.list.forEach(function(item) { 		
 		let resultBlock = ''
 		let wd = getWindDirection(item.wind.deg)
