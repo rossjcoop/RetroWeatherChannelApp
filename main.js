@@ -4,46 +4,92 @@ const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
 const mainBox = document.getElementById("mainBox")
 
-const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
-const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
+
+const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
+
+// const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
+// const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
 
 
-function getWeather(c) {  ///Eventually, I will feed this function a given city either via dialogue box, or more clever, using current location.
-	fetch(ccApi)
-  		.then(response => {
-  			if(response.status !== 200) {
-        		console.log(response.status)
-        		noData()
-        		return;
-      		}
-      		response.json()
-  				.then(data => {
-  				console.log(data)
-  				let temp = Math.round(data.main.temp)
-  				let cond = data.weather[0].description 
-  				let icon = data.weather[0].icon
-  				let windDir = getWindDirection(data.wind.deg)
-  				let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
-  				let windGust = returnGust(data.wind.gust)
-  				let curCity = data.name
-  				let humid = data.main.humidity
-  				let baro = convertInHg(data.main.pressure)
-  				let visb = convertMeters(data.visibility)
-  				let dt = new Date(data.dt * 1000).toDateString()
-  				let lat = data.coord.lat
-  				let lon = data.coord.lon
+function getWeather(c) { ///Eventually, c will be data passed to this function for any city in cityList so user can switch cities, for now, just Las Vegas, NV
+	const lat = 36.17 //c.coord.lat
+	const lon = -115.14 //c.coord.lon
+	const cityName = "Las Vegas" //c.name
+	const cityId = 5506956 //c.id
 
+	
+	var currentCondAPI = ////Gets current conditions for a given city ID
+		fetch("http://api.openweathermap.org/data/2.5/weather?id="+cityId+"&units=imperial&APPID="+apiId)
+  			.then(response => {
+	  			if(response.status !== 200) {
+	        		console.log("Current condition API: ", response.status)
+	        		return	      	
+	      		} else {
+	      			return response.json()
+	      		}	
+	  				//.then(ccData => {
+	  				//console.log(ccData)
+	  				// let temp = Math.round(data.main.temp)
+	  				// let cond = data.weather[0].description 
+	  				// let icon = data.weather[0].icon
+	  				// let windDir = getWindDirection(data.wind.deg)
+	  				// let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
+	  				// let windGust = returnGust(data.wind.gust)
+	  				// let curCity = data.name
+	  				// let humid = data.main.humidity
+	  				// let baro = convertInHg(data.main.pressure)
+	  				// let visb = convertMeters(data.visibility)
+	  				// let dt = new Date(data.dt * 1000).toDateString()
+	  				// const lat = ccData.coord.lat
+	  				// const lon = ccData.coord.lon
 
-  				page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
-  				footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
-  				setTimeout(function() {getRegionalObs(lat, lon); }, 10000)
+	  				// const data1 = ccData
 
-  				})
-		})
-}
+  				// page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
+  				// footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
+  				// setTimeout(function() {getRegionalObs(lat, lon); }, 10000)
+  			});	
+  		
+
+  	var localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
+  		fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID="+apiId)
+			.then(response => {
+  				if(response.status !== 200) {
+        			console.log("Local weather stations API: ", response.status)
+        			return
+      			} else {
+		      		return response.json()		  		
+		  		}
+  			});
+
+  	var forecastAPI = //Gets 5 day forecast for given city id
+  		fetch("http://api.openweathermap.org/data/2.5/forecast?id="+cityId+"&units=imperial&APPID="+apiId)
+			.then(response => {
+  				if(response.status !== 200) {
+        			console.log("5 day forecast API: ", response.status)
+        			return
+      			} else {
+      				return response.json()
+      			}
+  			});
+
+  	var combinedData = {"currentCondAPI": {}, "localObsAPI": {}, "forecastAPI": {}};
+
+  	Promise.all([currentCondAPI, localObsAPI, forecastAPI]).then(data => {
+  		combinedData["currentCondAPI"] = data[0];
+  		combinedData["localObsAPI"] = data[1];
+  		combinedData["forecastAPI"] = data[2];
+
+  		console.log(combinedData)
+  	})
+};
+  	
+
+	
+
 
 function getRegionalObs(lat, lon) {
-	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1")
+	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID="+apiId)
 		.then(response => {
   			if(response.status !== 200) {
         		console.log(response.status);
@@ -202,57 +248,71 @@ function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 	setInterval(slideshow, 45000)		
 }
 
+function main(data1, data2, data3) {
 
 
 
-function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { 
-	headline.innerHTML = `<div>Current<br />Conditions</div>`
-	mainBox.innerHTML = `
-		<div class = "page1Box">
-			<div class = "mainInfo">
-				<div class = "tempBox">
-					<h1 id = "temp">${temp}</h1><h1>°</h1>
+
+
+
+
+
+
+
+
+
+
+
+	function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt) { 
+		headline.innerHTML = `<div>Current<br />Conditions</div>`
+		mainBox.innerHTML = `
+			<div class = "page1Box">
+				<div class = "mainInfo">
+					<div class = "tempBox">
+						<h1 id = "temp">${temp}</h1><h1>°</h1>
+					</div>
+					<h2 id = "cond">${cond}</h2>
+					<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
+					<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
+					<h3 id = "gust">${windGust}</h3>
 				</div>
-				<h2 id = "cond">${cond}</h2>
-				<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
-				<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
-				<h3 id = "gust">${windGust}</h3>
+				<div class = "subInfo">
+					<h3 id = "cityName">${curCity}</h3>
+					<h3 id = "humidity">Humidity: ${humid}%</h3>
+					<h3>Dewpoint: </h3>
+					<h3>Ceiling: </h3>
+					<h3 id = "visibility">Visibility: ${visb} mi</h3>
+					<h3 id = "pressure">Pressure: ${baro}</h3>
+					<h3>Heat Index: </h3>
+				</div>
+			</div>`
+	}
+
+
+	function page2(data){
+		headline.innerHTML = `<div>Latest Observations</div`
+		mainBox.innerHTML = ''	
+		data.list.forEach(function(item) { 		
+			let resultBlock = ''
+			let wd = getWindDirection(item.wind.deg)
+			let ws = returnCalm(Math.round(item.wind.speed), wd)
+			
+			resultBlock = `		
+			<div class = "cityRow">
+				<div class = "city">${abbreviator(item.name)}</div>
+				<div class = "cityTemp">${Math.round(item.main.temp)}</div>
+				<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
+				<div class = "cityWind">${wd}${ws}</div>
 			</div>
-			<div class = "subInfo">
-				<h3 id = "cityName">${curCity}</h3>
-				<h3 id = "humidity">Humidity: ${humid}%</h3>
-				<h3>Dewpoint: </h3>
-				<h3>Ceiling: </h3>
-				<h3 id = "visibility">Visibility: ${visb} mi</h3>
-				<h3 id = "pressure">Pressure: ${baro}</h3>
-				<h3>Heat Index: </h3>
-			</div>
-		</div>`
-}
+			
+			`
+			mainBox.innerHTML += resultBlock
 
-function page2(data){
-	headline.innerHTML = `<div>Latest Observations</div`
-	mainBox.innerHTML = ''	
-	data.list.forEach(function(item) { 		
-		let resultBlock = ''
-		let wd = getWindDirection(item.wind.deg)
-		let ws = returnCalm(Math.round(item.wind.speed), wd)
-		
-		resultBlock = `		
-		<div class = "cityRow">
-			<div class = "city">${abbreviator(item.name)}</div>
-			<div class = "cityTemp">${Math.round(item.main.temp)}</div>
-			<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
-			<div class = "cityWind">${wd}${ws}</div>
-		</div>
-		
-		`
-		mainBox.innerHTML += resultBlock
+			})
 
-		})
+	}
 
-}
-
+};
 
 
 
@@ -290,12 +350,13 @@ function abbreviator(word) {
 	if(word.endsWith("Air Force Base")) {
 		return word.substr(0, (wordLength - 14)) + " " + "AFB"
 	} else if(word.startsWith("Scattered")) {
-		return "Sct'd" + "" + word.substr(8, wordLength)
+		return "Sct'd" + "" + word.substr(9, wordLength)
 	} else {
 		return word
 	}
 
 }
+
 
 
 
