@@ -42,7 +42,7 @@ function getWeather(c) {  ///Eventually, I will feed this function a given city 
 }
 
 function getRegionalObs(lat, lon) {
-	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1")
+	fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1")
 		.then(response => {
   			if(response.status !== 200) {
         		console.log(response.status);
@@ -51,7 +51,7 @@ function getRegionalObs(lat, lon) {
       		response.json()
   				.then(data => {
   					console.log(data)
-  					localObs(data)
+  					page2(data)
   				})
   		})
 }
@@ -161,6 +161,10 @@ function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 		setTimeout(order7, 35000)
 		setTimeout(order8, 40000)
 	
+
+		//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
+
+
 			function order1() {
 				bottomBar.innerHTML = `Conditions at ${curCity}`
 			}
@@ -224,23 +228,24 @@ function page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, b
 		</div>`
 }
 
-function localObs(data){
+function page2(data){
 	mainBox.innerHTML = ''
 	
 	
 	data.list.forEach(function(item) { 		
 		let resultBlock = ''
-		resultBlock = `
+		let wd = getWindDirection(item.wind.deg)
+		let ws = returnCalm(Math.round(item.wind.speed), wd)
 		
+		resultBlock = `		
 		<div class = "cityRow">
 			<div class = "city">${item.name}</div>
-			<div class = "cityTemp">${item.main.temp}</div>
+			<div class = "cityTemp">${Math.round(item.main.temp)}</div>
 			<div class = "cityWeather">${item.weather[0].description}</div>
-			<div class = "cityWind">${item.wind.deg}</div>
+			<div class = "cityWind">${wd}${ws}</div>
 		</div>
 		
 		`
-
 		mainBox.innerHTML += resultBlock
 
 		})
@@ -258,7 +263,6 @@ function noData() { ///Will display if no data reports, or if error.
 				<h1>No Report Availiable</h1>
 			</div>`
 }
-//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
 
 getTime()
