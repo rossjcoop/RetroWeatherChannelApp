@@ -183,76 +183,93 @@ function getTime() {  //Timestamp clock function as the top
 
 
 function main(weatherData) {
-	page1(weatherData.currentCondAPI)
+	slideshow2()
 	footer(weatherData.currentCondAPI)
-	setTimeout(function() {page2(weatherData.localObsAPI); }, 10000)
-	setTimeout(function() {page3(weatherData.forecastAPI); }, 20000)
 
 
+	function slideshow2() {
+
+		page1(weatherData.currentCondAPI)
+		setTimeout(function() {page2(weatherData.localObsAPI); }, 10000)
+		setTimeout(function() {page3(); }, 20000)
 
 
-	function page1(data) { 
+		function page1(data) { 
 
-		let temp = Math.round(data.main.temp)
-	  	let cond = data.weather[0].description 
-	  	let icon = data.weather[0].icon
-	  	let windDir = getWindDirection(data.wind.deg)
-	  	let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
-	  	let windGust = returnGust(data.wind.gust)
-	  	let curCity = data.name
-	  	let humid = data.main.humidity
-	  	let baro = convertInHg(data.main.pressure)
-	  	let visb = convertMeters(data.visibility)
-	  	let dt = new Date(data.dt * 1000).toDateString()
+			let temp = Math.round(data.main.temp)
+		  	let cond = data.weather[0].description 
+		  	let icon = data.weather[0].icon
+		  	let windDir = getWindDirection(data.wind.deg)
+		  	let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
+		  	let windGust = returnGust(data.wind.gust)
+		  	let curCity = data.name
+		  	let humid = data.main.humidity
+		  	let baro = convertInHg(data.main.pressure)
+		  	let visb = convertMeters(data.visibility)
+		  	let dt = new Date(data.dt * 1000).toDateString()
 
-		headline.innerHTML = `<div>Current<br />Conditions</div>`
-		mainBox.innerHTML = `
-			<div class = "page1Box">
-				<div class = "mainInfo">
-					<div class = "tempBox">
-						<h1 id = "temp">${temp}</h1><h1>°</h1>
+			headline.innerHTML = `<div>Current<br />Conditions</div>`
+			mainBox.innerHTML = `
+				<div class = "page1Box">
+					<div class = "mainInfo">
+						<div class = "tempBox">
+							<h1 id = "temp">${temp}</h1><h1>°</h1>
+						</div>
+						<h2 id = "cond">${cond}</h2>
+						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
+						<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
+						<h3 id = "gust">${windGust}</h3>
 					</div>
-					<h2 id = "cond">${cond}</h2>
-					<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
-					<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
-					<h3 id = "gust">${windGust}</h3>
-				</div>
-				<div class = "subInfo">
-					<h3 id = "cityName">${curCity}</h3>
-					<h3 id = "humidity">Humidity: ${humid}%</h3>
-					<h3>Dewpoint: </h3>
-					<h3>Ceiling: </h3>
-					<h3 id = "visibility">Visibility: ${visb} mi</h3>
-					<h3 id = "pressure">Pressure: ${baro}</h3>
-					<h3>Heat Index: </h3>
-				</div>
-			</div>`
-	}
+					<div class = "subInfo">
+						<h3 id = "cityName">${curCity}</h3>
+						<h3 id = "humidity">Humidity: ${humid}%</h3>
+						<h3>Dewpoint: </h3>
+						<h3>Ceiling: </h3>
+						<h3 id = "visibility">Visibility: ${visb} mi</h3>
+						<h3 id = "pressure">Pressure: ${baro}</h3>
+						<h3>Heat Index: </h3>
+					</div>
+				</div>`
+		};
 
 
-	function page2(data){
-		headline.innerHTML = `<div>Latest Observations</div`
-		mainBox.innerHTML = ''	
-		data.list.forEach(function(item) { 		
-			let resultBlock = ''
-			let wd = getWindDirection(item.wind.deg)
-			let ws = returnCalm(Math.round(item.wind.speed), wd)
-			
-			resultBlock = `		
-			<div class = "cityRow">
-				<div class = "city">${abbreviator(item.name)}</div>
-				<div class = "cityTemp">${Math.round(item.main.temp)}</div>
-				<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
-				<div class = "cityWind">${wd}${ws}</div>
-			</div>
-			
+		function page2(data){
+			headline.innerHTML = `<div>Latest Observations</div`
+			mainBox.innerHTML = ''	
+			data.list.forEach(function(item) { 		
+				let resultBlock = ''
+				let wd = getWindDirection(item.wind.deg)
+				let ws = returnCalm(Math.round(item.wind.speed), wd)
+				
+				resultBlock = `		
+				<div class = "cityRow">
+					<div class = "city">${abbreviator(item.name)}</div>
+					<div class = "cityTemp">${Math.round(item.main.temp)}</div>
+					<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
+					<div class = "cityWind">${wd}${ws}</div>
+				</div>
+				
+				`
+				mainBox.innerHTML += resultBlock
+
+				})
+
+		};
+
+
+		function page3(data){
+
+			mainBox.innerHTML = `
+
+
+			<div>Coming soon</div>
+
+
 			`
-			mainBox.innerHTML += resultBlock
-
-			})
-
-	}
-
+		};
+	};
+	
+	setInterval(slideshow2, 30000)
 };
 
 function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
