@@ -2,6 +2,7 @@ const headline = document.getElementById("headline")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
+const mainboxClmns = document.getElementById("mainboxClmns")
 const mainBox = document.getElementById("mainBox")
 
 
@@ -28,27 +29,6 @@ function getWeather(c) { ///Eventually, c will be data passed to this function f
 	      		} else {
 	      			return response.json()
 	      		}	
-	  				//.then(ccData => {
-	  				//console.log(ccData)
-	  				// let temp = Math.round(data.main.temp)
-	  				// let cond = data.weather[0].description 
-	  				// let icon = data.weather[0].icon
-	  				// let windDir = getWindDirection(data.wind.deg)
-	  				// let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
-	  				// let windGust = returnGust(data.wind.gust)
-	  				// let curCity = data.name
-	  				// let humid = data.main.humidity
-	  				// let baro = convertInHg(data.main.pressure)
-	  				// let visb = convertMeters(data.visibility)
-	  				// let dt = new Date(data.dt * 1000).toDateString()
-	  				// const lat = ccData.coord.lat
-	  				// const lon = ccData.coord.lon
-
-	  				// const data1 = ccData
-
-  				// page1(temp, cond, icon, windDir, windSpeed, windGust, curCity, humid, baro, visb, dt)
-  				// footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt)
-  				// setTimeout(function() {getRegionalObs(lat, lon); }, 10000)
   			});	
   		
 
@@ -183,30 +163,33 @@ function getTime() {  //Timestamp clock function as the top
 
 
 function main(weatherData) {
+	
+	//Current conditions weather data////////////////////////////////////////////////////
+	let temp = Math.round(weatherData.currentCondAPI.main.temp)
+	let cond = weatherData.currentCondAPI.weather[0].description 
+	let icon = weatherData.currentCondAPI.weather[0].icon
+	let windDir = getWindDirection(weatherData.currentCondAPI.wind.deg)
+	let windSpeed = returnCalm(Math.round(weatherData.currentCondAPI.wind.speed), windDir)
+	let windGust = returnGust(weatherData.currentCondAPI.wind.gust)
+	let curCity = weatherData.currentCondAPI.name
+	let humid = weatherData.currentCondAPI.main.humidity
+	let baro = convertInHg(weatherData.currentCondAPI.main.pressure)
+	let visb = convertMeters(weatherData.currentCondAPI.visibility)
+	let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
+	////////////////////////////////////////////////////////////////////////////////////
+	
 	slideshow2()
-	footer(weatherData.currentCondAPI)
+	footer()
 
 
 	function slideshow2() {
 
-		page1(weatherData.currentCondAPI)
-		setTimeout(function() {page2(weatherData.localObsAPI); }, 10000)
-		setTimeout(function() {page3(); }, 20000)
+		page1()
+		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
+		setTimeout(function() {page3(); }, 40000)
 
 
-		function page1(data) { 
-
-			let temp = Math.round(data.main.temp)
-		  	let cond = data.weather[0].description 
-		  	let icon = data.weather[0].icon
-		  	let windDir = getWindDirection(data.wind.deg)
-		  	let windSpeed = returnCalm(Math.round(data.wind.speed), windDir)
-		  	let windGust = returnGust(data.wind.gust)
-		  	let curCity = data.name
-		  	let humid = data.main.humidity
-		  	let baro = convertInHg(data.main.pressure)
-		  	let visb = convertMeters(data.visibility)
-		  	let dt = new Date(data.dt * 1000).toDateString()
+		function page1() { 			
 
 			headline.innerHTML = `<div>Current<br />Conditions</div>`
 			mainBox.innerHTML = `
@@ -235,7 +218,15 @@ function main(weatherData) {
 
 		function page2(data){
 			headline.innerHTML = `<div>Latest Observations</div`
-			mainBox.innerHTML = ''	
+			mainBox.innerHTML = ''
+			mainboxClmns.innerHTML = `
+				<div class = "columnRow">
+					<div class = "cityClmn"></div>
+					<div class = "cityTempClmn">°F</div>
+					<div class = "cityWeatherClmn">WEATHER</div>
+					<div class = "cityWindClmn">WIND</div>
+				</div>
+			`	
 			data.list.forEach(function(item) { 		
 				let resultBlock = ''
 				let wd = getWindDirection(item.wind.deg)
@@ -258,34 +249,84 @@ function main(weatherData) {
 
 
 		function page3(data){
-
+			headline.innerHTML = `
+				<div>${curCity} Metro</div>
+				<div>Extended Forecast</div>
+				`
 			mainBox.innerHTML = `
 
-
-			<div>Coming soon</div>
-
-
+			<div class = "days">
+				<div class = "day"></div>
+				<div class = "dayGif"></div>
+				<div class = "dayCond"></div>
+				<div class = "tempsBox">
+					<div class = "temps">
+						<div class = "tempLo"></div>
+						<div class = "dayTemp"></div>
+					</div>
+					<div class = "temps">
+						<div class = "tempHi"></div>
+						<div class = "dayTemp"></div>
+					</div>
+				</div>
+			</div>
+			<div class = "days">
+				<div class = "day"></div>
+				<div class = "dayGif"></div>
+				<div class = "dayCond"></div>
+				<div class = "tempsBox">
+					<div class = "temps">
+						<div class = "tempLo"></div>
+						<div class = "dayTemp"></div>
+					</div>
+					<div class = "temps">
+						<div class = "tempHi"></div>
+						<div class = "dayTemp"></div>
+					</div>
+				</div>
+			</div>
+			<div class = "days">
+				<div class = "day"></div>
+				<div class = "dayGif"></div>
+				<div class = "dayCond"></div>
+				<div class = "tempsBox">
+					<div class = "temps">
+						<div class = "tempLo"></div>
+						<div class = "dayTemp"></div>
+					</div>
+					<div class = "temps">
+						<div class = "tempHi"></div>
+						<div class = "dayTemp"></div>
+					</div>
+				</div>
+			</div>
 			`
 		};
 	};
-	
-	setInterval(slideshow2, 30000)
-};
 
-function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) {  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
-	bottomBar.innerHTML = ""
+	setInterval(slideshow2, 60000)
+	setInterval(function() { 
+		clearInterval(slideshow2)
+		mainBox.innerHTML = ``
+		}, 50000)
+
+
+
+	function footer() {
+	  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
 	slideshow()
+	
 	function slideshow() {
 		let mph = returnMPH(windSpeed)
+		
 		order1()
-		setTimeout(order1, 5000)
-		setTimeout(order2, 10000)
-		setTimeout(order3, 15000)
-		setTimeout(order4, 20000)
-		setTimeout(order5, 25000)
-		setTimeout(order6, 30000)
-		setTimeout(order7, 35000)
-		setTimeout(order8, 40000)
+		setTimeout(order2, 4000)
+		setTimeout(order3, 8000)
+		setTimeout(order4, 12000)
+		setTimeout(order5, 16000)
+		setTimeout(order6, 20000)
+		setTimeout(order7, 24000)
+		setTimeout(order8, 28000)
 	
 
 		//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
@@ -324,8 +365,16 @@ function footer(temp, cond, windDir, windSpeed, curCity, humid, baro, visb, dt) 
 			}
 	}
 
-	setInterval(slideshow, 45000)		
-}
+	setInterval(slideshow, 32000)
+	setInterval(function() { 
+		clearInterval(slideshow) 
+		bottomBar.innerHTML = ``
+		}, 50000)		
+	}
+
+};
+
+
 
 
 
@@ -345,7 +394,12 @@ getTime()
 getWeather()
 
 setInterval(getTime, 1000)
-setInterval(getWeather, 450000) //a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
+setInterval(getWeather, 60000)
+setInterval(function() {
+	clearInterval(getWeather)
+	mainBox.innerHTML = ``
+	bottomBar.innerHTML = ``
+	}, 50000)//a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
 
 ///apixu.com
 
@@ -364,13 +418,30 @@ function abbreviator(word) {
 	let wordLength = word.length
 	if(word.endsWith("Air Force Base")) {
 		return word.substr(0, (wordLength - 14)) + " " + "AFB"
-	} else if(word.startsWith("Scattered")) {
+	} else if(word.startsWith("scattered")) {
 		return "Sct'd" + "" + word.substr(9, wordLength)
 	} else {
 		return word
 	}
 
 }
+
+
+// function threeDay(data) {
+
+// 	data.list.filter(item => (item.dt * 1000).
+
+// 	var d = new Date(data * 1000).getHours()
+
+// }
+
+
+
+//Given that the data feed to this function is a list of (40) 3 hour periods, so 120 hour forecast, I need to find
+
+
+
+
 
 
 
