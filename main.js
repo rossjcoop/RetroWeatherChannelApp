@@ -304,11 +304,11 @@ function main(weatherData) {
 		};
 	};
 
-	setInterval(slideshow2, 60000)
+	var endSlideShow2 = setInterval(slideshow2, 60000)
 	setInterval(function() { 
-		clearInterval(slideshow2)
+		clearInterval(endSlideShow2)
 		mainBox.innerHTML = ``
-		}, 50000)
+		}, 600000)
 
 
 
@@ -365,11 +365,11 @@ function main(weatherData) {
 			}
 	}
 
-	setInterval(slideshow, 32000)
+	var endSlideShow = setInterval(slideshow, 32000)
 	setInterval(function() { 
-		clearInterval(slideshow) 
+		clearInterval(endSlideShow) 
 		bottomBar.innerHTML = ``
-		}, 50000)		
+		}, 600000)		
 	}
 
 };
@@ -394,12 +394,12 @@ getTime()
 getWeather()
 
 setInterval(getTime, 1000)
-setInterval(getWeather, 60000)
-setInterval(function() {
-	clearInterval(getWeather)
-	mainBox.innerHTML = ``
-	bottomBar.innerHTML = ``
-	}, 50000)//a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
+setInterval(getWeather, 600000)
+// setInterval(function() {
+// 	clearInterval(getWeather)
+// 	mainBox.innerHTML = ``
+// 	bottomBar.innerHTML = ``
+// 	}, 50000)//a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
 
 ///apixu.com
 
