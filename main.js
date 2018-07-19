@@ -3,7 +3,7 @@ const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
 const mainboxClmns = document.getElementById("mainboxClmns")
-const mainBox = document.getElementById("mainBox")
+const mainBox = document.getElementById("mainboxContent")
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -253,6 +253,7 @@ function main(weatherData) {
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
 				`
+			mainboxClmns.innerHTML = ``
 			mainBox.innerHTML = `
 
 			<div class = "days">

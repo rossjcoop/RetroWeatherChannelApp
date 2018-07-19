@@ -131,6 +131,43 @@ main {
 	color: rgb(205,	210, 221);
 }
 
+#mainboxClmns {
+	width: 980px;
+	height: 40px;
+	margin-top: -40px;
+	font-family: 'weatherStarSmall', monospace;
+	font-style: bold;
+	font-size: 40px;
+}
+
+.columnRow {
+	display: flex;
+}
+
+.cityClmn {
+	width: 400px;
+}
+
+.cityTempClmn {
+	width: 90px;
+	text-align: center;
+
+}
+
+.cityWeatherClmn {
+	width: 380px;
+}
+
+.cityWindClmn {
+	width: 110px;
+}
+
+#mainboxContent {
+	width: 980px;
+	height: 550px;
+	margin: 0 auto;
+}
+
 .page1Box {
 	width: 980px;
 	height: 600px;
