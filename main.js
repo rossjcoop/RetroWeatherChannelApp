@@ -249,25 +249,27 @@ function main(weatherData) {
 
 
 		function page3(data){
-
-			
-
-			let forecastHiLo = data.list.filter(threeDay)
-			
-				
-
-			console.log(forecastHiLo)
-
-
 			headline.innerHTML = `
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
 				`
 			mainboxClmns.innerHTML = ``
+
+			
+			let hiLo = data.list.filter(threeDay)
+
+
+			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
+			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
+			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
+
+			
+
+		
 			mainBox.innerHTML = `
 
 			<div class = "days">
-				<div class = "day"></div>
+				<div class = "day">${day1.substr(0, 3)}</div>
 				<div class = "dayGif"></div>
 				<div class = "dayCond"></div>
 				<div class = "tempsBox">
@@ -282,7 +284,7 @@ function main(weatherData) {
 				</div>
 			</div>
 			<div class = "days">
-				<div class = "day"></div>
+				<div class = "day">${day2.substr(0, 2)}</div>
 				<div class = "dayGif"></div>
 				<div class = "dayCond"></div>
 				<div class = "tempsBox">
@@ -297,7 +299,7 @@ function main(weatherData) {
 				</div>
 			</div>
 			<div class = "days">
-				<div class = "day"></div>
+				<div class = "day">${day3.substr(0, 2)}</div>
 				<div class = "dayGif"></div>
 				<div class = "dayCond"></div>
 				<div class = "tempsBox">
@@ -447,7 +449,10 @@ function threeDay(item) {
 	}	
 }
 
-
+function dayofWeek(d) {
+	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+	return days[d]
+}
 
 
 
