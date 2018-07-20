@@ -186,7 +186,7 @@ function main(weatherData) {
 
 		page1()
 		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
-		setTimeout(function() {page3(); }, 40000)
+		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
 
 
 		function page1() { 			
@@ -249,6 +249,16 @@ function main(weatherData) {
 
 
 		function page3(data){
+
+			
+
+			let forecastHiLo = data.list.filter(threeDay)
+			
+				
+
+			console.log(forecastHiLo)
+
+
 			headline.innerHTML = `
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
@@ -428,17 +438,18 @@ function abbreviator(word) {
 }
 
 
-// function threeDay(data) {
+function threeDay(item) {
+	let itemHour = new Date(item.dt * 1000).getHours()
+	if(itemHour == 5 || itemHour == 14) {
+		return true;
+	} else {
+	return false;
+	}	
+}
 
-// 	data.list.filter(item => (item.dt * 1000).
-
-// 	var d = new Date(data * 1000).getHours()
-
-// }
 
 
 
-//Given that the data feed to this function is a list of (40) 3 hour periods, so 120 hour forecast, I need to find
 
 
 
