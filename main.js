@@ -257,59 +257,59 @@ function main(weatherData) {
 
 			
 			let hiLo = data.list.filter(threeDay)
-
+			console.log(hiLo)
 
 			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
 			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
 			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
 
-			
+
 
 		
 			mainBox.innerHTML = `
 
 			<div class = "days">
 				<div class = "day">${day1.substr(0, 3)}</div>
-				<div class = "dayGif"></div>
-				<div class = "dayCond"></div>
+				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[1].weather[0].icon}.gif"></div>
+				<div class = "dayCond">${hiLo[1].weather[0].description}</div>
 				<div class = "tempsBox">
 					<div class = "temps">
-						<div class = "tempLo"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempLo">Lo</div>
+						<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
 					</div>
 					<div class = "temps">
-						<div class = "tempHi"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempHi">Hi</div>
+						<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
 					</div>
 				</div>
 			</div>
 			<div class = "days">
-				<div class = "day">${day2.substr(0, 2)}</div>
-				<div class = "dayGif"></div>
-				<div class = "dayCond"></div>
+				<div class = "day">${day2.substr(0, 3)}</div>
+				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[3].weather[0].icon}.gif"></div>
+				<div class = "dayCond">${hiLo[3].weather[0].description}</div>
 				<div class = "tempsBox">
 					<div class = "temps">
-						<div class = "tempLo"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempLo">Lo</div>
+						<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
 					</div>
 					<div class = "temps">
-						<div class = "tempHi"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempHi">Hi</div>
+						<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
 					</div>
 				</div>
 			</div>
 			<div class = "days">
-				<div class = "day">${day3.substr(0, 2)}</div>
-				<div class = "dayGif"></div>
-				<div class = "dayCond"></div>
+				<div class = "day">${day3.substr(0, 3)}</div>
+				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[5].weather[0].icon}.gif"></div>
+				<div class = "dayCond">${hiLo[5].weather[0].description}</div>
 				<div class = "tempsBox">
 					<div class = "temps">
-						<div class = "tempLo"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempLo">Lo</div>
+						<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
 					</div>
 					<div class = "temps">
-						<div class = "tempHi"></div>
-						<div class = "dayTemp"></div>
+						<div class = "tempHi">Hi</div>
+						<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
 					</div>
 				</div>
 			</div>
