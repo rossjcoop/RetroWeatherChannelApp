@@ -267,53 +267,54 @@ function main(weatherData) {
 
 		
 			mainBox.innerHTML = `
-
-			<div class = "days">
-				<div class = "day">${day1.substr(0, 3)}</div>
-				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[1].weather[0].icon}.gif"></div>
-				<div class = "dayCond">${hiLo[1].weather[0].description}</div>
-				<div class = "tempsBox">
-					<div class = "temps">
-						<div class = "tempLo">Lo</div>
-						<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+				<div class = "forecast">
+					<div class = "days">
+						<div class = "day">${day1.substr(0, 3)}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[1].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${hiLo[1].weather[0].description}</div>
+						<div class = "tempsBox">
+							<div class = "temps">
+								<div class = "tempLo">Lo</div>
+								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+							</div>
+							<div class = "temps">
+								<div class = "tempHi">Hi</div>
+								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+							</div>
+						</div>
 					</div>
-					<div class = "temps">
-						<div class = "tempHi">Hi</div>
-						<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+					<div class = "days">
+						<div class = "day">${day2.substr(0, 3)}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[3].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${hiLo[3].weather[0].description}</div>
+						<div class = "tempsBox">
+							<div class = "temps">
+								<div class = "tempLo">Lo</div>
+								<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
+							</div>
+							<div class = "temps">
+								<div class = "tempHi">Hi</div>
+								<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
+							</div>
+						</div>
+					</div>
+					<div class = "days">
+						<div class = "day">${day3.substr(0, 3)}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[5].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${hiLo[5].weather[0].description}</div>
+						<div class = "tempsBox">
+							<div class = "temps">
+								<div class = "tempLo">Lo</div>
+								<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
+							</div>
+							<div class = "temps">
+								<div class = "tempHi">Hi</div>
+								<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class = "days">
-				<div class = "day">${day2.substr(0, 3)}</div>
-				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[3].weather[0].icon}.gif"></div>
-				<div class = "dayCond">${hiLo[3].weather[0].description}</div>
-				<div class = "tempsBox">
-					<div class = "temps">
-						<div class = "tempLo">Lo</div>
-						<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
-					</div>
-					<div class = "temps">
-						<div class = "tempHi">Hi</div>
-						<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
-					</div>
-				</div>
-			</div>
-			<div class = "days">
-				<div class = "day">${day3.substr(0, 3)}</div>
-				<div class = "dayGif"><img class="gif" src="./Images/CurrentConditions/${hiLo[5].weather[0].icon}.gif"></div>
-				<div class = "dayCond">${hiLo[5].weather[0].description}</div>
-				<div class = "tempsBox">
-					<div class = "temps">
-						<div class = "tempLo">Lo</div>
-						<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
-					</div>
-					<div class = "temps">
-						<div class = "tempHi">Hi</div>
-						<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
-					</div>
-				</div>
-			</div>
-			`
+				`
 		};
 	};
 
