@@ -2,8 +2,8 @@ const headline = document.getElementById("headline")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
-const mainboxClmns = document.getElementById("mainboxClmns")
-const mainBox = document.getElementById("mainboxContent")
+const containerClmns = document.getElementById("containerClmns")
+const container = document.getElementById("containerContent")
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -192,7 +192,7 @@ function main(weatherData) {
 		function page1() { 			
 
 			headline.innerHTML = `<div>Current<br />Conditions</div>`
-			mainBox.innerHTML = `
+			container.innerHTML = `
 				<div class = "page1Box">
 					<div class = "mainInfo">
 						<div class = "tempBox">
@@ -218,8 +218,8 @@ function main(weatherData) {
 
 		function page2(data){
 			headline.innerHTML = `<div>Latest Observations</div`
-			mainBox.innerHTML = ''
-			mainboxClmns.innerHTML = `
+			container.innerHTML = ''
+			containerClmns.innerHTML = `
 				<div class = "columnRow">
 					<div class = "cityClmn"></div>
 					<div class = "cityTempClmn">°F</div>
@@ -241,7 +241,7 @@ function main(weatherData) {
 				</div>
 				
 				`
-				mainBox.innerHTML += resultBlock
+				container.innerHTML += resultBlock
 
 				})
 
@@ -253,11 +253,13 @@ function main(weatherData) {
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
 				`
-			mainboxClmns.innerHTML = ``
+			containerClmns.innerHTML = ``
 
 			
 			let hiLo = data.list.filter(threeDay)
 			console.log(hiLo)
+			let dayCond = data.list.filter(dayForecast)
+			console.log(dayCond)
 
 			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
 			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
@@ -266,12 +268,12 @@ function main(weatherData) {
 
 
 		
-			mainBox.innerHTML = `
+			container.innerHTML = `
 				<div class = "forecast">
 					<div class = "days">
 						<div class = "day">${day1.substr(0, 3)}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[1].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${hiLo[1].weather[0].description}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
 						<div class = "tempsBox">
 							<div class = "temps">
 								<div class = "tempLo">Lo</div>
@@ -285,8 +287,8 @@ function main(weatherData) {
 					</div>
 					<div class = "days">
 						<div class = "day">${day2.substr(0, 3)}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[3].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${hiLo[3].weather[0].description}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${dayCond[1].weather[0].description}</div>
 						<div class = "tempsBox">
 							<div class = "temps">
 								<div class = "tempLo">Lo</div>
@@ -300,8 +302,8 @@ function main(weatherData) {
 					</div>
 					<div class = "days">
 						<div class = "day">${day3.substr(0, 3)}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${hiLo[5].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${hiLo[5].weather[0].description}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${dayCond[2].weather[0].description}</div>
 						<div class = "tempsBox">
 							<div class = "temps">
 								<div class = "tempLo">Lo</div>
@@ -321,7 +323,7 @@ function main(weatherData) {
 	var endSlideShow2 = setInterval(slideshow2, 60000)
 	setInterval(function() { 
 		clearInterval(endSlideShow2)
-		mainBox.innerHTML = ``
+		container.innerHTML = ``
 		}, 600000)
 
 
@@ -397,7 +399,7 @@ function main(weatherData) {
 
 
 function noData() { ///Will display if no data reports, or if error.
-	mainBox.innerHTML = `
+	container.innerHTML = `
 			<div class = "noData">
 				<h1>No Report Availiable</h1>
 			</div>`
@@ -443,7 +445,16 @@ function abbreviator(word) {
 
 function threeDay(item) {
 	let itemHour = new Date(item.dt * 1000).getHours()
-	if(itemHour == 5 || itemHour == 14) {
+	if(itemHour == 5 || itemHour == 17) { ///Keep in mind, dt in the data is based on GMT +7 hours
+		return true;
+	} else {
+	return false;
+	}	
+}
+
+function dayForecast(item) {
+	let itemHour = new Date(item.dt * 1000).getHours()
+	if(itemHour == 14) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;

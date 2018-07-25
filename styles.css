@@ -117,7 +117,7 @@ main {
 	background: linear-gradient(rgb(49, 22, 73), rgb(180, 98, 20)); 
 }
 
-#mainBox {
+#container {
 	width: 980px;
 	height: 600px;
 	margin: 0 auto;
@@ -131,7 +131,7 @@ main {
 	color: rgb(205,	210, 221);
 }
 
-#mainboxClmns {
+#containerClmns {
 	width: 980px;
 	height: 40px;
 	margin-top: -40px;
@@ -162,7 +162,7 @@ main {
 	width: 110px;
 }
 
-#mainboxContent {
+#containerContent {
 	width: 980px;
 	height: 550px;
 	margin: 0 auto;
@@ -255,29 +255,41 @@ footer {
 
 
 .forecast {
+	margin: 0 auto;
 	width: 980px;
+	height: 578px;
 	display: flex;
+	justify-content: space-around;
 	font-size: 50px;
 }
 
 .days {
 	width: 300px;
-	height: 600px;
+	height: 578px;
 	border: 5px solid black;
-	margin: 2px;
-	margin: 0 auto;
-	padding: 5px;
 	background-color: rgb(129, 129, 247);
 	text-align: center;
 }
-
+.day {
+	color: rgb(223, 180, 39)
+}
 .dayGif {
+	margin: 0 auto;
 	width: 250px;
 	height: 250px;
-	justify-content: center
+	padding: 20px;
+
+}
+
+.dayCond {
+	margin: 0 auto;
+	width: 300px;
+	height: 100px;
 }
 
 .tempsBox {
+	margin: 0 auto;
 	display: flex;
+	justify-content: space-around;
 }
 
