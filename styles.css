@@ -142,6 +142,7 @@ main {
 
 .columnRow {
 	display: flex;
+	width: 980px;
 }
 
 .cityClmn {
@@ -163,7 +164,7 @@ main {
 }
 
 #screen {
-	width: 980px;
+	width: 940px;
 	height: 550px;
 }
 
@@ -230,7 +231,7 @@ footer {
 }
 
 .cityRow {
-	width: 980px;
+	width: 940px;
 	height: 80px;
 	display: flex;
 	font-size: 50px;
