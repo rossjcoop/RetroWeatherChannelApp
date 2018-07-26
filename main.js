@@ -3,7 +3,7 @@ const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
 const containerClmns = document.getElementById("containerClmns")
-const container = document.getElementById("containerContent")
+const container = document.getElementById("screen")
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -445,7 +445,7 @@ function abbreviator(word) {
 
 function threeDay(item) {
 	let itemHour = new Date(item.dt * 1000).getHours()
-	if(itemHour == 5 || itemHour == 17) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	if(itemHour == 5 || itemHour == 14) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;

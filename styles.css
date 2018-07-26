@@ -162,10 +162,9 @@ main {
 	width: 110px;
 }
 
-#containerContent {
+#screen {
 	width: 980px;
 	height: 550px;
-	margin: 0 auto;
 }
 
 .page1Box {
@@ -255,7 +254,6 @@ footer {
 
 
 .forecast {
-	margin: 0 auto;
 	width: 980px;
 	height: 578px;
 	display: flex;
@@ -282,13 +280,11 @@ footer {
 }
 
 .dayCond {
-	margin: 0 auto;
 	width: 300px;
 	height: 100px;
 }
 
 .tempsBox {
-	margin: 0 auto;
 	display: flex;
 	justify-content: space-around;
 }
