@@ -254,10 +254,10 @@ footer {
 
 
 .forecast {
-	width: 980px;
+	width: 940px;
 	height: 578px;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	font-size: 50px;
 }
 
