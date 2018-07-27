@@ -444,8 +444,13 @@ function abbreviator(word) {
 
 
 function threeDay(item) {
+	let now = new Date().getDay()
+	console.log(now)
 	let itemHour = new Date(item.dt * 1000).getHours()
-	if(itemHour == 5 || itemHour == 14) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	let itemDay = new Date(item.dt * 1000).getDay()
+	console.log(itemDay)
+
+	if(itemHour == 5 || itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;
