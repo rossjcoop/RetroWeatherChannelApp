@@ -267,13 +267,20 @@ footer {
 	height: 578px;
 	border: 5px solid gray;
 	background-image: 
-		linear-gradient(rgb(126, 127, 242), rgb(111, 98, 246)),
-		linear-gradient(rgb(111, 98, 246), rgb(88, 84, 245)),
+		linear-gradient(rgb(126, 127, 242) 12.5%, rgb(111, 98, 246) 12.5%, 
+						rgb(111, 98, 246) 25%, rgb(88, 84, 245) 25%, 
+						rgb(88, 84, 245) 37.5%, rgb(79, 68, 240) 37.5%, 
+						rgb(79, 68, 240) 50%, rgb(59, 51, 238) 50%,
+						rgb(59, 51, 238) 62.5%, rgb(47, 25, 240) 62.5%,
+						rgb(47, 25, 240) 75%, rgb(36, 0, 206) 75%,
+						rgb(36, 0, 206) 87.5%, rgb(36, 0, 206) 87.5%);
+						
+		/*linear-gradient
 		linear-gradient(rgb(88, 84, 245), rgb(79, 68, 240)), 
 		linear-gradient(rgb(79, 68, 240), rgb(59, 51, 238)),
 		linear-gradient(rgb(59, 51, 238), rgb(47, 25, 240)),
 		linear-gradient(rgb(47, 25, 240), rgb(44, 0, 241)),
-		linear-gradient(rgb(44, 0, 241), rgb(36, 0, 206));
+		linear-gradient(rgb(44, 0, 241), rgb(36, 0, 206));*/
 	text-align: center;
 }
 .day {
