@@ -121,12 +121,15 @@ main {
 	width: 980px;
 	height: 600px;
 	margin: 0 auto;
-	margin-top: 12px;
+	margin-top: 52px;
 	background-color: rgb(36, 43, 90);
-	border: 20px solid rgb(83, 90, 125);
+	-webkit-box-shadow: inset 0 0 75px rgb(83, 90, 125);
+	box-shadow: inset 0 0 75px rgb(83, 90, 125);
+
+	/*border: 20px solid rgb(83, 90, 125);
 	border-radius: 6px;
 	border-image-source: radial-gradient(rgb(83, 90, 125), rgb(36, 43, 90)); /*not quite right here*/
-	border-image-slice: 20;
+	/*border-image-slice: 20;*/
 /*	display: flex;*/
 	color: rgb(205,	210, 221);
 }
@@ -166,6 +169,7 @@ main {
 #screen {
 	width: 940px;
 	height: 550px;
+	margin: 0 auto;
 }
 
 .page1Box {
@@ -260,6 +264,7 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	font-size: 50px;
+	margin: 0 auto;
 }
 
 .days {

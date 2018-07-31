@@ -4,6 +4,7 @@ const datestamp = document.getElementById("date")
 const bottomBar = document.getElementById("bottomBar")
 const containerClmns = document.getElementById("containerClmns")
 const container = document.getElementById("screen")
+const desktop = document.getElementById("container")
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -190,7 +191,7 @@ function main(weatherData) {
 
 
 		function page1() { 			
-
+			// container.style.backgroundColor = "rgb(36, 43, 90)";
 			headline.innerHTML = `<div>Current<br />Conditions</div>`
 			container.innerHTML = `
 				<div class = "page1Box">
@@ -249,6 +250,7 @@ function main(weatherData) {
 
 
 		function page3(data){
+			// container.style.backgroundColor = "transparent";
 			headline.innerHTML = `
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
