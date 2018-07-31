@@ -271,7 +271,7 @@ function main(weatherData) {
 			container.innerHTML = `
 				<div class = "forecast">
 					<div class = "days">
-						<div class = "day">${day1.substr(0, 3)}</div>
+						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
 						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
 						<div class = "tempsBox">
@@ -286,7 +286,7 @@ function main(weatherData) {
 						</div>
 					</div>
 					<div class = "days">
-						<div class = "day">${day2.substr(0, 3)}</div>
+						<div class = "day">${day2.substr(0, 3).toUpperCase()}</div>
 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
 						<div class = "dayCond">${dayCond[1].weather[0].description}</div>
 						<div class = "tempsBox">
@@ -301,7 +301,7 @@ function main(weatherData) {
 						</div>
 					</div>
 					<div class = "days">
-						<div class = "day">${day3.substr(0, 3)}</div>
+						<div class = "day">${day3.substr(0, 3).toUpperCase()}</div>
 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
 						<div class = "dayCond">${dayCond[2].weather[0].description}</div>
 						<div class = "tempsBox">
@@ -445,10 +445,8 @@ function abbreviator(word) {
 
 function threeDay(item) {
 	let now = new Date().getDay()
-	console.log(now)
 	let itemHour = new Date(item.dt * 1000).getHours()
 	let itemDay = new Date(item.dt * 1000).getDay()
-	console.log(itemDay)
 
 	if(itemHour == 5 || itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
