@@ -221,7 +221,7 @@ footer {
 }
 
 .gifSmall {
-	width: 225px;
+	width: 210px;
 }
 
 #cityName {
@@ -264,7 +264,7 @@ footer {
 
 .days {
 	width: 300px;
-	height: 578px;
+	height: 570px;
 	border: 5px solid gray;
 	background-image: 
 		linear-gradient(rgb(108,139,243) 12.5%, rgb(99,119,242) 12.5%, 
@@ -285,19 +285,21 @@ footer {
 	text-align: center;
 }
 .day {
+	width: 300px;
+	height: 71.25px;
 	color: rgb(223, 180, 39)
 }
 .dayGif {
 	margin: 0 auto;
-	width: 250px;
-	height: 250px;
-	padding: 20px;
+	width: 213.75px;
+	height: 213.75px;
+
 
 }
 
 .dayCond {
 	width: 300px;
-	height: 100px;
+	height: 142.5px;
 }
 
 .tempsBox {
@@ -306,13 +308,17 @@ footer {
 }
 
 
-126	127	242	
+.dayTemp {
+	font-size: 75px;
+}
+
+/*126	127	242	
 111	98	246	
 88	84	245	
 79	68	240	
 59	51	238	
 47	25	240	
 44	0	241	
-36	0	206	
+36	0	206	*/
 
 

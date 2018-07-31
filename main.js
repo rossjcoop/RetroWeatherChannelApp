@@ -257,9 +257,9 @@ function main(weatherData) {
 
 			
 			let hiLo = data.list.filter(threeDay)
-			console.log(hiLo)
+			// console.log(hiLo)
 			let dayCond = data.list.filter(dayForecast)
-			console.log(dayCond)
+			// console.log(dayCond)
 
 			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
 			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
@@ -445,10 +445,12 @@ function abbreviator(word) {
 
 function threeDay(item) {
 	let now = new Date().getDay()
+	// console.log(now)
 	let itemHour = new Date(item.dt * 1000).getHours()
 	let itemDay = new Date(item.dt * 1000).getDay()
+	// console.log(itemDay)
 
-	if(itemHour == 5 || itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	if(itemHour == 5 && itemDay !== now || itemHour == 17 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;
@@ -456,8 +458,10 @@ function threeDay(item) {
 }
 
 function dayForecast(item) {
+	let now = new Date().getDay()
 	let itemHour = new Date(item.dt * 1000).getHours()
-	if(itemHour == 14) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	let itemDay = new Date(item.dt * 1000).getDay()
+	if(itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;
