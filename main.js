@@ -179,6 +179,8 @@ function main(weatherData) {
 	let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
 	////////////////////////////////////////////////////////////////////////////////////
 	
+
+	 ///////////////Just had a thought, to store the barometric pressure in local storage, this will reference whether pressure is going up or down
 	slideshow2()
 	footer()
 
@@ -191,7 +193,9 @@ function main(weatherData) {
 
 
 		function page1() { 			
-			// container.style.backgroundColor = "rgb(36, 43, 90)";
+			desktop.style.backgroundColor = "rgb(36, 43, 90)";
+			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)"
+			containerClmns.style.display ="none";
 			headline.innerHTML = `<div>Current<br />Conditions</div>`
 			container.innerHTML = `
 				<div class = "page1Box">
@@ -218,6 +222,7 @@ function main(weatherData) {
 
 
 		function page2(data){
+			containerClmns.style.display ="inline";
 			headline.innerHTML = `<div>Latest Observations</div`
 			container.innerHTML = ''
 			containerClmns.innerHTML = `
@@ -250,7 +255,9 @@ function main(weatherData) {
 
 
 		function page3(data){
-			// container.style.backgroundColor = "transparent";
+			desktop.style.backgroundColor = "transparent";
+			desktop.style.boxShadow = "none"
+			containerClmns.style.display ="none";
 			headline.innerHTML = `
 				<div>${curCity} Metro</div>
 				<div>Extended Forecast</div>
