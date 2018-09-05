@@ -17,8 +17,9 @@ body {
 	background-position: center;
 	background-color: rgb(28, 16, 81);
 	font-family: 'weatherStar', monospace;
-	text-shadow:
-		4px 4px #000;
+	text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+ 		 
+
 }
 
 
@@ -35,7 +36,7 @@ body {
 .outer-mask {
     position: absolute;
     top: 50px;
-    width: 880px;
+    width: 950px;
     height: 112px;
     overflow: hidden;
 }
@@ -43,7 +44,7 @@ body {
     position: absolute;
     left: -50px;
     top: 0px;
-    width: 880px;
+    width: 950px;
     height: 112px;
     overflow: hidden;
     -webkit-transform: skew(-40deg, 0deg);
@@ -55,7 +56,7 @@ body {
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 880px;
+    width: 950px;
     height: 112px;
     background-color: rgb(180, 98, 20);
     background-image: -webkit-linear-gradient(top, rgb(180, 98, 20), rgb(49, 22, 73));
@@ -83,7 +84,6 @@ body {
 	height: 150px;
 	margin-left: 80px;
 	display: flex;
-	justify-content: space-around;
 	position: relative;
 	padding-top: 50px;
 }
@@ -93,12 +93,20 @@ body {
 	border-radius: 20px;
 	box-shadow: 4px 7px;
 	margin-top: -25px;
+	margin-left: 25px;
 }
 
 #headline {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
-	width: 460px;
+	width: 500px;
+	padding-left: 25px;
+}
+
+
+.datetime {
+	padding-top: 15px;
+	width: 300px;
 }
 
 #date, #time {
@@ -106,11 +114,12 @@ body {
 	font-style: bold;
 	font-size: 50px;
 	font-family: 'weatherStarSmall', monospace;
-	text-align: center;
+	text-align: right;
 	justify-content: center;
 	margin: 0;
-	width: 240px;
-	height: 35px;
+	width: 270px;
+	height: 40px;
+	transform: scale(1.1, 0.9);
 }
 
 main {
@@ -182,7 +191,7 @@ main {
 }
 
 .mainInfo {
-	padding-top: 15px;
+	padding-top: 10px;
 	width: 490px;
 	text-align: center;
 }
