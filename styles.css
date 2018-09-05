@@ -98,7 +98,7 @@ body {
 #headline {
 	color: rgb(223, 180, 39);
 	font-size: 50px;
-	margin-left: -100px;
+	width: 460px;
 }
 
 #date, #time {
@@ -109,6 +109,8 @@ body {
 	text-align: center;
 	justify-content: center;
 	margin: 0;
+	width: 240px;
+	height: 35px;
 }
 
 main {
@@ -141,6 +143,7 @@ main {
 	font-family: 'weatherStarSmall', monospace;
 	font-style: bold;
 	font-size: 40px;
+	text-align: left;
 }
 
 .columnRow {
@@ -179,6 +182,7 @@ main {
 }
 
 .mainInfo {
+	padding-top: 15px;
 	width: 490px;
 	text-align: center;
 }
