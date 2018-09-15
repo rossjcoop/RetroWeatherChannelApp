@@ -5,6 +5,8 @@ const bottomBar = document.getElementById("bottomBar")
 const containerClmns = document.getElementById("containerClmns")
 const container = document.getElementById("screen")
 const desktop = document.getElementById("container")
+const headlineTop = document.getElementById("headlineTop")
+const headlineBottom = document.getElementById("headlineBottom")
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -194,9 +196,11 @@ function main(weatherData) {
 
 		function page1() { 			
 			desktop.style.backgroundColor = "rgb(36, 43, 90)";
-			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)"
-			containerClmns.style.display ="none";
-			headline.innerHTML = `<div>Current<br />Conditions</div>`
+			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
+			containerClmns.style.display = "none";
+			headline.innerHTML = `
+				<div class="headlineTop">Current</div>
+				<div class="headlineBottom">Conditions</div>`
 			container.innerHTML = `
 				<div class = "page1Box">
 					<div class = "mainInfo">
@@ -223,7 +227,7 @@ function main(weatherData) {
 
 		function page2(data){
 			containerClmns.style.display ="inline";
-			headline.innerHTML = `<div>Latest Observations</div`
+			headline.innerHTML = `<div class="headlineTop">Latest Observations</div`
 			container.innerHTML = ''
 			containerClmns.innerHTML = `
 				<div class = "columnRow">
@@ -259,8 +263,8 @@ function main(weatherData) {
 			desktop.style.boxShadow = "none"
 			containerClmns.style.display ="none";
 			headline.innerHTML = `
-				<div>${curCity} Metro</div>
-				<div>Extended Forecast</div>
+				<div class="headlineTop" style="color: white;">${curCity} Metro</div>
+				<div class="headlineBottom">Extended Forecast</div>
 				`
 			containerClmns.innerHTML = ``
 

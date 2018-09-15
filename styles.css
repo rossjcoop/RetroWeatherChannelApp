@@ -103,6 +103,16 @@ body {
 	padding-left: 25px;
 }
 
+.headlineTop {
+	width: 500px;
+	height: 50px;
+}
+
+.headlineBottom {
+	width: 500px;
+	height: 50px;
+}
+
 
 .datetime {
 	padding-top: 15px;
