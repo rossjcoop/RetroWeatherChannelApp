@@ -14,6 +14,25 @@ const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.
 // const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
 // const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
 
+window.onload = function() {
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+    // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+
+    console.log("Lat: ", startPos.coords.latitude)
+    console.log("Lon: ", startPos.coords.longitude)
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+};
+
+
+
+
+
+
+
 
 function getWeather(c) { ///Eventually, c will be data passed to this function for any city in cityList so user can switch cities, for now, just Las Vegas, NV
 	const lat = 36.17 //c.coord.lat
@@ -485,6 +504,62 @@ function dayofWeek(d) {
 	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 	return days[d]
 }
+
+
+
+
+// function conditions(id) {
+// 	let conditions = ["Sunny", "Clear", "Partly Cloudy", "Fair", "Mostly Cloudy", "Cloudy", "Windy", "Fog", "Light Rain", "Rain", "Heavy Rain", "Thunder", "T'Storms" "Hazy", "Snow Flurries", "Light Snow", "Snow", "Heavy Snow"
+
+// 	let idCodes = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
+
+
+
+	const conditionCodes = [
+	{
+		id: 200,
+		condition: "Thunderstorm",
+		shortCond: "T-Storm",
+	},
+	{	id: 201,
+		condition: "Thunderstorm",
+		shortCond: "T-Storm",
+	},
+	{
+		id: 202,
+		condition: "Thunderstorm",
+		shortCond: "T-Storm",
+	},
+	{
+		id: 210,
+		condition: "Thunderstorm",
+		shortCond: "T-Storm",
+	},
+	{
+		id: 211,
+		condition: "Thunderstorm",
+		shortCond: "T-Storm",
+	}
+	]
+
+	function idTrans(id) {
+
+	}
+// }
+
+
+//Take in the openmap ID and need to return the correct wording condition
+
+//ID 200 == conditions[11]
+
+
+
+
+
+
+
+
+
 
 
 
