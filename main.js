@@ -7,6 +7,8 @@ const container = document.getElementById("screen")
 const desktop = document.getElementById("container")
 const headlineTop = document.getElementById("headlineTop")
 const headlineBottom = document.getElementById("headlineBottom")
+var lat
+var lon
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -14,35 +16,39 @@ const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.
 // const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
 // const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
 
+
+
+////Browser now taking in user's location and can be feed into cords more accurately!
+
 window.onload = function() {
-  var startPos;
-  var geoSuccess = function(position) {
+  	var startPos;
+  	var geoSuccess = function(position) {
     startPos = position;
     // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
     // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
 
     console.log("Lat: ", startPos.coords.latitude)
     console.log("Lon: ", startPos.coords.longitude)
-  };
+    lat = startPos.coords.latitude
+    lon = startPos.coords.longitude
+    getWeather()
+  	};
+
   navigator.geolocation.getCurrentPosition(geoSuccess);
 };
 
 
 
 
-
-
-
-
 function getWeather(c) { ///Eventually, c will be data passed to this function for any city in cityList so user can switch cities, for now, just Las Vegas, NV
-	const lat = 36.17 //c.coord.lat
-	const lon = -115.14 //c.coord.lon
+	// const lat = 36.17 //c.coord.lat
+	// const lon = -115.14 //c.coord.lon
 	const cityName = "Las Vegas" //c.name
 	const cityId = 5506956 //c.id
 
 	
 	var currentCondAPI = ////Gets current conditions for a given city ID
-		fetch("http://api.openweathermap.org/data/2.5/weather?id="+cityId+"&units=imperial&APPID="+apiId)
+		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
   			.then(response => {
 	  			if(response.status !== 200) {
 	        		console.log("Current condition API: ", response.status)
@@ -67,7 +73,7 @@ function getWeather(c) { ///Eventually, c will be data passed to this function f
   			});
 
   	var forecastAPI = //Gets 5 day forecast for given city id
-  		fetch("http://api.openweathermap.org/data/2.5/forecast?id="+cityId+"&units=imperial&APPID="+apiId)
+  		fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
 			.then(response => {
   				if(response.status !== 200) {
         			console.log("5 day forecast API: ", response.status)
@@ -282,7 +288,7 @@ function main(weatherData) {
 			desktop.style.boxShadow = "none"
 			containerClmns.style.display ="none";
 			headline.innerHTML = `
-				<div class="headlineTop" style="color: white;">${curCity} Metro</div>
+				<div class="headlineTop" style="color: white;">${curCity}</div>
 				<div class="headlineBottom">Extended Forecast</div>
 				`
 			containerClmns.innerHTML = ``
@@ -439,7 +445,7 @@ function noData() { ///Will display if no data reports, or if error.
 
 
 getTime()
-getWeather()
+
 
 setInterval(getTime, 1000)
 setInterval(getWeather, 600000)
