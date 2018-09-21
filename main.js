@@ -10,8 +10,10 @@ const headlineBottom = document.getElementById("headlineBottom")
 var lat
 var lon
 
+const express = require('express')
+const app = express()
 
-// import { page1 } from './Slides/cc'
+import { page1 } from './slide_modules/cc.mjs'
 
 const page1 = require('./Slides/cc')
 
@@ -564,6 +566,9 @@ function dayofWeek(d) {
 //ID 200 == conditions[11]
 
 
+app.listen(3000, function(){
+	console.log("App running on port 3000")
+  })
 
 
 
