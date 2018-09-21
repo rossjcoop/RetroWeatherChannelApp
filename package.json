@@ -1,0 +1,10 @@
+{
+  "name": "WeatherChannelRetroApp",
+  "version": "1.0.15",
+  "description": "Retro weather channel app emulating the Weatherstar 4000 of the 90's",
+  "main": "main.js",
+  "repository": "https://github.com/rossjcoop/RetroWeatherChannelApp",
+  "author": "Ross Cooper",
+  "license": "MIT",
+  "private": false
+}
