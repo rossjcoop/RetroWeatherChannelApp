@@ -1,3 +1,5 @@
+
+
 const headline = document.getElementById("headline")
 const timestamp = document.getElementById("time")
 const datestamp = document.getElementById("date")
@@ -10,12 +12,7 @@ const headlineBottom = document.getElementById("headlineBottom")
 var lat
 var lon
 
-const express = require('express')
-const app = express()
 
-import { page1 } from './slide_modules/cc.mjs'
-
-const page1 = require('./Slides/cc')
 
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
@@ -226,35 +223,35 @@ function main(weatherData) {
 		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
 
 
-		// function page1() { 			
-		// 	desktop.style.backgroundColor = "rgb(36, 43, 90)";
-		// 	desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
-		// 	containerClmns.style.display = "none";
-		// 	headline.innerHTML = `
-		// 		<div class="headlineTop">Current</div>
-		// 		<div class="headlineBottom">Conditions</div>`
-		// 	container.innerHTML = `
-		// 		<div class = "page1Box">
-		// 			<div class = "mainInfo">
-		// 				<div class = "tempBox">
-		// 					<h1 id = "temp">${temp}</h1><h1>°</h1>
-		// 				</div>
-		// 				<h2 id = "cond">${cond}</h2>
-		// 				<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
-		// 				<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
-		// 				<h3 id = "gust">${windGust}</h3>
-		// 			</div>
-		// 			<div class = "subInfo">
-		// 				<h3 id = "cityName">${curCity}</h3>
-		// 				<h3 id = "humidity">Humidity: ${humid}%</h3>
-		// 				<h3>Dewpoint: </h3>
-		// 				<h3>Ceiling: </h3>
-		// 				<h3 id = "visibility">Visibility: ${visb} mi</h3>
-		// 				<h3 id = "pressure">Pressure: ${baro}</h3>
-		// 				<h3>Heat Index: </h3>
-		// 			</div>
-		// 		</div>`
-		// };
+		function page1() { 			
+			desktop.style.backgroundColor = "rgb(36, 43, 90)";
+			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
+			containerClmns.style.display = "none";
+			headline.innerHTML = `
+				<div class="headlineTop">Current</div>
+				<div class="headlineBottom">Conditions</div>`
+			container.innerHTML = `
+				<div class = "page1Box">
+					<div class = "mainInfo">
+						<div class = "tempBox">
+							<h1 id = "temp">${temp}</h1><h1>°</h1>
+						</div>
+						<h2 id = "cond">${cond}</h2>
+						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
+						<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
+						<h3 id = "gust">${windGust}</h3>
+					</div>
+					<div class = "subInfo">
+						<h3 id = "cityName">${curCity}</h3>
+						<h3 id = "humidity">Humidity: ${humid}%</h3>
+						<h3>Dewpoint: </h3>
+						<h3>Ceiling: </h3>
+						<h3 id = "visibility">Visibility: ${visb} mi</h3>
+						<h3 id = "pressure">Pressure: ${baro}</h3>
+						<h3>Heat Index: </h3>
+					</div>
+				</div>`
+		};
 
 
 		function page2(data){
@@ -566,9 +563,9 @@ function dayofWeek(d) {
 //ID 200 == conditions[11]
 
 
-app.listen(3000, function(){
-	console.log("App running on port 3000")
-  })
+// app.listen(3000, function(){
+// 	console.log("App running on port 3000")
+//   })
 
 
 
