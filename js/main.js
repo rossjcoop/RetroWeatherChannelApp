@@ -1,21 +1,6 @@
 
 
-// const headline = document.getElementById("headline")
-// const timestamp = document.getElementById("time")
-// const datestamp = document.getElementById("date")
-// const bottomBar = document.getElementById("bottomBar")
-// const containerClmns = document.getElementById("containerClmns")
-// const container = document.getElementById("screen")
-// const desktop = document.getElementById("container")
-// const headlineTop = document.getElementById("headlineTop")
-// const headlineBottom = document.getElementById("headlineBottom")
-// var lat
-// var lon
 
-
-
-
-const apiId = "e8560a1109f936430203f88c4e09f8f1" //My api id for openweathermap.org
 
 // const ccApi = "http://api.openweathermap.org/data/2.5/weather?id=5506956&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"//units=imperial //make sure it comes back in Fahrenheire
 // const loApi = "http://api.openweathermap.org/data/2.5/find?lat=-115.14&lon=36.17&cnt=10&units=imperial&APPID=e8560a1109f936430203f88c4e09f8f1"
