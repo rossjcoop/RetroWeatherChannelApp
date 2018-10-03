@@ -29,157 +29,73 @@ window.onload = function() {
 
 
 
-function getWeather(c) { ///Eventually, c will be data passed to this function for any city in cityList so user can switch cities, for now, just Las Vegas, NV
-	// const lat = 36.17 //c.coord.lat
-	// const lon = -115.14 //c.coord.lon
-	const cityName = "Las Vegas" //c.name
-	const cityId = 5506956 //c.id
+// function getWeather(c) { ///Eventually, c will be data passed to this function for any city in cityList so user can switch cities, for now, just Las Vegas, NV
+// 	// const lat = 36.17 //c.coord.lat
+// 	// const lon = -115.14 //c.coord.lon
+// 	const cityName = "Las Vegas" //c.name
+// 	const cityId = 5506956 //c.id
 
 	
-	var currentCondAPI = ////Gets current conditions for a given city ID
-		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
-  			.then(response => {
-	  			if(response.status !== 200) {
-	        		console.log("Current condition API: ", response.status)
-	        		noData()
-	        		return	      	
-	      		} else {
-	      			return response.json()
-	      		}	
-  			});	
+// 	var currentCondAPI = ////Gets current conditions for a given city ID
+// 		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
+//   			.then(response => {
+// 	  			if(response.status !== 200) {
+// 	        		console.log("Current condition API: ", response.status)
+// 	        		noData()
+// 	        		return	      	
+// 	      		} else {
+// 	      			return response.json()
+// 	      		}	
+//   			});	
   		
 
-  	var localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
-  		fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID="+apiId)
-			.then(response => {
-  				if(response.status !== 200) {
-        			console.log("Local weather stations API: ", response.status)
-        			noData()
-        			return
-      			} else {
-		      		return response.json()		  		
-		  		}
-  			});
+//   	var localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
+//   		fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units=imperial&APPID="+apiId)
+// 			.then(response => {
+//   				if(response.status !== 200) {
+//         			console.log("Local weather stations API: ", response.status)
+//         			noData()
+//         			return
+//       			} else {
+// 		      		return response.json()		  		
+// 		  		}
+//   			});
 
-  	var forecastAPI = //Gets 5 day forecast for given city id
-  		fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
-			.then(response => {
-  				if(response.status !== 200) {
-        			console.log("5 day forecast API: ", response.status)
-        			noData()
-        			return
-      			} else {
-      				return response.json()
-      			}
-  			});
+//   	var forecastAPI = //Gets 5 day forecast for given city id
+//   		fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
+// 			.then(response => {
+//   				if(response.status !== 200) {
+//         			console.log("5 day forecast API: ", response.status)
+//         			noData()
+//         			return
+//       			} else {
+//       				return response.json()
+//       			}
+//   			});
 
-  	var combinedData = {"currentCondAPI": {}, "localObsAPI": {}, "forecastAPI": {}};
+//   	var combinedData = {"currentCondAPI": {}, "localObsAPI": {}, "forecastAPI": {}};
 
-  	Promise.all([currentCondAPI, localObsAPI, forecastAPI]).then(data => {
-  		combinedData["currentCondAPI"] = data[0];
-  		combinedData["localObsAPI"] = data[1];
-  		combinedData["forecastAPI"] = data[2];
+//   	Promise.all([currentCondAPI, localObsAPI, forecastAPI]).then(data => {
+//   		combinedData["currentCondAPI"] = data[0];
+//   		combinedData["localObsAPI"] = data[1];
+//   		combinedData["forecastAPI"] = data[2];
 
-  		console.log(combinedData)
+//   		console.log(combinedData)
 
-  		main(combinedData) //Send it to my slideshow
+//   		main(combinedData) //Send it to my slideshow
 
-  	})
-};
+//   	})
+// };
   	
 
-
-
-function getWindDirection(deg) { ///This figures out the correct direction based on meterological degrees
-	if(deg >= 361 || deg == undefined) {
-		return ""
-	} else if(deg <= 22.5 || deg >= 337.6) {
-		return "N"
-	} else if(deg >= 22.6 && deg <= 68.5) {
-		return "NE"
-	} else if(deg >= 68.6 && deg <= 112.5) {
-		return "E"
-	} else if(deg >= 112.6 && deg <= 157.5) {
-		return "SE"
-	} else if(deg >= 157.6 && deg <= 202.5) {
-		return "S"
-	} else if(deg >= 202.6 && deg <= 247.5) {
-		return "SW"
-	} else if(deg >= 247.6 && deg <= 292.5) {
-		return "W"
-	} else if(deg >= 292.6 && deg <= 337.5) {
-		return "NW"
-	}
-}
-
-function returnCalm(speed, dir) { ///Simple function to return "Calm" if there is no wind
-	if(speed < 1 || dir == "") {
-		return "Calm"
-	} else {
-		return speed
-	}
-}
-
-function returnMPH(ws) {  //Function to not display MPH is windspeed is calm
-	if(ws === "Calm") {
-		return ""
-	} else {
-		return "MPH"
-	}
-}
-
-
-function returnGust(gust) { //Function to display gusts if there are any
-	if(gust != undefined) {
-		return "Gusts to " + Math.round(gust)
-	} else {
-		return ""
-	}
-}
-
-function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals. mb * 0.0295300
-	return Number(Math.round((mb * 0.0295300)+'e2')+'e-2');
-}
-
-
-function convertMeters(m) { //Function to convert kilometers into miles
-	return Math.round(m * 0.000621)
-}
-
-
-// function getTime() {  //Timestamp clock function as the top
-// 	var now = new Date()
-// 	var hour = now.getHours()
-// 	var minute = now.getMinutes()
-// 	var seconds = now.getSeconds()
-// 	var amPm = "AM"
-
-// 	if(hour == 0) {
-// 		hour += 12
-// 	}
-
-// 	if(hour > 12) {
-// 		hour -= 12
-// 		amPm = "PM"
-// 	}
-
-// 	if(minute < 10) {
-// 		minute = "0" + minute
-// 	}
-
-// 	if(seconds < 10) {
-// 		seconds = "0" + seconds
-// 	}
-
-// 	const time = hour + ":" + minute + ":" + seconds + " " + amPm
-// 	const date = now.toDateString().slice(0, 10)
-// 	timestamp.innerHTML = `${time}`
-// 	datestamp.innerHTML = `${date}`
-
-// }
-
-
 function main(weatherData) {
+
+
+
+
+
+
+
 	
 	//Current conditions weather data////////////////////////////////////////////////////
 	let temp = Math.round(weatherData.currentCondAPI.main.temp)
@@ -206,6 +122,18 @@ function main(weatherData) {
 		page1()
 		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
 		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
+
+
+		function intro() {
+			headline.innerHTML = `
+			<div class="headlineTop">Select Your Location</div>`
+			container.innerHTML = `
+			<div class="selectBox"></div>
+				<div class="cityName"`
+		}
+
+
+
 
 
 		function page1() { 			
@@ -554,7 +482,93 @@ function dayofWeek(d) {
 
 
 
+function getWindDirection(deg) { ///This figures out the correct direction based on meterological degrees
+	if(deg >= 361 || deg == undefined) {
+		return ""
+	} else if(deg <= 22.5 || deg >= 337.6) {
+		return "N"
+	} else if(deg >= 22.6 && deg <= 68.5) {
+		return "NE"
+	} else if(deg >= 68.6 && deg <= 112.5) {
+		return "E"
+	} else if(deg >= 112.6 && deg <= 157.5) {
+		return "SE"
+	} else if(deg >= 157.6 && deg <= 202.5) {
+		return "S"
+	} else if(deg >= 202.6 && deg <= 247.5) {
+		return "SW"
+	} else if(deg >= 247.6 && deg <= 292.5) {
+		return "W"
+	} else if(deg >= 292.6 && deg <= 337.5) {
+		return "NW"
+	}
+}
 
+function returnCalm(speed, dir) { ///Simple function to return "Calm" if there is no wind
+	if(speed < 1 || dir == "") {
+		return "Calm"
+	} else {
+		return speed
+	}
+}
+
+function returnMPH(ws) {  //Function to not display MPH is windspeed is calm
+	if(ws === "Calm") {
+		return ""
+	} else {
+		return "MPH"
+	}
+}
+
+
+function returnGust(gust) { //Function to display gusts if there are any
+	if(gust != undefined) {
+		return "Gusts to " + Math.round(gust)
+	} else {
+		return ""
+	}
+}
+
+function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals. mb * 0.0295300
+	return Number(Math.round((mb * 0.0295300)+'e2')+'e-2');
+}
+
+
+function convertMeters(m) { //Function to convert kilometers into miles
+	return Math.round(m * 0.000621)
+}
+
+
+// function getTime() {  //Timestamp clock function as the top
+// 	var now = new Date()
+// 	var hour = now.getHours()
+// 	var minute = now.getMinutes()
+// 	var seconds = now.getSeconds()
+// 	var amPm = "AM"
+
+// 	if(hour == 0) {
+// 		hour += 12
+// 	}
+
+// 	if(hour > 12) {
+// 		hour -= 12
+// 		amPm = "PM"
+// 	}
+
+// 	if(minute < 10) {
+// 		minute = "0" + minute
+// 	}
+
+// 	if(seconds < 10) {
+// 		seconds = "0" + seconds
+// 	}
+
+// 	const time = hour + ":" + minute + ":" + seconds + " " + amPm
+// 	const date = now.toDateString().slice(0, 10)
+// 	timestamp.innerHTML = `${time}`
+// 	datestamp.innerHTML = `${date}`
+
+// }
 
 
 
