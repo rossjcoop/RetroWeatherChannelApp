@@ -88,7 +88,9 @@
 // };
 
 window.onload = function() {
-    startPage()
+	startPage()
+	getTime()	
+	setInterval(getTime, 1000)
 };
   	
 function startPage() {
@@ -98,7 +100,7 @@ function startPage() {
     <div class="selectBox"></div>
         <div class="selectZip">
 			<input type="text" placeholder="Enter Zip" rel="zipInput">
-			<select>
+			<select rel="ctrySel">
 				<option value="US">USA</option>
 		  	</select>
             <input type="submit" value="Submit" rel="zipSubmit">
@@ -107,16 +109,22 @@ function startPage() {
             <input type="submit" value="Use My Location" rel="locationSubmit">
         </div>
     </div>`
-    let zipInput = document.querySelector('[rel="zipInput"]')
+	let zipInput = document.querySelector('[rel="zipInput"]')
+	let ctrySel = document.querySelector('[rel="ctrySel"]')
     let zipSubmit = document.querySelector('[rel="zipSubmit"]')
     let cordSubmit = document.querySelector('[rel="locationSubmit"]')
 
     zipSubmit.addEventListener('click', function(event) {
-        zip = zipInput.value
-      	
+		zip = zipInput.value
+		ctry = ctrySel.value
+		getWeatherZip(zip, ctry)
+		setInterval(function() {
+			getWeatherZip(zip, ctry)
+			}
+			, 600000)     	
     })
 
-    cordSubmit.addEventListener('click' function(event) {
+    cordSubmit.addEventListener('click', function(event) {
         var startPos;
         var geoSuccess = function(position) {
             startPos = position;
@@ -124,493 +132,275 @@ function startPage() {
             console.log("Lon: ", startPos.coords.longitude)
             lat = startPos.coords.latitude
             lon = startPos.coords.longitude
-            //Send to API
+			getWeatherCord(lat, lon)
+			setInterval(function() {
+				getWeatherCord(lat, lon)}
+				, 600000)
         };
-        navigator.geolocation.getCurrentPosition(geoSuccess);
+		navigator.geolocation.getCurrentPosition(geoSuccess)
     });
-
 };
-function main(weatherData) {
 
 
-
-
-
-
-
+// function main() {
 	
-	//Current conditions weather data////////////////////////////////////////////////////
-	let temp = Math.round(weatherData.currentCondAPI.main.temp)
-	let cond = weatherData.currentCondAPI.weather[0].description 
-	let icon = weatherData.currentCondAPI.weather[0].icon
-	let windDir = getWindDirection(weatherData.currentCondAPI.wind.deg)
-	let windSpeed = returnCalm(Math.round(weatherData.currentCondAPI.wind.speed), windDir)
-	let windGust = returnGust(weatherData.currentCondAPI.wind.gust)
-	let curCity = weatherData.currentCondAPI.name
-	let humid = weatherData.currentCondAPI.main.humidity
-	let baro = convertInHg(weatherData.currentCondAPI.main.pressure)
-	let visb = convertMeters(weatherData.currentCondAPI.visibility)
-	let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
-	////////////////////////////////////////////////////////////////////////////////////
+// 	//Current conditions weather data////////////////////////////////////////////////////
+// 	let temp = Math.round(weatherData.currentCondAPI.main.temp)
+// 	let cond = weatherData.currentCondAPI.weather[0].description 
+// 	let icon = weatherData.currentCondAPI.weather[0].icon
+// 	let windDir = getWindDirection(weatherData.currentCondAPI.wind.deg)
+// 	let windSpeed = returnCalm(Math.round(weatherData.currentCondAPI.wind.speed), windDir)
+// 	let windGust = returnGust(weatherData.currentCondAPI.wind.gust)
+// 	let curCity = weatherData.currentCondAPI.name
+// 	let humid = weatherData.currentCondAPI.main.humidity
+// 	let baro = convertInHg(weatherData.currentCondAPI.main.pressure)
+// 	let visb = convertMeters(weatherData.currentCondAPI.visibility)
+// 	let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
+// 	////////////////////////////////////////////////////////////////////////////////////
 	
 
-	 ///////////////Just had a thought, to store the barometric pressure in local storage, this will reference whether pressure is going up or down
-	slideshow2()
-	footer()
+// 	 ///////////////Just had a thought, to store the barometric pressure in local storage, this will reference whether pressure is going up or down
+// 	slideshow2()
+// 	footer()
 
 
-	function slideshow2() {
+// 	function slideshow2() {
 
-		page1()
-		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
-		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
-
-
-		function intro() {
-			headline.innerHTML = `
-			<div class="headlineTop">Select Your Location</div>`
-			container.innerHTML = `
-			<div class="selectBox"></div>
-				<div class="selectZip">
-					<input type="text" placeholder="Enter Zip" rel="zipInput">
-					<input type="submit" value="Submit" rel="zipSubmit">
-				</div>
-			</div>`
-		}
-
-		function page1() { 			
-			desktop.style.backgroundColor = "rgb(36, 43, 90)";
-			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
-			containerClmns.style.display = "none";
-			headline.innerHTML = `
-				<div class="headlineTop">Current</div>
-				<div class="headlineBottom">Conditions</div>`
-			container.innerHTML = `
-				<div class = "page1Box">
-					<div class = "mainInfo">
-						<div class = "tempBox">
-							<h1 id = "temp">${temp}</h1><h1>°</h1>
-						</div>
-						<h2 id = "cond">${cond}</h2>
-						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
-						<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
-						<h3 id = "gust">${windGust}</h3>
-					</div>
-					<div class = "subInfo">
-						<h3 id = "cityName">${curCity}</h3>
-						<h3 id = "humidity">Humidity: ${humid}%</h3>
-						<h3>Dewpoint: </h3>
-						<h3>Ceiling: </h3>
-						<h3 id = "visibility">Visibility: ${visb} mi</h3>
-						<h3 id = "pressure">Pressure: ${baro}</h3>
-						<h3>Heat Index: </h3>
-					</div>
-				</div>`
-		};
+// 		page1()
+// 		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
+// 		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
 
 
-		function page2(data){
-			containerClmns.style.display ="inline";
-			headline.innerHTML = `<div class="headlineTop">Latest Observations</div`
-			container.innerHTML = ''
-			containerClmns.innerHTML = `
-				<div class = "columnRow">
-					<div class = "cityClmn"></div>
-					<div class = "cityTempClmn">°F</div>
-					<div class = "cityWeatherClmn">WEATHER</div>
-					<div class = "cityWindClmn">WIND</div>
-				</div>
-			`	
-			data.list.forEach(function(item) { 		
-				let resultBlock = ''
-				let wd = getWindDirection(item.wind.deg)
-				let ws = returnCalm(Math.round(item.wind.speed), wd)
+// 		function intro() {
+// 			headline.innerHTML = `
+// 			<div class="headlineTop">Select Your Location</div>`
+// 			container.innerHTML = `
+// 			<div class="selectBox"></div>
+// 				<div class="selectZip">
+// 					<input type="text" placeholder="Enter Zip" rel="zipInput">
+// 					<input type="submit" value="Submit" rel="zipSubmit">
+// 				</div>
+// 			</div>`
+// 		}
+
+// 		function page1() { 			
+// 			desktop.style.backgroundColor = "rgb(36, 43, 90)";
+// 			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
+// 			containerClmns.style.display = "none";
+// 			headline.innerHTML = `
+// 				<div class="headlineTop">Current</div>
+// 				<div class="headlineBottom">Conditions</div>`
+// 			container.innerHTML = `
+// 				<div class = "page1Box">
+// 					<div class = "mainInfo">
+// 						<div class = "tempBox">
+// 							<h1 id = "temp">${temp}</h1><h1>°</h1>
+// 						</div>
+// 						<h2 id = "cond">${cond}</h2>
+// 						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
+// 						<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
+// 						<h3 id = "gust">${windGust}</h3>
+// 					</div>
+// 					<div class = "subInfo">
+// 						<h3 id = "cityName">${curCity}</h3>
+// 						<h3 id = "humidity">Humidity: ${humid}%</h3>
+// 						<h3>Dewpoint: </h3>
+// 						<h3>Ceiling: </h3>
+// 						<h3 id = "visibility">Visibility: ${visb} mi</h3>
+// 						<h3 id = "pressure">Pressure: ${baro}</h3>
+// 						<h3>Heat Index: </h3>
+// 					</div>
+// 				</div>`
+// 		};
+
+
+// 		function page2(data){
+// 			containerClmns.style.display ="inline";
+// 			headline.innerHTML = `<div class="headlineTop">Latest Observations</div`
+// 			container.innerHTML = ''
+// 			containerClmns.innerHTML = `
+// 				<div class = "columnRow">
+// 					<div class = "cityClmn"></div>
+// 					<div class = "cityTempClmn">°F</div>
+// 					<div class = "cityWeatherClmn">WEATHER</div>
+// 					<div class = "cityWindClmn">WIND</div>
+// 				</div>
+// 			`	
+// 			data.list.forEach(function(item) { 		
+// 				let resultBlock = ''
+// 				let wd = getWindDirection(item.wind.deg)
+// 				let ws = returnCalm(Math.round(item.wind.speed), wd)
 				
-				resultBlock = `		
-				<div class = "cityRow">
-					<div class = "city">${abbreviator(item.name)}</div>
-					<div class = "cityTemp">${Math.round(item.main.temp)}</div>
-					<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
-					<div class = "cityWind">${wd}${ws}</div>
-				</div>
+// 				resultBlock = `		
+// 				<div class = "cityRow">
+// 					<div class = "city">${abbreviator(item.name)}</div>
+// 					<div class = "cityTemp">${Math.round(item.main.temp)}</div>
+// 					<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
+// 					<div class = "cityWind">${wd}${ws}</div>
+// 				</div>
 				
-				`
-				container.innerHTML += resultBlock
+// 				`
+// 				container.innerHTML += resultBlock
 
-				})
+// 				})
 
-		};
+// 		};
 
 
-		function page3(data){
-			desktop.style.backgroundColor = "transparent";
-			desktop.style.boxShadow = "none"
-			containerClmns.style.display ="none";
-			headline.innerHTML = `
-				<div class="headlineTop" style="color: white;">${curCity}</div>
-				<div class="headlineBottom">Extended Forecast</div>
-				`
-			containerClmns.innerHTML = ``
+// 		function page3(data){
+// 			desktop.style.backgroundColor = "transparent";
+// 			desktop.style.boxShadow = "none"
+// 			containerClmns.style.display ="none";
+// 			headline.innerHTML = `
+// 				<div class="headlineTop" style="color: white;">${curCity}</div>
+// 				<div class="headlineBottom">Extended Forecast</div>
+// 				`
+// 			containerClmns.innerHTML = ``
 
 			
-			let hiLo = data.list.filter(threeDay)
-			// console.log(hiLo)
-			let dayCond = data.list.filter(dayForecast)
-			// console.log(dayCond)
+// 			let hiLo = data.list.filter(threeDay)
+// 			// console.log(hiLo)
+// 			let dayCond = data.list.filter(dayForecast)
+// 			// console.log(dayCond)
 
-			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
-			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
-			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
+// 			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
+// 			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
+// 			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
 
 
 
 		
-			container.innerHTML = `
-				<div class = "forecast">
-					<div class = "days">
-						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-					<div class = "days">
-						<div class = "day">${day2.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[1].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-					<div class = "days">
-						<div class = "day">${day3.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[2].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				`
-		};
-	};
+// 			container.innerHTML = `
+// 				<div class = "forecast">
+// 					<div class = "days">
+// 						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
+// 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
+// 						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
+// 						<div class = "tempsBox">
+// 							<div class = "temps">
+// 								<div class = "tempLo">Lo</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+// 							</div>
+// 							<div class = "temps">
+// 								<div class = "tempHi">Hi</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+// 							</div>
+// 						</div>
+// 					</div>
+// 					<div class = "days">
+// 						<div class = "day">${day2.substr(0, 3).toUpperCase()}</div>
+// 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
+// 						<div class = "dayCond">${dayCond[1].weather[0].description}</div>
+// 						<div class = "tempsBox">
+// 							<div class = "temps">
+// 								<div class = "tempLo">Lo</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
+// 							</div>
+// 							<div class = "temps">
+// 								<div class = "tempHi">Hi</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
+// 							</div>
+// 						</div>
+// 					</div>
+// 					<div class = "days">
+// 						<div class = "day">${day3.substr(0, 3).toUpperCase()}</div>
+// 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
+// 						<div class = "dayCond">${dayCond[2].weather[0].description}</div>
+// 						<div class = "tempsBox">
+// 							<div class = "temps">
+// 								<div class = "tempLo">Lo</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
+// 							</div>
+// 							<div class = "temps">
+// 								<div class = "tempHi">Hi</div>
+// 								<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
+// 							</div>
+// 						</div>
+// 					</div>
+// 				</div>
+// 				`
+// 		};
+// 	};
 
-	var endSlideShow2 = setInterval(slideshow2, 60000)
-	setInterval(function() { 
-		clearInterval(endSlideShow2)
-		container.innerHTML = ``
-		}, 600000)
+// 	var endSlideShow2 = setInterval(slideshow2, 60000)
+// 	setInterval(function() { 
+// 		clearInterval(endSlideShow2)
+// 		container.innerHTML = ``
+// 		}, 600000)
 
 
 
-	function footer() {
-	  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
-	slideshow()
+// 	function footer() {
+// 	  //Data slideshow at the footer, current data gets passed to it, then executes the actual slideshow with another function inside
+// 	slideshow()
 	
-	function slideshow() {
-		let mph = returnMPH(windSpeed)
+// 	function slideshow() {
+// 		let mph = returnMPH(windSpeed)
 		
-		order1()
-		setTimeout(order2, 4000)
-		setTimeout(order3, 8000)
-		setTimeout(order4, 12000)
-		setTimeout(order5, 16000)
-		setTimeout(order6, 20000)
-		setTimeout(order7, 24000)
-		setTimeout(order8, 28000)
+// 		order1()
+// 		setTimeout(order2, 4000)
+// 		setTimeout(order3, 8000)
+// 		setTimeout(order4, 12000)
+// 		setTimeout(order5, 16000)
+// 		setTimeout(order6, 20000)
+// 		setTimeout(order7, 24000)
+// 		setTimeout(order8, 28000)
 	
 
-		//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
+// 		//Slide order: 1. Conditions at ${city}, 2. ${cond}, 3. Temp: ${temp}°F, 4. Humidity: ${humid}%  Dewpoint: ${}, 5. Barometric Pressure: ${baro}F, 6. Wind: ${windDir} ${windSpeed} MPH, 7. Visib: ${visb} mi.  Ceiling: ${}, 8. ${month} Precipitation: ${}
 
 
-			function order1() {
-				bottomBar.innerHTML = `Conditions at ${curCity}`
-			}
+// 			function order1() {
+// 				bottomBar.innerHTML = `Conditions at ${curCity}`
+// 			}
 			
-		 	function order2() {
-				bottomBar.innerHTML = `${cond}`
-			}
+// 		 	function order2() {
+// 				bottomBar.innerHTML = `${cond}`
+// 			}
 
-			function order3() {
-				bottomBar.innerHTML = `Temp: ${temp}°F`
-			}
+// 			function order3() {
+// 				bottomBar.innerHTML = `Temp: ${temp}°F`
+// 			}
 
-			function order4() {
-				bottomBar.innerHTML = `Humidity: ${humid}%  Dewpoint:`//here would be dewpoint if we had it :(
-			}
+// 			function order4() {
+// 				bottomBar.innerHTML = `Humidity: ${humid}%  Dewpoint:`//here would be dewpoint if we had it :(
+// 			}
 
-			function order5() {
-				bottomBar.innerHTML = `Barometric Pressure: ${baro}`//Need a function here to see if pressure is falling, dropping, or sustaning.
-			}
+// 			function order5() {
+// 				bottomBar.innerHTML = `Barometric Pressure: ${baro}`//Need a function here to see if pressure is falling, dropping, or sustaning.
+// 			}
 
-			function order6() {
-				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} ${mph}`
-			}
+// 			function order6() {
+// 				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} ${mph}`
+// 			}
 
-			function order7() {
-				bottomBar.innerHTML = `Visib: ${visb} mi.  Ceiling:`//Need a data point for ceiling, eventually.
-			}
+// 			function order7() {
+// 				bottomBar.innerHTML = `Visib: ${visb} mi.  Ceiling:`//Need a data point for ceiling, eventually.
+// 			}
 
-			function order8() {
-				bottomBar.innerHTML = `${dt.slice(3, 7)} Precipitation:` //Need a data point for precip, eventually.
-			}
-	}
-
-	var endSlideShow = setInterval(slideshow, 32000)
-	setInterval(function() { 
-		clearInterval(endSlideShow) 
-		bottomBar.innerHTML = ``
-		}, 600000)		
-	}
-
-};
-
-
-
-
-
-
-
-
-
-function noData() { ///Will display if no data reports, or if error.
-	container.innerHTML = `
-			<div class = "noData">
-				<h1>No Report Availiable</h1>
-			</div>`
-}
-
-
-getTime()
-
-
-setInterval(getTime, 1000)
-setInterval(getWeather, 600000)
-// setInterval(function() {
-// 	clearInterval(getWeather)
-// 	mainBox.innerHTML = ``
-// 	bottomBar.innerHTML = ``
-// 	}, 50000)//a little note, I had to have this function run in line with the slideshow function intervals in order to not have alignment issues.
-
-///apixu.com
-
-
-
-//trying to write a function a take temp and humidity to figure out dewpoint.
-function dp(T, RH) {
-    var tA = Math.pow(RH/100,1/8);
-    return ((112 + (0.9 * T))) * tA + (0.1 * T) - 112;
-};
-
-
-
-
-function abbreviator(word) {
-	let wordLength = word.length
-	if(word.endsWith("Air Force Base")) {
-		return word.substr(0, (wordLength - 14)) + " " + "AFB"
-	} else if(word.startsWith("scattered")) {
-		return "Sct'd" + "" + word.substr(9, wordLength)
-	} else {
-		return word
-	}
-
-}
-
-
-function threeDay(item) {
-	let now = new Date().getDay()
-	// console.log(now)
-	let itemHour = new Date(item.dt * 1000).getHours()
-	let itemDay = new Date(item.dt * 1000).getDay()
-	// console.log(itemDay)
-
-	if(itemHour == 5 && itemDay !== now || itemHour == 17 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-		return true;
-	} else {
-	return false;
-	}	
-}
-
-function dayForecast(item) {
-	let now = new Date().getDay()
-	let itemHour = new Date(item.dt * 1000).getHours()
-	let itemDay = new Date(item.dt * 1000).getDay()
-	if(itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-		return true;
-	} else {
-	return false;
-	}	
-}
-
-function dayofWeek(d) {
-	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-	return days[d]
-}
-
-
-
-
-// function conditions(id) {
-// 	let conditions = ["Sunny", "Clear", "Partly Cloudy", "Fair", "Mostly Cloudy", "Cloudy", "Windy", "Fog", "Light Rain", "Rain", "Heavy Rain", "Thunder", "T'Storms" "Hazy", "Snow Flurries", "Light Snow", "Snow", "Heavy Snow"
-
-// 	let idCodes = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
-
-
-
-	const conditionCodes = [
-	{
-		id: 200,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{	id: 201,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 202,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 210,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 211,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	}
-	]
-
-	function idTrans(id) {
-
-	}
-// }
-
-
-//Take in the openmap ID and need to return the correct wording condition
-
-//ID 200 == conditions[11]
-
-
-// app.listen(3000, function(){
-// 	console.log("App running on port 3000")
-//   })
-
-
-
-function getWindDirection(deg) { ///This figures out the correct direction based on meterological degrees
-	if(deg >= 361 || deg == undefined) {
-		return ""
-	} else if(deg <= 22.5 || deg >= 337.6) {
-		return "N"
-	} else if(deg >= 22.6 && deg <= 68.5) {
-		return "NE"
-	} else if(deg >= 68.6 && deg <= 112.5) {
-		return "E"
-	} else if(deg >= 112.6 && deg <= 157.5) {
-		return "SE"
-	} else if(deg >= 157.6 && deg <= 202.5) {
-		return "S"
-	} else if(deg >= 202.6 && deg <= 247.5) {
-		return "SW"
-	} else if(deg >= 247.6 && deg <= 292.5) {
-		return "W"
-	} else if(deg >= 292.6 && deg <= 337.5) {
-		return "NW"
-	}
-}
-
-function returnCalm(speed, dir) { ///Simple function to return "Calm" if there is no wind
-	if(speed < 1 || dir == "") {
-		return "Calm"
-	} else {
-		return speed
-	}
-}
-
-function returnMPH(ws) {  //Function to not display MPH is windspeed is calm
-	if(ws === "Calm") {
-		return ""
-	} else {
-		return "MPH"
-	}
-}
-
-
-function returnGust(gust) { //Function to display gusts if there are any
-	if(gust != undefined) {
-		return "Gusts to " + Math.round(gust)
-	} else {
-		return ""
-	}
-}
-
-function convertInHg(mb) {///Simple function to convert millibars to inches of Mercury, also still need to round this off to two decimals. mb * 0.0295300
-	return Number(Math.round((mb * 0.0295300)+'e2')+'e-2');
-}
-
-
-function convertMeters(m) { //Function to convert kilometers into miles
-	return Math.round(m * 0.000621)
-}
-
-
-// function getTime() {  //Timestamp clock function as the top
-// 	var now = new Date()
-// 	var hour = now.getHours()
-// 	var minute = now.getMinutes()
-// 	var seconds = now.getSeconds()
-// 	var amPm = "AM"
-
-// 	if(hour == 0) {
-// 		hour += 12
+// 			function order8() {
+// 				bottomBar.innerHTML = `${dt.slice(3, 7)} Precipitation:` //Need a data point for precip, eventually.
+// 			}
 // 	}
 
-// 	if(hour > 12) {
-// 		hour -= 12
-// 		amPm = "PM"
+// 	var endSlideShow = setInterval(slideshow, 32000)
+// 	setInterval(function() { 
+// 		clearInterval(endSlideShow) 
+// 		bottomBar.innerHTML = ``
+// 		}, 600000)		
 // 	}
 
-// 	if(minute < 10) {
-// 		minute = "0" + minute
-// 	}
+// };
 
-// 	if(seconds < 10) {
-// 		seconds = "0" + seconds
-// 	}
 
-// 	const time = hour + ":" + minute + ":" + seconds + " " + amPm
-// 	const date = now.toDateString().slice(0, 10)
-// 	timestamp.innerHTML = `${time}`
-// 	datestamp.innerHTML = `${date}`
 
-// }
+
+
+
+
+
+
+
 
 
 

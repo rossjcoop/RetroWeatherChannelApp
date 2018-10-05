@@ -42,11 +42,7 @@ function getWeatherCord(lat, lon) { ///Pulls in data via cordinates provided by 
   		combinedData["forecastAPI"] = data[2];
 
   		console.log(combinedData)
-
-		  // main(combinedData) //Send it to my slideshow
-		  
-		return combinedData
-
+		  main(combinedData) //Send it to my slideshow
   	})
 };
 
@@ -100,9 +96,7 @@ function getWeatherZip(zip, country) { ///Or pulls weather data via zip code and
 
   		console.log(combinedData)
 
-		  // main(combinedData) //Send it to my slideshow
-		  
-		return combinedData
+		  main(combinedData) //Send it to my slideshow
 
   	})
 };
