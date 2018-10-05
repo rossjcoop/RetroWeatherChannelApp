@@ -9,22 +9,22 @@
 
 ////Browser now taking in user's location and can be feed into cords more accurately!
 
-window.onload = function() {
-  	var startPos;
-  	var geoSuccess = function(position) {
-    startPos = position;
-    // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-    // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+// window.onload = function() {
+//   	var startPos;
+//   	var geoSuccess = function(position) {
+//     startPos = position;
+//     // document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+//     // document.getElementById('startLon').innerHTML = startPos.coords.longitude;
 
-    console.log("Lat: ", startPos.coords.latitude)
-    console.log("Lon: ", startPos.coords.longitude)
-    lat = startPos.coords.latitude
-    lon = startPos.coords.longitude
-    getWeather()
-  	};
+//     console.log("Lat: ", startPos.coords.latitude)
+//     console.log("Lon: ", startPos.coords.longitude)
+//     lat = startPos.coords.latitude
+//     lon = startPos.coords.longitude
+//     getWeather()
+//   	};
 
-  navigator.geolocation.getCurrentPosition(geoSuccess);
-};
+//   navigator.geolocation.getCurrentPosition(geoSuccess);
+// };
 
 
 
@@ -86,8 +86,50 @@ window.onload = function() {
 
 //   	})
 // };
-  	
 
+window.onload = function() {
+    startPage()
+};
+  	
+function startPage() {
+    headline.innerHTML = `
+    <div class="headlineTop">Select Your Location</div>`
+    container.innerHTML = `
+    <div class="selectBox"></div>
+        <div class="selectZip">
+			<input type="text" placeholder="Enter Zip" rel="zipInput">
+			<select>
+				<option value="US">USA</option>
+		  	</select>
+            <input type="submit" value="Submit" rel="zipSubmit">
+        </div>
+        <div class="selectCords"></div>
+            <input type="submit" value="Use My Location" rel="locationSubmit">
+        </div>
+    </div>`
+    let zipInput = document.querySelector('[rel="zipInput"]')
+    let zipSubmit = document.querySelector('[rel="zipSubmit"]')
+    let cordSubmit = document.querySelector('[rel="locationSubmit"]')
+
+    zipSubmit.addEventListener('click', function(event) {
+        zip = zipInput.value
+      	
+    })
+
+    cordSubmit.addEventListener('click' function(event) {
+        var startPos;
+        var geoSuccess = function(position) {
+            startPos = position;
+            console.log("Lat: ", startPos.coords.latitude)
+            console.log("Lon: ", startPos.coords.longitude)
+            lat = startPos.coords.latitude
+            lon = startPos.coords.longitude
+            //Send to API
+        };
+        navigator.geolocation.getCurrentPosition(geoSuccess);
+    });
+
+};
 function main(weatherData) {
 
 
@@ -129,12 +171,12 @@ function main(weatherData) {
 			<div class="headlineTop">Select Your Location</div>`
 			container.innerHTML = `
 			<div class="selectBox"></div>
-				<div class="cityName"`
+				<div class="selectZip">
+					<input type="text" placeholder="Enter Zip" rel="zipInput">
+					<input type="submit" value="Submit" rel="zipSubmit">
+				</div>
+			</div>`
 		}
-
-
-
-
 
 		function page1() { 			
 			desktop.style.backgroundColor = "rgb(36, 43, 90)";

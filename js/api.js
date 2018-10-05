@@ -1,4 +1,4 @@
-function getWeatherCord(lat, lon) { 
+function getWeatherCord(lat, lon) { ///Pulls in data via cordinates provided by the browser
 	
 	let currentCondAPI = ////Gets current conditions 
 		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=imperial&APPID="+apiId)
@@ -51,8 +51,10 @@ function getWeatherCord(lat, lon) {
 };
 
 
-function getWeatherZip(zip, country) { 
-	
+function getWeatherZip(zip, country) { ///Or pulls weather data via zip code and country
+	let lat = 0
+	let lon = 0
+
 	let currentCondAPI = ////Gets current conditions 
 		fetch("http://api.openweathermap.org/data/2.5/weather?zip="+zip+","+country+"&units=imperial&APPID="+apiId)
   			.then(response => {
@@ -60,6 +62,8 @@ function getWeatherZip(zip, country) {
 	        		console.log("Current condition API: ", response.status)
 	        		return	      	
 	      		} else {
+					lat = response.json().coord.lat
+					lon = response.json().coord.lon/////May have to figure out a way to get cordinates from the response to use in the next fetch....
 	      			return response.json()
 	      		}	
   			});	
@@ -70,7 +74,6 @@ function getWeatherZip(zip, country) {
 			.then(response => {
   				if(response.status !== 200) {
         			console.log("Local weather stations API: ", response.status)
-        			noData()
         			return
       			} else {
 		      		return response.json()		  		
