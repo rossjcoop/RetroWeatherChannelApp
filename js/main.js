@@ -115,16 +115,18 @@ function startPage() {
     let cordSubmit = document.querySelector('[rel="locationSubmit"]')
 
     zipSubmit.addEventListener('click', function(event) {
-		zip = zipInput.value
-		ctry = ctrySel.value
-		getWeatherZip(zip, ctry)
-		setInterval(function() {
-			getWeatherZip(zip, ctry)
-			}
-			, 600000)     	
+        event.preventDefault
+        zip = zipInput.value
+        ctry = ctrySel.value
+        getWeatherZip()
+        setInterval(function() {
+            getWeatherZip()
+        }
+        , 600000)    
     })
 
     cordSubmit.addEventListener('click', function(event) {
+        event.preventDefault
         var startPos;
         var geoSuccess = function(position) {
             startPos = position;
@@ -132,9 +134,9 @@ function startPage() {
             console.log("Lon: ", startPos.coords.longitude)
             lat = startPos.coords.latitude
             lon = startPos.coords.longitude
-			getWeatherCord(lat, lon)
+			getWeatherCord()
 			setInterval(function() {
-				getWeatherCord(lat, lon)}
+				getWeatherCord()}
 				, 600000)
         };
 		navigator.geolocation.getCurrentPosition(geoSuccess)
