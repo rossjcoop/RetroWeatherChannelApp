@@ -91,14 +91,6 @@ function dayofWeek(d) {
 
 
 
-
-// function conditions(id) {
-// 	let conditions = ["Sunny", "Clear", "Partly Cloudy", "Fair", "Mostly Cloudy", "Cloudy", "Windy", "Fog", "Light Rain", "Rain", "Heavy Rain", "Thunder", "T'Storms" "Hazy", "Snow Flurries", "Light Snow", "Snow", "Heavy Snow"
-
-// 	let idCodes = [200, 201, 202, 210, 211, 212, 221, 230, 231, 232]
-
-
-
 	const conditionCodes = [
 	{
 		id: 200,
@@ -129,17 +121,6 @@ function dayofWeek(d) {
 	function idTrans(id) {
 
 	}
-// }
-
-
-//Take in the openmap ID and need to return the correct wording condition
-
-//ID 200 == conditions[11]
-
-
-// app.listen(3000, function(){
-// 	console.log("App running on port 3000")
-//   })
 
 
 
