@@ -95,17 +95,19 @@ window.onload = function() {
   	
 function startPage() {
     headline.innerHTML = `
-    <div class="headlineTop">Select Your Location</div>`
+    <div class="headlineTop">Select Location</div>`
     container.innerHTML = `
-    <div class="selectBox"></div>
-        <div class="selectZip">
+    <div class="page1Box">
+        <div class="mainInfo">
+            <h3>Enter Zip</h3>
 			<input type="text" placeholder="Enter Zip" rel="zipInput">
 			<select rel="ctrySel">
 				<option value="US">USA</option>
 		  	</select>
             <input type="submit" value="Submit" rel="zipSubmit">
         </div>
-        <div class="selectCords"></div>
+        <div class="subInfo">
+            <h3>Find My Location</h3>
             <input type="submit" value="Use My Location" rel="locationSubmit">
         </div>
     </div>`
