@@ -1,8 +1,10 @@
 function main(weatherData) {
 
 
-	if(music = "on") {
-		musicPlayer.setAttribute("autoplay", true)
+	if(music == "on") {
+		musicPlayer.autoplay = "true"
+		musicPlayer.loop = "true"
+		musicPlayer.load()
 	}
 	
 	//Current conditions weather data////////////////////////////////////////////////////

@@ -88,6 +88,7 @@
 // };
 
 window.onload = function() {
+    console.log(music)
 	startPage()
 	getTime()	
 	setInterval(getTime, 1000)
