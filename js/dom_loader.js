@@ -8,10 +8,13 @@ const desktop = document.getElementById("container");
 const headlineTop = document.getElementById("headlineTop");
 const headlineBottom = document.getElementById("headlineBottom");
 
+const musicPlayer = document.querySelector(".musicPlayer")
+
 var lat;
 var lon;
 var zip;
 var ctry;
+var music;
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1"; //My api id for openweathermap.org
 

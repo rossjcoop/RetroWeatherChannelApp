@@ -110,11 +110,16 @@ function startPage() {
             <h3>Find My Location</h3>
             <input type="submit" value="Use My Location" rel="locationSubmit">
         </div>
+        <div class="features">
+            <input type="checkbox" rel="musicOn">Music?
+        </div>
+            
     </div>`
 	let zipInput = document.querySelector('[rel="zipInput"]')
 	let ctrySel = document.querySelector('[rel="ctrySel"]')
     let zipSubmit = document.querySelector('[rel="zipSubmit"]')
-    let cordSubmit = document.querySelector('[rel="locationSubmit"]')
+    let cordSubmit = document.querySelector('[rel="locationSubmit"]') 
+    let musicOn = document.querySelector('[rel="musicOn"]')
 
     zipSubmit.addEventListener('click', function(event) {
         event.preventDefault
@@ -143,6 +148,13 @@ function startPage() {
         };
 		navigator.geolocation.getCurrentPosition(geoSuccess)
     });
+
+    musicOn.addEventListener('click', function(event) {
+        event.preventDefault
+        music = musicOn.value
+        console.log('yes!')
+        console.log(music)
+    })
 };
 
 

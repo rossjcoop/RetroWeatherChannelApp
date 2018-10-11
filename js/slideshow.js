@@ -1,4 +1,9 @@
 function main(weatherData) {
+
+
+	if(music = "on") {
+		musicPlayer.setAttribute("autoplay", true)
+	}
 	
 	//Current conditions weather data////////////////////////////////////////////////////
 	let temp = Math.round(weatherData.currentCondAPI.main.temp)
