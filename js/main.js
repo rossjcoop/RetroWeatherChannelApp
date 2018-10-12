@@ -96,26 +96,55 @@ window.onload = function() {
   	
 function startPage() {
     headline.innerHTML = `
-    <div class="headlineTop">Select Location</div>`
-    container.innerHTML = `
-    <div class="page1Box">
-        <div class="mainInfo">
-            <h3>Enter Zip</h3>
-			<input type="text" placeholder="Enter Zip" rel="zipInput">
-			<select rel="ctrySel">
-				<option value="US">USA</option>
-		  	</select>
-            <input type="submit" value="Submit" rel="zipSubmit">
-        </div>
-        <div class="subInfo">
-            <h3>Find My Location</h3>
-            <input type="submit" value="Use My Location" rel="locationSubmit">
-        </div>
-        <div class="features">
-            <input type="checkbox" rel="musicOn">Music?
-        </div>
-            
-    </div>`
+    <div class="headlineTop">Set Up Menu</div>`
+    container.innerHTML = `   
+        <form>
+            <div class="startSect">
+                <label>Select Your Location</label>
+                    <div>
+                        <input type="radio" name="selLoc" value=""><input type="text" placeholder="Enter Zip" rel="zipInput">
+                        <select>
+                            <option value="US">USA</option>
+                        <select>
+                        <input type="radio" name="selLoc">Use My Location
+                    </div>
+                    <div>
+                       
+                    </div>
+            </div>
+            <div class="startSect">
+                <label>Slideshow Settings:</label>
+                    <div>
+                        <input type="checkbox" rel="musicOn">Music?
+                        <label>Select Track</label>
+                            <select rel="cdPlayer">
+                                <option value="Overcast.mp3">Overcast</option>
+                                <option value="Casio Blues.mp3">Casio Blues</option>
+                                <option value="Green Tea.mp3">Green Tea</option>
+                            </select>
+                    </div>
+                    <div>
+                        <label>Slide Speed</label>
+                            <select>
+                                <option value="5">5 secs</option>
+                                <option value="10">10 secs</option>
+                                <option value="15">15 secs</option>
+                                <option value="20">20 secs</option>
+                            </select>
+                    </div>
+                    <div>
+                        <label>°F/°C</label>
+                            <select>
+                                <option value="F">°F</option>
+                                <option value="C">°C</option>
+                            </select>
+                    </div>
+            </div>
+            <div>
+            </div>
+            <input type="submit" value="Start" rel="start">
+        </form>     
+    `
 	let zipInput = document.querySelector('[rel="zipInput"]')
 	let ctrySel = document.querySelector('[rel="ctrySel"]')
     let zipSubmit = document.querySelector('[rel="zipSubmit"]')
@@ -412,7 +441,23 @@ function startPage() {
 
 
 
-
+{/* <div class="setUpBox">
+        <div class="location">
+            <h3>Enter Zip</h3>
+			<input type="text" placeholder="Enter Zip" rel="zipInput">
+			<select rel="ctrySel">
+				<option value="US">USA</option>
+		  	</select>
+            <input type="submit" value="Submit" rel="zipSubmit">
+        </div>
+        <div class="subInfo">
+            <h3>Find My Location</h3>
+            <input type="submit" value="Use My Location" rel="locationSubmit">
+        </div>
+        <div class="features">
+            <input type="checkbox" rel="musicOn">Music?
+        </div>           
+    </div> */}
 
 
 

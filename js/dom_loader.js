@@ -7,14 +7,29 @@ const container = document.getElementById("screen");
 const desktop = document.getElementById("container");
 const headlineTop = document.getElementById("headlineTop");
 const headlineBottom = document.getElementById("headlineBottom");
+const musicPlayer = document.querySelector(".musicPlayer");
 
-const musicPlayer = document.querySelector(".musicPlayer")
 
+///Location variables
 var lat;
 var lon;
+var city;
 var zip;
 var ctry;
 var music;
+
+
+////Current Weather variables
+var ccTemp; //current temperature of your city	
+var ccCond; //current weather conditions of your city
+var ccIcon; //current condition weather icon to display
+var ccWindDir; //current wind direction of your city
+var ccWindSpeed; //current wind speed of your city
+var ccWindGust; //current wind gust(if any) of your city	
+var ccHumid;//current humidity of your city
+var ccBaro;//current barometer of your city
+var ccVisb;//current visibility of your city
+var ccDt;//date and time of weather report taken
 
 const apiId = "e8560a1109f936430203f88c4e09f8f1"; //My api id for openweathermap.org
 
