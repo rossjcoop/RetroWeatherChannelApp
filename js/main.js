@@ -98,15 +98,15 @@ function startPage() {
     headline.innerHTML = `
     <div class="headlineTop">Set Up Menu</div>`
     container.innerHTML = `   
-        <form>
+        <div>
             <div class="startSect">
                 <label>Select Your Location</label>
                     <div>
-                        <input type="radio" name="selLoc" value=""><input type="text" placeholder="Enter Zip" rel="zipInput">
+                        <input type="radio" name="selLoc" value="" rel="zipButton"><input type="text" placeholder="Enter Zip" rel="zipInput">
                         <select>
-                            <option value="US">USA</option>
+                            <option rel="ctrySel" value="US">USA</option>
                         <select>
-                        <input type="radio" name="selLoc">Use My Location
+                        <input type="radio" name="selLoc" value="" rel="locButton">Use My Location
                     </div>
                     <div>
                        
@@ -143,41 +143,72 @@ function startPage() {
             <div>
             </div>
             <input type="submit" value="Start" rel="start">
-        </form>     
+        </div>     
     `
+    let zipSelect = document.querySelector('[rel="zipButton"]')
+    let cordSelect = document.querySelector('[rel="locButton"]')
 	let zipInput = document.querySelector('[rel="zipInput"]')
 	let ctrySel = document.querySelector('[rel="ctrySel"]')
-    let zipSubmit = document.querySelector('[rel="zipSubmit"]')
-    let cordSubmit = document.querySelector('[rel="locationSubmit"]') 
+    // let zipSubmit = document.querySelector('[rel="zipSubmit"]')
+    // let cordSubmit = document.querySelector('[rel="locationSubmit"]') 
+    let submit = document.querySelector('[rel="start"]')
     let musicOn = document.querySelector('[rel="musicOn"]')
 
-    zipSubmit.addEventListener('click', function(event) {
-        event.preventDefault
-        zip = zipInput.value
-        ctry = ctrySel.value
-        getWeatherZip()
-        setInterval(function() {
+    submit.addEventListener('click', function(event) {
+        if(zipSelect.checked == true) {
+            console.log("hit zip")
+            zip = zipInput.value
+            ctry = ctrySel.value
             getWeatherZip()
-        }
-        , 600000)    
+            setInterval(function() {
+                getWeatherZip()
+            }
+            , 600000)   
+        } else if(cordSelect.checked == true) {
+            console.log("Hit cord")
+            var startPos;
+            var geoSuccess = function(position) {
+                startPos = position;
+                console.log("Lat: ", startPos.coords.latitude)
+                console.log("Lon: ", startPos.coords.longitude)
+                lat = startPos.coords.latitude
+                lon = startPos.coords.longitude
+                getWeatherCord()
+                setInterval(function() {
+                    getWeatherCord()}
+                    , 600000)
+            };
+            navigator.geolocation.getCurrentPosition(geoSuccess)
+
+        } else {
+            alert("You must either enter a zip or use your current location.")
+        }        
     })
 
-    cordSubmit.addEventListener('click', function(event) {
-        event.preventDefault
-        var startPos;
-        var geoSuccess = function(position) {
-            startPos = position;
-            console.log("Lat: ", startPos.coords.latitude)
-            console.log("Lon: ", startPos.coords.longitude)
-            lat = startPos.coords.latitude
-            lon = startPos.coords.longitude
-			getWeatherCord()
-			setInterval(function() {
-				getWeatherCord()}
-				, 600000)
-        };
-		navigator.geolocation.getCurrentPosition(geoSuccess)
-    });
+    zipSelect.addEventListener('click', function(event) {
+        console.log(zipSelect.checked)
+    })
+
+    cordSelect.addEventListener('click', function(event) {
+        console.log(cordSelect.checked)
+    })
+
+    // cordSubmit.addEventListener('click', function(event) {
+    //     event.preventDefault
+    //     var startPos;
+    //     var geoSuccess = function(position) {
+    //         startPos = position;
+    //         console.log("Lat: ", startPos.coords.latitude)
+    //         console.log("Lon: ", startPos.coords.longitude)
+    //         lat = startPos.coords.latitude
+    //         lon = startPos.coords.longitude
+	// 		getWeatherCord()
+	// 		setInterval(function() {
+	// 			getWeatherCord()}
+	// 			, 600000)
+    //     };
+	// 	navigator.geolocation.getCurrentPosition(geoSuccess)
+    // });
 
     musicOn.addEventListener('click', function(event) {
         event.preventDefault
