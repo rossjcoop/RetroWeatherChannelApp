@@ -55,11 +55,10 @@ function main(weatherData) {
 					<div class = "subInfo">
 						<h3 id = "cityName">${curCity}</h3>
 						<h3 id = "humidity">Humidity: ${humid}%</h3>
-						<h3>Dewpoint: </h3>
-						<h3>Ceiling: </h3>
+						<h3>Dewpoint: No Data</h3>
+						<h3>Ceiling: No Data</h3>
 						<h3 id = "visibility">Visibility: ${visb} mi</h3>
 						<h3 id = "pressure">Pressure: ${baro}</h3>
-						<h3>Heat Index: </h3>
 					</div>
 				</div>`
 		};
