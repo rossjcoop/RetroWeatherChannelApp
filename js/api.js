@@ -100,6 +100,7 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 
 
 function setWeather(d) {
+	lo = []
 	let curCon = d.currentCondAPI // Current condition API
 	let loObs = d.localObsAPI.list // Local Observations API
 
@@ -123,5 +124,7 @@ function setWeather(d) {
 			"wind": formatWind(item.wind.speed, item.wind.deg)
 		})
 	})
+
+	let hiLo = data.list.filter(threeDay)
 
 };

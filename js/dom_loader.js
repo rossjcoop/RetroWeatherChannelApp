@@ -34,17 +34,9 @@ var ccVisb;//current visibility of your city
 var ccDt;//date and time of weather report taken
 
 
-// var lo = {//Local observations in the immediate area
-// 	"city1": {},
-// 	"city2": {},
-// 	"city3": {},
-// 	"city4": {},
-// 	"city5": {},
-// 	"city6": {},
-// 	"city7": {}
-// }
+var lo = [];//Local observations for 7 areas
 
-var lo = []
+var ef = [];//3 day forecast
 
 function noData() { ///Will display if no data reports, or if error.
 	container.innerHTML = `
