@@ -1,3 +1,5 @@
+const apiId = "e8560a1109f936430203f88c4e09f8f1"; //My api id for openweathermap.org
+
 const headline = document.getElementById("headline");
 const timestamp = document.getElementById("time");
 const datestamp = document.getElementById("date");
@@ -31,9 +33,18 @@ var ccBaro;//current barometer of your city
 var ccVisb;//current visibility of your city
 var ccDt;//date and time of weather report taken
 
-const apiId = "e8560a1109f936430203f88c4e09f8f1"; //My api id for openweathermap.org
 
+// var lo = {//Local observations in the immediate area
+// 	"city1": {},
+// 	"city2": {},
+// 	"city3": {},
+// 	"city4": {},
+// 	"city5": {},
+// 	"city6": {},
+// 	"city7": {}
+// }
 
+var lo = []
 
 function noData() { ///Will display if no data reports, or if error.
 	container.innerHTML = `
@@ -142,6 +153,13 @@ function dayofWeek(d) {
 
 
 
+function formatWind(speed, dir) {
+	let direction = getWindDirection(dir)
+	let velocity = returnCalm(Math.round(speed), direction)
+
+	return direction + velocity
+}
+
 function getWindDirection(deg) { ///This figures out the correct direction based on meterological degrees
 	if(deg >= 361 || deg == undefined) {
 		return ""
@@ -229,4 +247,8 @@ function getTime() {  //Timestamp clock function as the top
 	datestamp.innerHTML = `${date}`
 
 }
+
+
+
+
 

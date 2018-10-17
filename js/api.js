@@ -43,6 +43,7 @@ function getWeatherCord() { ///Pulls in data via cordinates provided by the brow
 
   		console.log(combinedData)
 		  main(combinedData) //Send it to my slideshow
+		  setWeather(combinedData)
   	})
 };
 
@@ -95,4 +96,32 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 		
 				}	  
   			})	  
+};
+
+
+function setWeather(d) {
+	let curCon = d.currentCondAPI // Current condition API
+	let loObs = d.localObsAPI.list // Local Observations API
+
+	ccTemp = Math.round(curCon.main.temp)
+	ccCond = curCon.weather[0].description 
+	ccIcon = curCon.weather[0].icon
+	ccWindDir = getWindDirection(curCon.wind.deg)
+	ccWindSpeed = returnCalm(Math.round(curCon.wind.speed), ccWindDir)
+	ccwindGust = returnGust(curCon.wind.gust)
+	ccCurCity = curCon.name
+	ccHumid = curCon.main.humidity
+	ccBaro = convertInHg(curCon.main.pressure)
+	ccVisb = convertMeters(curCon.visibility)
+	ccDt = new Date(curCon.dt * 1000).toDateString()
+
+	loObs.forEach(item => {
+		lo.push({
+			"name": item.name,
+			"temp": Math.round(item.main.temp),
+			"weather": abbreviator(item.weather[0].description),
+			"wind": formatWind(item.wind.speed, item.wind.deg)
+		})
+	})
+
 };
