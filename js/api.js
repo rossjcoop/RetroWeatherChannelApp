@@ -128,26 +128,36 @@ function setWeather(d) {
 
 	// let hiLo = extFc.filter(threeDay)
 	// let dayCond = data.list.filter(dayForecast)
+
+	forecast(extFc)
 };
 
 function forecast(arr) {
 	let today = new Date().getDay()	
 	let time = new Date().getTime()
+	let dayInMilsecs = 86400000
+	let day1 = new Date(time + dayInMilsecs).getDay()
+	let day2 = new Date(time + (dayInMilsecs * 2)).getDay()
+	let day3 = new Date(time + (dayInMilsecs * 3)).getDay()
+	console.log(day1, day2, day3)
 	//86400000 milliseconds in a day
 	//259200000 milliseconds in 3 days
 	let threeDay = arr.filter(filterer)
+	console.log(threeDay)
 
-	let day1 = []
-	let day2 = []
-	let day3 = []
+	
+
+
 
 
 	function filterer(item) {		///First will be a time filterer			
 		let itemHour = new Date(item.dt * 1000).getHours()
 		let itemDay = new Date(item.dt * 1000).getDay()
 		let itemTime = new Date(item.dt * 1000)
-		if(itemDay !== today && (itemDay - today < 3 || itemDay - today <= -3)) {
+		if(itemDay == day1 || itemDay == day2 || itemDay == day3) {
 			return true
+		} else {
+			return false
 		}
 	}
 
