@@ -105,6 +105,13 @@ function dayForecast(item) {
 	}	
 }
 
+
+function forecast(arr) {
+	let now = new Date().getDay()
+	let itemHour = new Date(item.dt * 1000).getHours()
+	let itemDay = new Date(item.dt * 1000).getDay()
+}
+
 function dayofWeek(d) {
 	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 	return days[d]
