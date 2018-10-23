@@ -139,7 +139,6 @@ function forecast(arr) {
 	let day1 = new Date(time + dayInMilsecs).getDay()
 	let day2 = new Date(time + (dayInMilsecs * 2)).getDay()
 	let day3 = new Date(time + (dayInMilsecs * 3)).getDay()
-	console.log(day1, day2, day3)
 	//86400000 milliseconds in a day
 	//259200000 milliseconds in 3 days
 	let threeDay = arr.filter(filterer)
