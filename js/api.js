@@ -43,7 +43,7 @@ function getWeatherCord() { ///Pulls in data via cordinates provided by the brow
 
   		console.log(combinedData)
 		  main(combinedData) //Send it to my slideshow
-		  setWeather(combinedData)
+		//   setWeather(combinedData)
   	})
 };
 
@@ -99,125 +99,126 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 };
 
 
-function setWeather(d) {
-	lo = []
-	ef = []
-	let curCon = d.currentCondAPI // Current Conditions API
-	let loObs = d.localObsAPI.list // Local Observations API
-	let extFc = d.forecastAPI.list // Extended Forecast API
+// function setWeather(d) {
+// 	lo = []
+// 	ef = []
+// 	let curCon = d.currentCondAPI // Current Conditions API
+// 	let loObs = d.localObsAPI.list // Local Observations API
+// 	let extFc = d.forecastAPI.list // Extended Forecast API
 
-	ccTemp = Math.round(curCon.main.temp)
-	ccCond = curCon.weather[0].description 
-	ccIcon = curCon.weather[0].icon
-	ccWindDir = getWindDirection(curCon.wind.deg)
-	ccWindSpeed = returnCalm(Math.round(curCon.wind.speed), ccWindDir)
-	ccwindGust = returnGust(curCon.wind.gust)
-	ccCurCity = curCon.name
-	ccHumid = curCon.main.humidity
-	ccBaro = convertInHg(curCon.main.pressure)
-	ccVisb = convertMeters(curCon.visibility)
-	ccDt = new Date(curCon.dt * 1000).toDateString()
+// 	ccTemp = Math.round(curCon.main.temp)
+// 	ccCond = curCon.weather[0].description 
+// 	ccIcon = curCon.weather[0].icon
+// 	ccWindDir = getWindDirection(curCon.wind.deg)
+// 	ccWindSpeed = returnCalm(Math.round(curCon.wind.speed), ccWindDir)
+// 	ccwindGust = returnGust(curCon.wind.gust)
+// 	ccCurCity = curCon.name
+// 	ccHumid = curCon.main.humidity
+// 	ccBaro = convertInHg(curCon.main.pressure)
+// 	ccVisb = convertMeters(curCon.visibility)
+// 	ccDt = new Date(curCon.dt * 1000).toDateString()
 
-	loObs.forEach(item => {
-		lo.push({
-			"name": item.name,
-			"temp": Math.round(item.main.temp),
-			"weather": abbreviator(item.weather[0].description),
-			"wind": formatWind(item.wind.speed, item.wind.deg)
-		})
-	})
+// 	loObs.forEach(item => {
+// 		lo.push({
+// 			"name": item.name,
+// 			"temp": Math.round(item.main.temp),
+// 			"weather": abbreviator(item.weather[0].description),
+// 			"wind": formatWind(item.wind.speed, item.wind.deg)
+// 		})
+// 	})
 
-	// let hiLo = extFc.filter(threeDay)
-	// let dayCond = data.list.filter(dayForecast)
+// 	// let hiLo = extFc.filter(threeDay)
+// 	// let dayCond = data.list.filter(dayForecast)
 
-	forecast(extFc)
-};
+// 	forecast(extFc)
+// };
 
-function forecast(arr) {
-	let today = new Date().getDay()	
-	let time = new Date().getTime()
-	let dayInMilsecs = 86400000
-	let day1 = new Date(time + dayInMilsecs).getDay()
-	let day2 = new Date(time + (dayInMilsecs * 2)).getDay()
-	let day3 = new Date(time + (dayInMilsecs * 3)).getDay()
-	//86400000 milliseconds in a day
-	//259200000 milliseconds in 3 days
-	let day1Arr = [];
-	let day2Arr = [];
-	let day3Arr = [];
+// function forecast(arr) {
+// 	let today = new Date().getDay()	
+// 	let time = new Date().getTime()
+// 	let dayInMilsecs = 86400000
+// 	let day1 = new Date(time + dayInMilsecs).getDay()
+// 	let day2 = new Date(time + (dayInMilsecs * 2)).getDay()
+// 	let day3 = new Date(time + (dayInMilsecs * 3)).getDay()
+// 	//86400000 milliseconds in a day
+// 	//259200000 milliseconds in 3 days
+// 	let day1Arr = [];
+// 	let day2Arr = [];
+// 	let day3Arr = [];
 
-	let threeDAY = arr.filter(filterer);
+// 	let threeDayNew = arr.filter(filterer);
 	
-	console.log(day1Arr, day2Arr, day3Arr)
+// 	console.log(day1Arr, day2Arr, day3Arr)
 
-	function filterer(item) {		///First, we'll filter out data only the next three days from today			
-		let itemHour = new Date(item.dt * 1000).getHours()
-		let itemDay = new Date(item.dt * 1000).getDay()
-		let itemTime = new Date(item.dt * 1000)
-		if(itemDay == day1) {
-			day1Arr.push(item)
-			return true
-		} else if(itemDay == day2) {
-			day2Arr.push(item)
-			return true
-		} else if(itemDay == day3) {
-			day3Arr.push(item)
-			return true
-		} else {
-			return false
-		}
-	}
-
-	
-
-	///Second will be a function to figure out the highest and lowest temps of the day
-	///Will feed it an array of numbers and find the highest and lowest numbers
-	function highLow(array) {
-		let largest = Math.max.apply(Math, array);
-		let smallest = Math.min.apply(Math, array);
-		return [largest, smallest]
-	}
-
+// 	function filterer(item) {		///First, we'll filter out data only the next three days from today			
+// 		let itemHour = new Date(item.dt * 1000).getHours()
+// 		let itemDay = new Date(item.dt * 1000).getDay()
+// 		let itemTime = new Date(item.dt * 1000)
+// 		if(itemDay == day1) {
+// 			day1Arr.push(item)
+// 			return true
+// 		} else if(itemDay == day2) {
+// 			day2Arr.push(item)
+// 			return true
+// 		} else if(itemDay == day3) {
+// 			day3Arr.push(item)
+// 			return true
+// 		} else {
+// 			return false
+// 		}
+// 	}
 
 	
+
+// 	///Second will be a function to figure out the highest and lowest temps of the day
+// 	///Will feed it an array of numbers and find the highest and lowest numbers
+// 	function highLow(array) {
+// 		let largest = Math.max.apply(Math, array);
+// 		let smallest = Math.min.apply(Math, array);
+// 		return [largest, smallest]
+// 	}
+
+
 	
 	
+	
 
-	///END RESULT EVENTUALLY...Then the
-	// ef = [
-	// 	{
-	// 		"day": "TUE",//Just the day of the data
-	// 		"cond": "clear skies", ///Takes all the conditions for a period between 9am and 5pm and finds the most common
-	// 		"hiTemp": 75,//// Takes all the temps for a 24 hour period and finds the highest and lowest temperature
-	// 		"loTemp": 56,
-	// 	},
-	// 	{
-	// 		"day": "WED",
-	// 		"cond": "clear skies",
-	// 		"hiTemp": 80,
-	// 		"loTemp": 61,
-	// 	},
-	// 	{
-	// 		"day": "THU",
-	// 		"cond": "clear skies",
-	// 		"hiTemp": 82,
-	// 		"loTemp": 63,
-	// 	}
-	// ]
+// 	///END RESULT EVENTUALLY...Then the
+// 	// ef = [
+// 	// 	{
+// 	// 		"day": "TUE",//Just the day of the data
+// 	// 		"cond": "clear skies", ///Takes all the conditions for a period between 9am and 5pm and finds the most common
+// 	// 		"hiTemp": 75,//// Takes all the temps for a 24 hour period and finds the highest and lowest temperature
+// 	// 		"loTemp": 56,
+// 	// 	},
+// 	// 	{
+// 	// 		"day": "WED",
+// 	// 		"cond": "clear skies",
+// 	// 		"hiTemp": 80,
+// 	// 		"loTemp": 61,
+// 	// 	},
+// 	// 	{
+// 	// 		"day": "THU",
+// 	// 		"cond": "clear skies",
+// 	// 		"hiTemp": 82,
+// 	// 		"loTemp": 63,
+// 	// 	}
+// 	// ]
 
-	ef = [
-		{
-			"day": dayofWeek(day1),
-		},
-		{
-			"day": dayofWeek(day2),
-		},
-		{
-			"day": dayofWeek(day3),
-		}
-	]
+// 	ef = [
+// 		{
+// 			"day": dayofWeek(day1),
+// 			"cond": 
+// 		},
+// 		{
+// 			"day": dayofWeek(day2),
+// 		},
+// 		{
+// 			"day": dayofWeek(day3),
+// 		}
+// 	]
 
-}
+// }
 
 //map through the array forecast and push only the vital
 

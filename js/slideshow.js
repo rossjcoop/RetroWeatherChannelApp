@@ -109,7 +109,7 @@ function main(weatherData) {
 
 			
 			let hiLo = data.list.filter(threeDay)
-			// console.log(hiLo)
+			console.log("hiLo", hiLo)
 			let dayCond = data.list.filter(dayForecast)
 			// console.log(dayCond)
 

@@ -86,10 +86,13 @@ function threeDay(item) {
 	let itemHour = new Date(item.dt * 1000).getHours()
 	let itemDay = new Date(item.dt * 1000).getDay()
 	// console.log(itemDay)
+	console.log(itemHour)
 
-	if(itemHour == 5 && itemDay !== now || itemHour == 17 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	if(itemHour == 4 && itemDay !== now || itemHour == 16 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+		console.log("true")
 		return true;
 	} else {
+		console.log("false")
 	return false;
 	}	
 }
@@ -98,12 +101,14 @@ function dayForecast(item) {
 	let now = new Date().getDay()
 	let itemHour = new Date(item.dt * 1000).getHours()
 	let itemDay = new Date(item.dt * 1000).getDay()
-	if(itemHour == 14 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+	if(itemHour == 13 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
 		return true;
 	} else {
 	return false;
 	}	
 }
+
+//Did time change affect my function's here?
 
 
 function forecast(arr) {
