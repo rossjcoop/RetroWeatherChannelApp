@@ -86,13 +86,10 @@ function threeDay(item) {
 	let itemHour = new Date(item.dt * 1000).getHours()
 	let itemDay = new Date(item.dt * 1000).getDay()
 	// console.log(itemDay)
-	console.log(itemHour)
-
+	// console.log(itemHour)
 	if(itemHour == 4 && itemDay !== now || itemHour == 16 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-		console.log("true")
 		return true;
-	} else {
-		console.log("false")
+	} else {	
 	return false;
 	}	
 }
