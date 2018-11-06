@@ -91,6 +91,7 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 							combinedData["forecastAPI"] = data[1];
 							console.log(combinedData)
 							main(combinedData) //Send it to my slideshow
+							setWeather(combinedData)
 						})
 					});
 		
@@ -146,21 +147,18 @@ function forecast(arr) {
 	let day2Arr = [];
 	let day3Arr = [];
 
+	// day1Arr.flat().filter(filterHiLo);
+	// day2Arr.forEach(filterHiLo);
+	// day3Arr.forEach(filterHiLo);
 
-	var day1HiLo = day1Arr.map(item => item.find(item.main.temp))
-	var day2HiLo;
-	var day3HiLo;
-
-	var day1Cond;
-	var day2Cond;
-	var day3Cond;
+	
 
 
 
 	let threeDayNew = arr.filter(filterer);
 	
 	console.log(day1Arr, day2Arr, day3Arr)
-	console.log(day1HiLo)
+	
 	function filterer(item) {		///First, we'll filter out data only the next three days from today			
 		let itemHour = new Date(item.dt * 1000).getHours()
 		let itemDay = new Date(item.dt * 1000).getDay()
@@ -179,13 +177,23 @@ function forecast(arr) {
 		}
 	}
 
-	
+
+
+	let day1HiLo = highLow(day1Arr.map(item => item.main.temp))
+	let day2HiLo = highLow(day2Arr.map(item => item.main.temp))
+	let day3HiLo = highLow(day3Arr.map(item => item.main.temp))
+
+	let day1Cond = day1Arr.map(item => item.weather[0].description)
+	var day2Cond = day2Arr.map(item => item.weather[0].description)
+	var day3Cond = day3Arr.map(item => item.weather[0].description)
+
+	console.log(day1HiLo, day2HiLo, day3HiLo)
 
 	///Second will be a function to figure out the highest and lowest temps of the day
 	///Will feed it an array of numbers and find the highest and lowest numbers
 	function highLow(array) {
-		let largest = Math.max.apply(Math, array);
-		let smallest = Math.min.apply(Math, array);
+		let largest = Math.round(Math.max.apply(Math, array));
+		let smallest = Math.round(Math.min.apply(Math, array));
 
 		return [largest, smallest]
 	}
