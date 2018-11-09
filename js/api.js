@@ -183,21 +183,28 @@ function forecast(arr) {
 	let day2HiLo = highLow(day2Arr.map(item => item.main.temp))
 	let day3HiLo = highLow(day3Arr.map(item => item.main.temp))
 
-	let day1Cond = day1Arr.map(item => item.weather[0].description)
-	var day2Cond = day2Arr.map(item => item.weather[0].description)
-	var day3Cond = day3Arr.map(item => item.weather[0].description)
+	let day1Cond = commonCond(day1Arr.map(item => item.weather[0].description))
+	var day2Cond = commonCond(day2Arr.map(item => item.weather[0].description))
+	var day3Cond = commonCond(day3Arr.map(item => item.weather[0].description))
 
 	console.log(day1HiLo, day2HiLo, day3HiLo)
+	console.log(day1Cond, day2Cond, day3Cond)
 
 	///Second will be a function to figure out the highest and lowest temps of the day
 	///Will feed it an array of numbers and find the highest and lowest numbers
 	function highLow(array) {
 		let largest = Math.round(Math.max.apply(Math, array));
 		let smallest = Math.round(Math.min.apply(Math, array));
-
 		return [largest, smallest]
 	}
 
+
+	function commonCond(arr) {
+		return arr.sort((a,b) =>
+		arr.filter(v => v===a).length - arr.filter(v => v===b).length
+  		).pop();
+	}
+	
 
 	
 	
