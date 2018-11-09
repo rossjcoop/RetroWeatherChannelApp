@@ -157,7 +157,7 @@ function forecast(arr) {
 
 	let threeDayNew = arr.filter(filterer);
 	
-	console.log(day1Arr, day2Arr, day3Arr)
+	// console.log(day1Arr, day2Arr, day3Arr)
 	
 	function filterer(item) {		///First, we'll filter out data only the next three days from today			
 		let itemHour = new Date(item.dt * 1000).getHours()
@@ -187,8 +187,8 @@ function forecast(arr) {
 	var day2Cond = commonCond(day2Arr.map(item => item.weather[0].description))
 	var day3Cond = commonCond(day3Arr.map(item => item.weather[0].description))
 
-	console.log(day1HiLo, day2HiLo, day3HiLo)
-	console.log(day1Cond, day2Cond, day3Cond)
+	// console.log(day1HiLo, day2HiLo, day3HiLo)
+	// console.log(day1Cond, day2Cond, day3Cond)
 
 	///Second will be a function to figure out the highest and lowest temps of the day
 	///Will feed it an array of numbers and find the highest and lowest numbers
@@ -205,7 +205,26 @@ function forecast(arr) {
   		).pop();
 	}
 	
-
+	ef = [
+		{
+			"day": dayofWeek(day1),
+			"condition": day1Cond,
+			"high": day1HiLo[0],
+			"low": day1HiLo[1],
+		},
+		{
+			"day": dayofWeek(day2),
+			"condition": day2Cond,
+			"high": day2HiLo[0],
+			"low": day2HiLo[1],
+		},
+		{
+			"day": dayofWeek(day3),
+			"condition": day3Cond,
+			"high": day3HiLo[0],
+			"low": day3HiLo[1],
+		}
+	]
 	
 	
 	
@@ -232,19 +251,12 @@ function forecast(arr) {
 	// 	}
 	// ]
 
-	ef = [
-		{
-			"day": dayofWeek(day1),
-		},
-		{
-			"day": dayofWeek(day2),
-		},
-		{
-			"day": dayofWeek(day3),
-		}
-	]
+	console.log(ef)
 
 }
+
+
+
 
 //map through the array forecast and push only the vital
 
