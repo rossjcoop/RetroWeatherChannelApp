@@ -45,20 +45,20 @@ function main(weatherData) {
 				<div class = "page1Box">
 					<div class = "mainInfo">
 						<div class = "tempBox">
-							<h1 id = "temp">${temp}</h1><h1>°</h1>
+							<h1 id = "temp">${ccTemp}</h1><h1>°</h1>
 						</div>
-						<h2 id = "cond">${cond}</h2>
-						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${icon}.gif"></div>
-						<h3 id = "wind">Wind: ${windDir} ${windSpeed}</h3>
-						<h3 id = "gust">${windGust}</h3>
+						<h2 id = "cond">${ccCond}</h2>
+						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${ccIcon}.gif"></div>
+						<h3 id = "wind">Wind: ${ccWindDir} ${ccWindSpeed}</h3>
+						<h3 id = "gust">${ccwindGust}</h3>
 					</div>
 					<div class = "subInfo">
-						<h3 id = "cityName">${curCity}</h3>
-						<h3 id = "humidity">Humidity: ${humid}%</h3>
+						<h3 id = "cityName">${city}</h3>
+						<h3 id = "humidity">Humidity: ${ccHumid}%</h3>
 						<h3>Dewpoint: No Data</h3>
 						<h3>Ceiling: No Data</h3>
-						<h3 id = "visibility">Visibility: ${visb} mi</h3>
-						<h3 id = "pressure">Pressure: ${baro}</h3>
+						<h3 id = "visibility">Visibility: ${ccVisb} mi</h3>
+						<h3 id = "pressure">Pressure: ${ccBaro}</h3>
 					</div>
 				</div>`
 		};
@@ -185,7 +185,7 @@ function main(weatherData) {
 	slideshow()
 	
 	function slideshow() {
-		let mph = returnMPH(windSpeed)
+		let mph = returnMPH(ccWindSpeed)
 		
 		order1()
 		setTimeout(order2, 4000)
@@ -201,35 +201,35 @@ function main(weatherData) {
 
 
 			function order1() {
-				bottomBar.innerHTML = `Conditions at ${curCity}`
+				bottomBar.innerHTML = `Conditions at ${city}`
 			}
 			
 		 	function order2() {
-				bottomBar.innerHTML = `${cond}`
+				bottomBar.innerHTML = `${ccCond}`
 			}
 
 			function order3() {
-				bottomBar.innerHTML = `Temp: ${temp}°F`
+				bottomBar.innerHTML = `Temp: ${ccTemp}°F`
 			}
 
 			function order4() {
-				bottomBar.innerHTML = `Humidity: ${humid}%  Dewpoint:`//here would be dewpoint if we had it :(
+				bottomBar.innerHTML = `Humidity: ${ccHumid}%  Dewpoint:`//here would be dewpoint if we had it :(
 			}
 
 			function order5() {
-				bottomBar.innerHTML = `Barometric Pressure: ${baro}`//Need a function here to see if pressure is falling, dropping, or sustaning.
+				bottomBar.innerHTML = `Barometric Pressure: ${ccBaro}`//Need a function here to see if pressure is falling, dropping, or sustaning.
 			}
 
 			function order6() {
-				bottomBar.innerHTML = `Wind: ${windDir} ${windSpeed} ${mph}`
+				bottomBar.innerHTML = `Wind: ${ccWindDir} ${ccWindSpeed} ${mph}`
 			}
 
 			function order7() {
-				bottomBar.innerHTML = `Visib: ${visb} mi.  Ceiling:`//Need a data point for ceiling, eventually.
+				bottomBar.innerHTML = `Visib: ${ccVisb} mi.  Ceiling: No Data`//Need a data point for ceiling, eventually.
 			}
 
 			function order8() {
-				bottomBar.innerHTML = `${dt.slice(3, 7)} Precipitation:` //Need a data point for precip, eventually.
+				bottomBar.innerHTML = `${ccDt.slice(3, 7)} Precipitation: No Data` //Need a data point for precip, eventually.
 			}
 	}
 

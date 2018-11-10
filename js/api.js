@@ -41,9 +41,10 @@ function getWeatherCord() { ///Pulls in data via cordinates provided by the brow
   		combinedData["localObsAPI"] = data[1];
   		combinedData["forecastAPI"] = data[2];
 
-  		console.log(combinedData)
-		  main(combinedData) //Send it to my slideshow
+		  console.log(combinedData)
 		  setWeather(combinedData)
+		  main(combinedData) //Send it to my slideshow
+		  
   	})
 };
 
@@ -90,8 +91,9 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 							combinedData["localObsAPI"] = data[0];
 							combinedData["forecastAPI"] = data[1];
 							console.log(combinedData)
-							main(combinedData) //Send it to my slideshow
 							setWeather(combinedData)
+							main(combinedData) //Send it to my slideshow
+							
 						})
 					});
 		
@@ -106,7 +108,7 @@ function setWeather(d) {
 	let curCon = d.currentCondAPI // Current Conditions API
 	let loObs = d.localObsAPI.list // Local Observations API
 	let extFc = d.forecastAPI.list // Extended Forecast API
-
+	city = curCon.name
 	ccTemp = Math.round(curCon.main.temp)
 	ccCond = curCon.weather[0].description 
 	ccIcon = curCon.weather[0].icon
@@ -184,8 +186,8 @@ function forecast(arr) {
 	let day3HiLo = highLow(day3Arr.map(item => item.main.temp))
 
 	let day1Cond = commonCond(day1Arr.map(item => item.weather[0].description))
-	var day2Cond = commonCond(day2Arr.map(item => item.weather[0].description))
-	var day3Cond = commonCond(day3Arr.map(item => item.weather[0].description))
+	let day2Cond = commonCond(day2Arr.map(item => item.weather[0].description))
+	let day3Cond = commonCond(day3Arr.map(item => item.weather[0].description))
 
 	// console.log(day1HiLo, day2HiLo, day3HiLo)
 	// console.log(day1Cond, day2Cond, day3Cond)
@@ -207,19 +209,19 @@ function forecast(arr) {
 	
 	ef = [
 		{
-			"day": dayofWeek(day1),
+			"day": dayofWeek(day1).substr(0, 3).toUpperCase(),
 			"condition": day1Cond,
 			"high": day1HiLo[0],
 			"low": day1HiLo[1],
 		},
 		{
-			"day": dayofWeek(day2),
+			"day": dayofWeek(day2).substr(0, 3).toUpperCase(),
 			"condition": day2Cond,
 			"high": day2HiLo[0],
 			"low": day2HiLo[1],
 		},
 		{
-			"day": dayofWeek(day3),
+			"day": dayofWeek(day3).substr(0, 3).toUpperCase(),
 			"condition": day3Cond,
 			"high": day3HiLo[0],
 			"low": day3HiLo[1],
