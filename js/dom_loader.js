@@ -251,5 +251,30 @@ function getTime() {  //Timestamp clock function as the top
 
 
 
+function page1Styles() {
+
+}
+
+
+function page2Styles() {
+
+}
+
+
+function page3Styles() {
+	desktop.style.backgroundColor = "transparent";
+	desktop.style.boxShadow = "none"
+	containerClmns.style.display ="none";
+	container.style.width = "940px";
+	container.style.height = "578px";
+	container.style.display = "flex";
+	container.style.justifyContent = "space-between";
+	container.style.fontSize = "50px";
+	container.style.paddingTop = "18px";
+	container.style.margin = "0 auto";
+}
+
+
+
 
 

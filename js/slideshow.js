@@ -116,8 +116,28 @@ function main(weatherData) {
 			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
 			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
 			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
+			container.innerHTML = `
+				<div class = "forecast">`
+			ef.forEach(function(item) {
+				let resultBlock = ''
 
-
+				resultBlock = `
+					<div class = "days">
+						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
+						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
+						<div class = "tempsBox">
+							<div class = "temps">
+								<div class = "tempLo">Lo</div>
+								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+							</div>
+							<div class = "temps">
+								<div class = "tempHi">Hi</div>
+								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+							</div>
+						</div>
+					</div>`
+			}
 
 		
 			container.innerHTML = `
