@@ -216,18 +216,21 @@ function forecast(arr) {
 		{
 			"day": dayofWeek(day1).substr(0, 3).toUpperCase(),
 			"condition": day1Cond,
+			"icon": day1Icon,
 			"high": day1HiLo[0],
 			"low": day1HiLo[1],
 		},
 		{
 			"day": dayofWeek(day2).substr(0, 3).toUpperCase(),
 			"condition": day2Cond,
+			"icon": day2Icon,
 			"high": day2HiLo[0],
 			"low": day2HiLo[1],
 		},
 		{
 			"day": dayofWeek(day3).substr(0, 3).toUpperCase(),
 			"condition": day3Cond,
+			"icon": day3Icon,
 			"high": day3HiLo[0],
 			"low": day3HiLo[1],
 		}

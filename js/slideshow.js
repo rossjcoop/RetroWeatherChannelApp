@@ -31,10 +31,11 @@ function main(weatherData) {
 
 		page1()
 		setTimeout(page2, 20000)
-		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
+		setTimeout(page3, 40000)
 
 
-		function page1() { 			
+		function page1() { 
+			container.classList.remove("forecast")			
 			desktop.style.backgroundColor = "rgb(36, 43, 90)";
 			desktop.style.boxShadow = "inset 0 0 75px rgb(83, 90, 125)";
 			containerClmns.style.display = "none";
@@ -97,8 +98,8 @@ function main(weatherData) {
 		};
 
 
-		function page3(data){
-			containerClmns.innerHTML = ``
+		function page3(){
+			container.innerHTML = ``
 			container.classList.add("forecast")
 			desktop.style.backgroundColor = "transparent";
 			desktop.style.boxShadow = "none"
@@ -107,7 +108,7 @@ function main(weatherData) {
 				<div class="headlineTop" style="color: white;">${city}</div>
 				<div class="headlineBottom">Extended Forecast</div>
 				`		
-		
+			containerClmns.innerHTML = ``
 			// let hiLo = data.list.filter(threeDay)
 			// // console.log("hiLo", hiLo)
 			// let dayCond = data.list.filter(dayForecast)
@@ -122,72 +123,74 @@ function main(weatherData) {
 
 				resultBlock = `
 					<div class = "days">
-						<div class = "day">${item.}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
+						<div class = "day">${item.day}</div>
+						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${item.icon}.gif"></div>
+						<div class = "dayCond">${item.condition}</div>
 						<div class = "tempsBox">
 							<div class = "temps">
 								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+								<div class = "dayTemp">${item.low}</div>
 							</div>
 							<div class = "temps">
 								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+								<div class = "dayTemp">${item.high}</div>
 							</div>
 						</div>
 					</div>`
+
+				container.innerHTML += resultBlock
 			})
 
 		
-			container.innerHTML = `
-				<div class = "forecast">
-					<div class = "days">
-						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-					<div class = "days">
-						<div class = "day">${day2.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[1].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-					<div class = "days">
-						<div class = "day">${day3.substr(0, 3).toUpperCase()}</div>
-						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
-						<div class = "dayCond">${dayCond[2].weather[0].description}</div>
-						<div class = "tempsBox">
-							<div class = "temps">
-								<div class = "tempLo">Lo</div>
-								<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
-							</div>
-							<div class = "temps">
-								<div class = "tempHi">Hi</div>
-								<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				`
+			// container.innerHTML = `
+			// 	<div class = "forecast">
+			// 		<div class = "days">
+			// 			<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
+			// 			<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
+			// 			<div class = "dayCond">${dayCond[0].weather[0].description}</div>
+			// 			<div class = "tempsBox">
+			// 				<div class = "temps">
+			// 					<div class = "tempLo">Lo</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[0].main.temp)}</div>
+			// 				</div>
+			// 				<div class = "temps">
+			// 					<div class = "tempHi">Hi</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[1].main.temp)}</div>
+			// 				</div>
+			// 			</div>
+			// 		</div>
+			// 		<div class = "days">
+			// 			<div class = "day">${day2.substr(0, 3).toUpperCase()}</div>
+			// 			<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[1].weather[0].icon}.gif"></div>
+			// 			<div class = "dayCond">${dayCond[1].weather[0].description}</div>
+			// 			<div class = "tempsBox">
+			// 				<div class = "temps">
+			// 					<div class = "tempLo">Lo</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[2].main.temp)}</div>
+			// 				</div>
+			// 				<div class = "temps">
+			// 					<div class = "tempHi">Hi</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[3].main.temp)}</div>
+			// 				</div>
+			// 			</div>
+			// 		</div>
+			// 		<div class = "days">
+			// 			<div class = "day">${day3.substr(0, 3).toUpperCase()}</div>
+			// 			<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[2].weather[0].icon}.gif"></div>
+			// 			<div class = "dayCond">${dayCond[2].weather[0].description}</div>
+			// 			<div class = "tempsBox">
+			// 				<div class = "temps">
+			// 					<div class = "tempLo">Lo</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[4].main.temp)}</div>
+			// 				</div>
+			// 				<div class = "temps">
+			// 					<div class = "tempHi">Hi</div>
+			// 					<div class = "dayTemp">${Math.round(hiLo[5].main.temp)}</div>
+			// 				</div>
+			// 			</div>
+			// 		</div>
+			// 	</div>
+			// 	`
 		};
 	};
 
