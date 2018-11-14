@@ -189,8 +189,13 @@ function forecast(arr) {
 	let day2Cond = commonCond(day2Arr.map(item => item.weather[0].description))
 	let day3Cond = commonCond(day3Arr.map(item => item.weather[0].description))
 
+	let day1Icon = commonCond(day1Arr.map(item => item.weather[0].icon).filter(item => item.endsWith('d')))
+	let day2Icon = commonCond(day2Arr.map(item => item.weather[0].icon).filter(item => item.endsWith('d')))
+	let day3Icon = commonCond(day3Arr.map(item => item.weather[0].icon).filter(item => item.endsWith('d')))
+
 	// console.log(day1HiLo, day2HiLo, day3HiLo)
 	// console.log(day1Cond, day2Cond, day3Cond)
+	console.log(day1Icon, day2Icon, day3Icon)
 
 	///Second will be a function to figure out the highest and lowest temps of the day
 	///Will feed it an array of numbers and find the highest and lowest numbers

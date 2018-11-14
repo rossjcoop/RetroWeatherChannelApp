@@ -98,32 +98,31 @@ function main(weatherData) {
 
 
 		function page3(data){
+			containerClmns.innerHTML = ``
+			container.classList.add("forecast")
 			desktop.style.backgroundColor = "transparent";
 			desktop.style.boxShadow = "none"
 			containerClmns.style.display ="none";
 			headline.innerHTML = `
 				<div class="headlineTop" style="color: white;">${city}</div>
 				<div class="headlineBottom">Extended Forecast</div>
-				`
-			containerClmns.innerHTML = ``
+				`		
+		
+			// let hiLo = data.list.filter(threeDay)
+			// // console.log("hiLo", hiLo)
+			// let dayCond = data.list.filter(dayForecast)
+			// // console.log(dayCond)
 
-			
-			let hiLo = data.list.filter(threeDay)
-			// console.log("hiLo", hiLo)
-			let dayCond = data.list.filter(dayForecast)
-			// console.log(dayCond)
+			// let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
+			// let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
+			// let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
 
-			let day1 = dayofWeek(new Date(hiLo[0].dt * 1000).getDay())
-			let day2 = dayofWeek(new Date(hiLo[2].dt * 1000).getDay())
-			let day3 = dayofWeek(new Date(hiLo[4].dt * 1000).getDay())
-			container.innerHTML = `
-				<div class = "forecast">`
 			ef.forEach(function(item) {
 				let resultBlock = ''
 
 				resultBlock = `
 					<div class = "days">
-						<div class = "day">${day1.substr(0, 3).toUpperCase()}</div>
+						<div class = "day">${item.}</div>
 						<div class = "dayGif"><img class="gifSmall" src="./Images/CurrentConditions/${dayCond[0].weather[0].icon}.gif"></div>
 						<div class = "dayCond">${dayCond[0].weather[0].description}</div>
 						<div class = "tempsBox">
@@ -137,7 +136,7 @@ function main(weatherData) {
 							</div>
 						</div>
 					</div>`
-			}
+			})
 
 		
 			container.innerHTML = `
