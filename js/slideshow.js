@@ -8,17 +8,17 @@ function main(weatherData) {
 	}
 	
 	//Current conditions weather data////////////////////////////////////////////////////
-	let temp = Math.round(weatherData.currentCondAPI.main.temp)
-	let cond = weatherData.currentCondAPI.weather[0].description 
-	let icon = weatherData.currentCondAPI.weather[0].icon
-	let windDir = getWindDirection(weatherData.currentCondAPI.wind.deg)
-	let windSpeed = returnCalm(Math.round(weatherData.currentCondAPI.wind.speed), windDir)
-	let windGust = returnGust(weatherData.currentCondAPI.wind.gust)
-	let curCity = weatherData.currentCondAPI.name
-	let humid = weatherData.currentCondAPI.main.humidity
-	let baro = convertInHg(weatherData.currentCondAPI.main.pressure)
-	let visb = convertMeters(weatherData.currentCondAPI.visibility)
-	let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
+	// let temp = Math.round(weatherData.currentCondAPI.main.temp)
+	// let cond = weatherData.currentCondAPI.weather[0].description 
+	// let icon = weatherData.currentCondAPI.weather[0].icon
+	// let windDir = getWindDirection(weatherData.currentCondAPI.wind.deg)
+	// let windSpeed = returnCalm(Math.round(weatherData.currentCondAPI.wind.speed), windDir)
+	// let windGust = returnGust(weatherData.currentCondAPI.wind.gust)
+	// let curCity = weatherData.currentCondAPI.name
+	// let humid = weatherData.currentCondAPI.main.humidity
+	// let baro = convertInHg(weatherData.currentCondAPI.main.pressure)
+	// let visb = convertMeters(weatherData.currentCondAPI.visibility)
+	// let dt = new Date(weatherData.currentCondAPI.dt * 1000).toDateString()
 	////////////////////////////////////////////////////////////////////////////////////
 	
 
@@ -30,7 +30,7 @@ function main(weatherData) {
 	function slideshow2() {
 
 		page1()
-		setTimeout(function() {page2(weatherData.localObsAPI); }, 20000)
+		setTimeout(page2, 20000)
 		setTimeout(function() {page3(weatherData.forecastAPI); }, 40000)
 
 
@@ -64,7 +64,7 @@ function main(weatherData) {
 		};
 
 
-		function page2(data){
+		function page2(){
 			containerClmns.style.display ="inline";
 			headline.innerHTML = `<div class="headlineTop">Latest Observations</div`
 			container.innerHTML = ''
@@ -76,17 +76,17 @@ function main(weatherData) {
 					<div class = "cityWindClmn">WIND</div>
 				</div>
 			`	
-			data.list.forEach(function(item) { 		
+			lo.forEach(function(item) { 		
 				let resultBlock = ''
-				let wd = getWindDirection(item.wind.deg)
-				let ws = returnCalm(Math.round(item.wind.speed), wd)
+				// let wd = getWindDirection(item.wind.deg)
+				// let ws = returnCalm(Math.round(item.wind.speed), wd)
 				
 				resultBlock = `		
 				<div class = "cityRow">
-					<div class = "city">${abbreviator(item.name)}</div>
-					<div class = "cityTemp">${Math.round(item.main.temp)}</div>
-					<div class = "cityWeather">${abbreviator(item.weather[0].description)}</div>
-					<div class = "cityWind">${wd}${ws}</div>
+					<div class = "city">${item.name}</div>
+					<div class = "cityTemp">${item.temp}</div>
+					<div class = "cityWeather">${item.weather}</div>
+					<div class = "cityWind">${item.wind}</div>
 				</div>
 				
 				`
@@ -102,7 +102,7 @@ function main(weatherData) {
 			desktop.style.boxShadow = "none"
 			containerClmns.style.display ="none";
 			headline.innerHTML = `
-				<div class="headlineTop" style="color: white;">${curCity}</div>
+				<div class="headlineTop" style="color: white;">${city}</div>
 				<div class="headlineBottom">Extended Forecast</div>
 				`
 			containerClmns.innerHTML = ``

@@ -123,7 +123,7 @@ function setWeather(d) {
 
 	loObs.forEach(item => {
 		lo.push({
-			"name": item.name,
+			"name": abbreviator(item.name),
 			"temp": Math.round(item.main.temp),
 			"weather": abbreviator(item.weather[0].description),
 			"wind": formatWind(item.wind.speed, item.wind.deg)
