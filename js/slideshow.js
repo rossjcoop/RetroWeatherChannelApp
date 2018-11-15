@@ -42,6 +42,8 @@ function main(weatherData) {
 			headline.innerHTML = `
 				<div class="headlineTop">Current</div>
 				<div class="headlineBottom">Conditions</div>`
+			
+			
 			container.innerHTML = `
 				<div class = "page1Box">
 					<div class = "mainInfo">

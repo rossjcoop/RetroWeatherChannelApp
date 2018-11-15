@@ -38,11 +38,10 @@ var lo = [];//Local observations for 7 areas
 
 var ef = [];//3 day forecast
 
-function noData() { ///Will display if no data reports, or if error.
-	container.innerHTML = `
-			<div class = "noData">
-				<h1>No Report Availiable</h1>
-			</div>`
+function noData(data) { ///Will display if no data reports, or if error.
+	if(data == undefined) {
+		return "No Data"
+	}
 }
 
 
@@ -80,39 +79,34 @@ function abbreviator(word) {
 }
 
 
-function threeDay(item) {
-	let now = new Date().getDay()
-	// console.log(now)
-	let itemHour = new Date(item.dt * 1000).getHours()
-	let itemDay = new Date(item.dt * 1000).getDay()
-	// console.log(itemDay)
-	// console.log(itemHour)
-	if(itemHour == 4 && itemDay !== now || itemHour == 16 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-		return true;
-	} else {	
-	return false;
-	}	
-}
+// function threeDay(item) {
+// 	let now = new Date().getDay()
+// 	// console.log(now)
+// 	let itemHour = new Date(item.dt * 1000).getHours()
+// 	let itemDay = new Date(item.dt * 1000).getDay()
+// 	// console.log(itemDay)
+// 	// console.log(itemHour)
+// 	if(itemHour == 4 && itemDay !== now || itemHour == 16 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+// 		return true;
+// 	} else {	
+// 	return false;
+// 	}	
+// }
 
-function dayForecast(item) {
-	let now = new Date().getDay()
-	let itemHour = new Date(item.dt * 1000).getHours()
-	let itemDay = new Date(item.dt * 1000).getDay()
-	if(itemHour == 13 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-		return true;
-	} else {
-	return false;
-	}	
-}
+// function dayForecast(item) {
+// 	let now = new Date().getDay()
+// 	let itemHour = new Date(item.dt * 1000).getHours()
+// 	let itemDay = new Date(item.dt * 1000).getDay()
+// 	if(itemHour == 13 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
+// 		return true;
+// 	} else {
+// 	return false;
+// 	}	
+// }
 
 //Did time change affect my function's here?
 
 
-function forecast(arr) {
-	let now = new Date().getDay()
-	let itemHour = new Date(item.dt * 1000).getHours()
-	let itemDay = new Date(item.dt * 1000).getDay()
-}
 
 function dayofWeek(d) {
 	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -120,8 +114,7 @@ function dayofWeek(d) {
 }
 
 
-
-	const conditionCodes = [
+const conditionCodes = [
 	{
 		id: 200,
 		condition: "Thunderstorm",
@@ -146,11 +139,9 @@ function dayofWeek(d) {
 		condition: "Thunderstorm",
 		shortCond: "T-Storm",
 	}
-	]
+]
 
-	function idTrans(id) {
 
-	}
 
 
 
