@@ -1,7 +1,8 @@
 function main(weatherData) {
 
 
-	if(music == "on") {
+	if(music = true) {
+		musicPlayer.src = track
 		musicPlayer.autoplay = "true"
 		musicPlayer.loop = "true"
 		musicPlayer.load()
@@ -42,8 +43,6 @@ function main(weatherData) {
 			headline.innerHTML = `
 				<div class="headlineTop">Current</div>
 				<div class="headlineBottom">Conditions</div>`
-			
-			
 			container.innerHTML = `
 				<div class = "page1Box">
 					<div class = "mainInfo">

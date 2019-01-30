@@ -12,13 +12,20 @@ const headlineBottom = document.getElementById("headlineBottom");
 const musicPlayer = document.querySelector(".musicPlayer");
 
 
+
+///Music variables
+var music = false //default music is off
+var track = "Files/Music/Overcast.mp3" //default music track
+
+
+
 ///Location variables
 var lat;
 var lon;
 var city;
 var zip;
 var ctry;
-var music;
+
 
 
 ////Current Weather variables

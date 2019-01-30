@@ -117,8 +117,8 @@ function startPage() {
                         <input type="checkbox" rel="musicOn">Music?
                         <label>Select Track</label>
                             <select rel="cdPlayer">
-                                <option value="Overcast.mp3">Overcast</option>
-                                <option value="Casio Blues.mp3">Casio Blues</option>
+                                <option value="Files/Music/Overcast.mp3">Overcast</option>
+                                <option value="Files/Music/Casio_Blues.mp3">Casio Blues</option>
                                 <option value="Green Tea.mp3">Green Tea</option>
                             </select>
                     </div>
@@ -152,6 +152,7 @@ function startPage() {
     // let cordSubmit = document.querySelector('[rel="locationSubmit"]') 
     let submit = document.querySelector('[rel="start"]')
     let musicOn = document.querySelector('[rel="musicOn"]')
+    let musicTrack = document.querySelector('[rel="cdPlayer"]')
 
     submit.addEventListener('click', function(event) {
         if(zipSelect.checked == true) {
@@ -209,11 +210,15 @@ function startPage() {
 	// 	navigator.geolocation.getCurrentPosition(geoSuccess)
     // });
 
-    musicOn.addEventListener('click', function(event) {
+    musicOn.addEventListener('change', function(event) {
         event.preventDefault
-        music = musicOn.value
-        console.log('yes!')
+        music = musicOn.checked
         console.log(music)
+    })
+
+    musicTrack.addEventListener('change', function(event) {
+        event.preventDefault
+        track = musicTrack.value
     })
 };
 
