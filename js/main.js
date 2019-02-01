@@ -120,7 +120,10 @@ function startPage() {
                                 <option value="Files/Music/Overcast.mp3">Overcast</option>
                                 <option value="Files/Music/Casio_Blues.mp3">Casio Blues</option>
                                 <option value="Green Tea.mp3">Green Tea</option>
+                                <option value="">Custom Link</option>
                             </select>
+                        <label>URL for MP3</label>
+                            <input type="text" placeholder="Enter URL" rel="mp3URL" disabled>
                     </div>
                     <div>
                         <label>Slide Speed</label>
