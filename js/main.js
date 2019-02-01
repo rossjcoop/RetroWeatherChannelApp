@@ -120,7 +120,7 @@ function startPage() {
                                 <option value="Files/Music/Overcast.mp3">Overcast</option>
                                 <option value="Files/Music/Casio_Blues.mp3">Casio Blues</option>
                                 <option value="Green Tea.mp3">Green Tea</option>
-                                <option value="">Custom Link</option>
+                                <option value="Custom Link">Custom Link</option>
                             </select>
                         <label>URL for MP3</label>
                             <input type="text" placeholder="Enter URL" rel="mp3URL" disabled>
@@ -156,6 +156,7 @@ function startPage() {
     let submit = document.querySelector('[rel="start"]')
     let musicOn = document.querySelector('[rel="musicOn"]')
     let musicTrack = document.querySelector('[rel="cdPlayer"]')
+    let musicURL = document.querySelector('[rel="mp3URL')
 
     submit.addEventListener('click', function(event) {
         if(zipSelect.checked == true) {
@@ -220,8 +221,13 @@ function startPage() {
     })
 
     musicTrack.addEventListener('change', function(event) {
-        event.preventDefault
-        track = musicTrack.value
+        event.preventDefault     
+        if(musicTrack.value === "Custom Link") {
+            musicURL.disabled = false////need to change the property of the url input tag to enabled when it is selected in the dropdown...
+        } else {
+            musicURL.disabled = true
+            track = musicTrack.value
+        }
     })
 };
 

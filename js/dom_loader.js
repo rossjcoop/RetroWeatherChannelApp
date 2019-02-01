@@ -10,6 +10,7 @@ const desktop = document.getElementById("container");
 const headlineTop = document.getElementById("headlineTop");
 const headlineBottom = document.getElementById("headlineBottom");
 const musicPlayer = document.querySelector(".musicPlayer");
+const musicURL = document.querySelector(".musicURL");
 
 
 
