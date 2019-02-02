@@ -159,6 +159,7 @@ function startPage() {
     let musicURL = document.querySelector('[rel="mp3URL')
 
     submit.addEventListener('click', function(event) {
+        setMusicVariables();
         if(zipSelect.checked == true) {
             console.log("hit zip")
             zip = zipInput.value
@@ -189,13 +190,13 @@ function startPage() {
         }        
     })
 
-    zipSelect.addEventListener('click', function(event) {
-        console.log(zipSelect.checked)
-    })
+    // zipSelect.addEventListener('click', function(event) {
+    //     console.log(zipSelect.checked)
+    // })
 
-    cordSelect.addEventListener('click', function(event) {
-        console.log(cordSelect.checked)
-    })
+    // cordSelect.addEventListener('click', function(event) {
+    //     console.log(cordSelect.checked)
+    // })
 
     // cordSubmit.addEventListener('click', function(event) {
     //     event.preventDefault
@@ -214,11 +215,11 @@ function startPage() {
 	// 	navigator.geolocation.getCurrentPosition(geoSuccess)
     // });
 
-    musicOn.addEventListener('change', function(event) {
-        event.preventDefault
-        music = musicOn.checked
-        console.log(music)
-    })
+    // musicOn.addEventListener('change', function(event) {
+    //     event.preventDefault
+    //     music = musicOn.checked
+    //     console.log(music)
+    // })
 
     musicTrack.addEventListener('change', function(event) {
         event.preventDefault     
@@ -226,10 +227,22 @@ function startPage() {
             musicURL.disabled = false////need to change the property of the url input tag to enabled when it is selected in the dropdown...
         } else {
             musicURL.disabled = true
-            track = musicTrack.value
         }
     })
+
+
+    function setMusicVariables() {
+    music = musicOn.checked
+    if(musicTrack.value === "Custom Link") {
+        track = musicURL.value
+    } else {
+        track = musicTrack.value
+    }
+
+    }
 };
+
+
 
 
 // function main() {
