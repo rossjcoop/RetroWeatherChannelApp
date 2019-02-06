@@ -26,6 +26,8 @@ var lon;
 var city;
 var zip;
 var ctry;
+var units = "imperial"; //make units imperial by default
+var unitDisplay = "°F"
 
 
 
@@ -150,7 +152,13 @@ const conditionCodes = [
 ]
 
 
-
+function fC(){
+	if(units === "imperial") {
+		return "°F"
+	} else {
+		return "°C"
+	} 
+}
 
 
 function formatWind(speed, dir) {

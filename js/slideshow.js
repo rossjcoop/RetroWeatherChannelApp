@@ -1,7 +1,7 @@
 function main(weatherData) {
+	
 
-
-	if(music = true) {
+	if(music == true) {
 		musicPlayer.src = track
 		musicPlayer.autoplay = "true"
 		musicPlayer.loop = "true"
@@ -73,7 +73,7 @@ function main(weatherData) {
 			containerClmns.innerHTML = `
 				<div class = "columnRow">
 					<div class = "cityClmn"></div>
-					<div class = "cityTempClmn">°F</div>
+					<div class = "cityTempClmn">${unitDisplay}</div>
 					<div class = "cityWeatherClmn">WEATHER</div>
 					<div class = "cityWindClmn">WIND</div>
 				</div>
@@ -232,7 +232,7 @@ function main(weatherData) {
 			}
 
 			function order3() {
-				bottomBar.innerHTML = `Temp: ${ccTemp}°F`
+				bottomBar.innerHTML = `Temp: ${ccTemp}${unitDisplay}`
 			}
 
 			function order4() {

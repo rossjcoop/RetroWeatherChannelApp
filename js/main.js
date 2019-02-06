@@ -135,10 +135,10 @@ function startPage() {
                             </select>
                     </div>
                     <div>
-                        <label>°F/°C</label>
-                            <select>
-                                <option value="F">°F</option>
-                                <option value="C">°C</option>
+                        <label>Units</label>
+                            <select rel="unitSelector">
+                                <option value="imperial">Fahrenheit</option>
+                                <option value="metric">Celsius</option>
                             </select>
                     </div>
             </div>
@@ -157,6 +157,7 @@ function startPage() {
     let musicOn = document.querySelector('[rel="musicOn"]')
     let musicTrack = document.querySelector('[rel="cdPlayer"]')
     let musicURL = document.querySelector('[rel="mp3URL')
+    let unitSelector = document.querySelector('[rel="unitSelector')
 
     submit.addEventListener('click', function(event) {
         setMusicVariables();
@@ -215,11 +216,11 @@ function startPage() {
 	// 	navigator.geolocation.getCurrentPosition(geoSuccess)
     // });
 
-    // musicOn.addEventListener('change', function(event) {
-    //     event.preventDefault
-    //     music = musicOn.checked
-    //     console.log(music)
-    // })
+    musicOn.addEventListener('change', function(event) {
+        event.preventDefault
+        music = musicOn.checked
+        console.log(music)
+    })
 
     musicTrack.addEventListener('change', function(event) {
         event.preventDefault     
@@ -240,6 +241,12 @@ function startPage() {
     }
 
     }
+
+    unitSelector.addEventListener('change', function(event) {
+        event.preventDefault
+        units = unitSelector.value
+        unitDisplay = fC()
+    })
 };
 
 
