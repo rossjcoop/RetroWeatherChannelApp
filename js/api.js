@@ -1,3 +1,7 @@
+
+///openweathermap api
+
+
 function getWeatherCord() { ///Pulls in data via cordinates provided by the browser
 	
 	let currentCondAPI = ////Gets current conditions 
@@ -103,12 +107,16 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 
 
 function setWeather(d) {
-	lo = []
+	
+  lo = []///Let's clear out the arrays when new data arrives
 	ef = []
-	let curCon = d.currentCondAPI // Current Conditions API
+	
+  let curCon = d.currentCondAPI // Current Conditions API
 	let loObs = d.localObsAPI.list // Local Observations API
 	let extFc = d.forecastAPI.list // Extended Forecast API
-	city = curCon.name
+	
+  ///Setting Global Variables
+  city = curCon.name
 	ccTemp = Math.round(curCon.main.temp)
 	ccCond = curCon.weather[0].description 
 	ccIcon = curCon.weather[0].icon
@@ -125,7 +133,7 @@ function setWeather(d) {
 		lo.push({
 			"name": abbreviator(item.name),
 			"temp": Math.round(item.main.temp),
-			"weather": abbreviator(item.weather[0].description),
+			"weather": loAbbreviator(item.weather[0].description, item.weather[0].icon),
 			"wind": formatWind(item.wind.speed, item.wind.deg)
 		})
 	})
@@ -235,35 +243,35 @@ function forecast(arr) {
 			"low": day3HiLo[1],
 		}
 	]
-	
-	
-	
-
-	///END RESULT EVENTUALLY...Then the
-	// ef = [
-	// 	{
-	// 		"day": "TUE",//Just the day of the data
-	// 		"cond": "clear skies", ///Takes all the conditions for a period between 9am and 5pm and finds the most common
-	// 		"hiTemp": 75,//// Takes all the temps for a 24 hour period and finds the highest and lowest temperature
-	// 		"loTemp": 56,
-	// 	},
-	// 	{
-	// 		"day": "WED",
-	// 		"cond": "clear skies",
-	// 		"hiTemp": 80,
-	// 		"loTemp": 61,
-	// 	},
-	// 	{
-	// 		"day": "THU",
-	// 		"cond": "clear skies",
-	// 		"hiTemp": 82,
-	// 		"loTemp": 63,
-	// 	}
-	// ]
 
 }
 
-//map through the array forecast and push only the vital
+const conditionCodes = [
+  {
+    id: 200,
+    condition: "Thunderstorm",
+    shortCond: "T-Storm",
+  },
+  { id: 201,
+    condition: "Thunderstorm",
+    shortCond: "T-Storm",
+  },
+  {
+    id: 202,
+    condition: "Thunderstorm",
+    shortCond: "T-Storm",
+  },
+  {
+    id: 210,
+    condition: "Thunderstorm",
+    shortCond: "T-Storm",
+  },
+  {
+    id: 211,
+    condition: "Thunderstorm",
+    shortCond: "T-Storm",
+  }
+]
 
 
 

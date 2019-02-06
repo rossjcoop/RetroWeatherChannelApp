@@ -47,7 +47,7 @@ function main(weatherData) {
 				<div class = "page1Box">
 					<div class = "mainInfo">
 						<div class = "tempBox">
-							<h1 id = "temp">${ccTemp}</h1><h1>°</h1>
+							<div id = "temp">${ccTemp}°</div><div></div>
 						</div>
 						<h2 id = "cond">${ccCond}</h2>
 						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${ccIcon}.gif"></div>
@@ -68,7 +68,7 @@ function main(weatherData) {
 
 		function page2(){
 			containerClmns.style.display ="inline";
-			headline.innerHTML = `<div class="headlineTop">Latest Observations</div`
+			headline.innerHTML = `<div class="headlineTop">Latest Observations</div>`
 			container.innerHTML = ''
 			containerClmns.innerHTML = `
 				<div class = "columnRow">

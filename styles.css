@@ -156,7 +156,7 @@ main {
 }
 
 #containerClmns {
-	width: 980px;
+	width: 940px;
 	height: 40px;
 /*	margin-top: -30px;*/
 	font-family: 'weatherStarSmall', monospace;
@@ -171,21 +171,19 @@ main {
 }
 
 .cityClmn {
-	width: 400px;
+	width: 420px;
 }
 
 .cityTempClmn {
-	width: 90px;
-	text-align: center;
-
+	width: 80px;
 }
 
 .cityWeatherClmn {
-	width: 380px;
+	width: 360px;
 }
 
 .cityWindClmn {
-	width: 110px;
+	width: 100px;
 }
 
 #screen {
@@ -269,15 +267,15 @@ footer {
 }
 
 .cityTemp {
-	width: 90px;
+	width: 80px;
 }
 
 .cityWeather {
-	width: 380px;
+	width: 360px;
 }
 
 .cityWind {
-	width: 110px;
+	width: 100px;
 }
 
 

@@ -10,7 +10,6 @@ const desktop = document.getElementById("container");
 const headlineTop = document.getElementById("headlineTop");
 const headlineBottom = document.getElementById("headlineBottom");
 const musicPlayer = document.querySelector(".musicPlayer");
-const musicURL = document.querySelector(".musicURL");
 
 
 
@@ -48,6 +47,7 @@ var lo = [];//Local observations for 7 areas
 
 var ef = [];//3 day forecast
 
+
 function noData(data) { ///Will display if no data reports, or if error.
 	if(data == undefined) {
 		return "No Data"
@@ -77,44 +77,39 @@ function dp(T, RH) {
 
 
 function abbreviator(word) {
-	let wordLength = word.length
+	let wL = word.length
 	if(word.endsWith("Air Force Base")) {
-		return word.substr(0, (wordLength - 14)) + " " + "AFB"
+		return word.substr(0, (wL - 14)) + " " + "AFB"
 	} else if(word.startsWith("scattered")) {
-		return "Sct'd" + "" + word.substr(9, wordLength)
+		return "Sct'd" + "" + word.substr(9, wL)
 	} else {
 		return word
 	}
 
 }
 
-
-// function threeDay(item) {
-// 	let now = new Date().getDay()
-// 	// console.log(now)
-// 	let itemHour = new Date(item.dt * 1000).getHours()
-// 	let itemDay = new Date(item.dt * 1000).getDay()
-// 	// console.log(itemDay)
-// 	// console.log(itemHour)
-// 	if(itemHour == 4 && itemDay !== now || itemHour == 16 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-// 		return true;
-// 	} else {	
-// 	return false;
-// 	}	
-// }
-
-// function dayForecast(item) {
-// 	let now = new Date().getDay()
-// 	let itemHour = new Date(item.dt * 1000).getHours()
-// 	let itemDay = new Date(item.dt * 1000).getDay()
-// 	if(itemHour == 13 && itemDay !== now) { ///Keep in mind, dt in the data is based on GMT +7 hours
-// 		return true;
-// 	} else {
-// 	return false;
-// 	}	
-// }
-
-//Did time change affect my function's here?
+function loAbbreviator(word, code) {
+	switch(word){
+		case "scattered clouds" || "few clouds":
+			return "Partly Cloudy"
+		break;
+		case "clear sky":
+			if(code === "01d"){
+				return "Sunny"
+			} else {
+				return "Fair"
+			}
+		break;
+		case "broken clouds":
+			return "Mostly Cloudy"
+		break;
+		case "overcast clouds":
+			return "Cloudy"
+		default:
+			return word
+		break;
+	}
+}
 
 
 
@@ -122,34 +117,6 @@ function dayofWeek(d) {
 	let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 	return days[d]
 }
-
-
-const conditionCodes = [
-	{
-		id: 200,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{	id: 201,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 202,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 210,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	},
-	{
-		id: 211,
-		condition: "Thunderstorm",
-		shortCond: "T-Storm",
-	}
-]
 
 
 function fC(){
