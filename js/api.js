@@ -5,7 +5,7 @@
 function getWeatherCord() { ///Pulls in data via cordinates provided by the browser
 	
 	let currentCondAPI = ////Gets current conditions 
-		fetch("http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
+		fetch("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
   			.then(response => {
 	  			if(response.status !== 200) {
 	        		console.log("Current condition API: ", response.status)
@@ -17,7 +17,7 @@ function getWeatherCord() { ///Pulls in data via cordinates provided by the brow
   		
 
   	let localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
-  		fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units="+units+"&APPID="+apiId)
+  		fetch("https://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units="+units+"&APPID="+apiId)
 			.then(response => {
   				if(response.status !== 200) {
         			console.log("Local weather stations API: ", response.status)
@@ -28,7 +28,7 @@ function getWeatherCord() { ///Pulls in data via cordinates provided by the brow
   			});
 
   	let forecastAPI = //Gets 5 day forecast
-  		fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
+  		fetch("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
 			.then(response => {
   				if(response.status !== 200) {
         			console.log("5 day forecast API: ", response.status)
@@ -57,7 +57,7 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 	let combinedData = {"currentCondAPI": {}, "localObsAPI": {}, "forecastAPI": {}};
 	
 	// let currentCondAPI = ////Gets current conditions 
-		fetch("http://api.openweathermap.org/data/2.5/weather?zip="+zip+","+ctry+"&units="+units+"&APPID="+apiId)
+		fetch("https://api.openweathermap.org/data/2.5/weather?zip="+zip+","+ctry+"&units="+units+"&APPID="+apiId)
   			.then(response => {
 	  			if(response.status !== 200) {
 	        		console.log("Current condition API: ", response.status)
@@ -70,7 +70,7 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 					}).then(function() {
 						
 						let localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
-							fetch("http://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units="+units+"&APPID="+apiId)
+							fetch("https://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units="+units+"&APPID="+apiId)
 								.then(response => {
 									if(response.status !== 200) {
 										console.log("Local weather stations API: ", response.status)
@@ -81,7 +81,7 @@ function getWeatherZip() { ///Or pulls weather data via zip code and country
 								});
 			  
 						let forecastAPI = //Gets 5 day forecast
-							fetch("http://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
+							fetch("https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&units="+units+"&APPID="+apiId)
 								.then(response => {
 									if(response.status !== 200) {
 										console.log("5 day forecast API: ", response.status)
@@ -118,7 +118,7 @@ function setWeather(d) {
   ///Setting Global Variables
   city = curCon.name
 	ccTemp = Math.round(curCon.main.temp)
-	ccCond = curCon.weather[0].description 
+	ccCond = loAbbreviator(curCon.weather[0].description, curCon.weather[0].icon)
 	ccIcon = curCon.weather[0].icon
 	ccWindDir = getWindDirection(curCon.wind.deg)
 	ccWindSpeed = returnCalm(Math.round(curCon.wind.speed), ccWindDir)

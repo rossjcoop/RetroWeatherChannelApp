@@ -1,4 +1,4 @@
-const apiId = "e8560a1109f936430203f88c4e09f8f1"; //My api id for openweathermap.org
+
 
 const headline = document.getElementById("headline");
 const timestamp = document.getElementById("time");
@@ -82,6 +82,8 @@ function abbreviator(word) {
 		return word.substr(0, (wL - 14)) + " " + "AFB"
 	} else if(word.startsWith("scattered")) {
 		return "Sct'd" + "" + word.substr(9, wL)
+	} else if(wL > 16){
+		return word.substr(0, 16)
 	} else {
 		return word
 	}

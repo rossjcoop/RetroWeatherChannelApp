@@ -47,7 +47,7 @@ function main(weatherData) {
 				<div class = "page1Box">
 					<div class = "mainInfo">
 						<div class = "tempBox">
-							<div id = "temp">${ccTemp}°</div><div></div>
+							<h1 id = "temp">${ccTemp}</h1><h1>°</h1>
 						</div>
 						<h2 id = "cond">${ccCond}</h2>
 						<div id = "ccGif"><img class="gif" src="./Images/CurrentConditions/${ccIcon}.gif"></div>
