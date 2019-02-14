@@ -1,5 +1,3 @@
-
-
 const headline = document.getElementById("headline");
 const timestamp = document.getElementById("time");
 const datestamp = document.getElementById("date");
