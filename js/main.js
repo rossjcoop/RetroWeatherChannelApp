@@ -88,9 +88,10 @@
 // };
 
 window.onload = function() {
-	startPage()
-	getTime()	
-	setInterval(getTime, 1000)
+	startPage();
+    // errorPage()
+	getTime();	
+	setInterval(getTime, 1000);
 };
   	
 function startPage() {
@@ -147,27 +148,27 @@ function startPage() {
             <input type="submit" value="Start" rel="start">
         </div>     
     `
-    let zipSelect = document.querySelector('[rel="zipButton"]')
-    let cordSelect = document.querySelector('[rel="locButton"]')
-	let zipInput = document.querySelector('[rel="zipInput"]')
-	let ctrySel = document.querySelector('[rel="ctrySel"]')
-    // let zipSubmit = document.querySelector('[rel="zipSubmit"]')
-    // let cordSubmit = document.querySelector('[rel="locationSubmit"]') 
-    let submit = document.querySelector('[rel="start"]')
-    let musicOn = document.querySelector('[rel="musicOn"]')
-    let musicTrack = document.querySelector('[rel="cdPlayer"]')
-    let musicURL = document.querySelector('[rel="mp3URL')
-    let unitSelector = document.querySelector('[rel="unitSelector')
+    let zipSelect = document.querySelector('[rel="zipButton"]');
+    let cordSelect = document.querySelector('[rel="locButton"]');
+	let zipInput = document.querySelector('[rel="zipInput"]');
+	let ctrySel = document.querySelector('[rel="ctrySel"]');
+    // let zipSubmit = document.querySelector('[rel="zipSubmit"]');
+    // let cordSubmit = document.querySelector('[rel="locationSubmit"]');
+    let submit = document.querySelector('[rel="start"]');
+    let musicOn = document.querySelector('[rel="musicOn"]');
+    let musicTrack = document.querySelector('[rel="cdPlayer"]');
+    let musicURL = document.querySelector('[rel="mp3URL');
+    let unitSelector = document.querySelector('[rel="unitSelector');
 
     submit.addEventListener('click', function(event) {
         setMusicVariables();
         if(zipSelect.checked == true) {
             console.log("hit zip")
-            zip = zipInput.value
-            ctry = ctrySel.value
-            getWeatherZip()
+            zip = zipInput.value;
+            ctry = ctrySel.value;
+            getWeatherZip();
             setInterval(function() {
-                getWeatherZip()
+                getWeatherZip();
             }
             , 600000)   
         } else if(cordSelect.checked == true) {
@@ -175,19 +176,20 @@ function startPage() {
             var startPos;
             var geoSuccess = function(position) {
                 startPos = position;
-                console.log("Lat: ", startPos.coords.latitude)
-                console.log("Lon: ", startPos.coords.longitude)
-                lat = startPos.coords.latitude
-                lon = startPos.coords.longitude
-                getWeatherCord()
+                console.log("Lat: ", startPos.coords.latitude);
+                console.log("Lon: ", startPos.coords.longitude);
+                lat = startPos.coords.latitude;
+                lon = startPos.coords.longitude;
+                getWeatherCord();
+                getWeatherGovCord();
                 setInterval(function() {
                     getWeatherCord()}
-                    , 600000)
+                    , 600000);
             };
-            navigator.geolocation.getCurrentPosition(geoSuccess)
+            navigator.geolocation.getCurrentPosition(geoSuccess);
 
         } else {
-            alert("You must either enter a zip or use your current location.")
+            alert("You must either enter a zip or use your current location.");
         }        
     })
 

@@ -52,6 +52,15 @@ function noData(data) { ///Will display if no data reports, or if error.
 	}
 }
 
+function errorPage() {
+	headline.innerHTML = `
+    <div class="headlineTop">Sorry Folks!</div>`
+    container.innerHTML = `   
+        <h1>No data</h1>
+        <p>Check back soon, I'm going to make some changes and bring in a new web api. If you need the weather report in Las Vegas, it will seriously rain for the rest of the day here on Valentine's Day! And it will be cold!</p>       
+    `     
+}
+
 
 
 // setInterval(getWeather, 600000)
