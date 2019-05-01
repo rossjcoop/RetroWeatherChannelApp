@@ -1,25 +1,65 @@
-
+"use strict";
 ///openweathermap api
-let weatherGovApi = 'https://api.weather.gov/'
-let currentStation = ''
+let weatherGovApi = 'https://api.weather.gov/';
+let forecastApi = '';
+let forecastGridDataApi = '';
+let forecastHourlyApi = '';
+let forecastOfficeApi = '';
+let forecastZoneApi = '';
 
 
-function getWeatherGovCord() { ///Pulls in data via cordinates provided by the browser
-	
-	// let currentCondAPI = ////Gets current conditions 
-		fetch(weatherGovApi+'points/'+lat+","+lon)
-  			.then(response => {
-	  			if(response.status !== 200) {
-	        		console.log("Current condition API: ", response.status);
-	        		return	      	
-	      		} else {
-                      // return response.json()
-                      console.log(response.json());
-                      
-	      		}	
-  			});	
-  		
+//https://api.weather.gov/points/36.2358%2C-115.327/stations //returns stations in 2.
+//https://api.weather.gov/gridpoints/VEF/115,101/forecast?units=us forecast data, good data
+
+function status(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return Promise.resolve(response)
+    } else {
+      return Promise.reject(new Error(response.statusText))
+    }
 }
+
+function json(response) {
+    return response.json()
+}
+
+
+
+function getWeatherGovCord() { ///Pulls in data via cordinates provided by the browser	
+	////Gets weather station data first to call apis 
+  fetch(weatherGovApi+'points/'+lat+","+lon)
+    .then(status)
+    .then(json)
+    .then(data => {
+      console.log('Request succeeded with JSON response', data)
+
+    }).catch(err => {
+      console.log('Request failed', err);
+    });
+
+  let getForecast = (api) => {
+    fetch(api)
+      .then(status)
+      .then(json)
+
+  }
+        
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //   	let localObsAPI = ///Gets 7 weather stations current conditions based on lat and lon of the current conditions city
 //   		fetch("https://api.openweathermap.org/data/2.5/find?lat="+lat+"&lon="+lon+"&cnt=7&units="+units+"&APPID="+apiId)
 // 			.then(response => {
